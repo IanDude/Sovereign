@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757836130474",
+    "project_id": "sovereign-9c600",
+    "storage_bucket": "sovereign-9c600.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757836130474:android:86f7b1169316994f3308d3",
+        "android_client_info": {
+          "package_name": "com.example.sovereign"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoGguPB-0XiEsiWDd37B1bFGnNsGJttJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
