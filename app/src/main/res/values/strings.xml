@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sovereign</string>
+    <string name="nav_Home">Home</string>
+    <string name="nav_recognition">Recognition</string>
 </resources>
