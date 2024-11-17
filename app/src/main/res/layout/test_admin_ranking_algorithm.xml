@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/background_light"
+    android:padding="10dp">
+
+    <!-- Sovereign Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/holo_red_light"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SOVEREIGN"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/sovereign_college"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="CICT"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/star_icon_sovereign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:paddingEnd="5dp" />
+
+            <TextView
+                android:id="@+id/sovereign_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15,900"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Supreme Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/holo_orange_light"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SUPREME"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/supreme_college"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="CJJ"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/star_icon_supreme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:paddingEnd="5dp" />
+
+            <TextView
+                android:id="@+id/supreme_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Monarch Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MONARCH"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/monarch_college"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="CBM"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/star_icon_monarch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:paddingEnd="5dp" />
+
+            <TextView
+                android:id="@+id/monarch_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- High Lord Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/holo_green_light"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HIGH LORD"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/high_lord_college"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="CAS"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/star_icon_high_lord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:paddingEnd="5dp" />
+
+            <TextView
+                android:id="@+id/high_lord_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Imperial Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/holo_green_dark"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IMPERIAL"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/imperial_college"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="ABC"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/star_icon_imperial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:paddingEnd="5dp" />
+
+            <TextView
+                android:id="@+id/imperial_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11,000"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
