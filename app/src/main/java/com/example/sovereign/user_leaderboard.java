@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class test_admin_ranking_algorithm extends AppCompatActivity {
+public class user_leaderboard extends AppCompatActivity {
 
     // Data structure to hold college and points
     class College {
@@ -35,7 +35,7 @@ public class test_admin_ranking_algorithm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_admin_ranking_algorithm); // Replace with your XML file name
+        setContentView(R.layout.user_leaderboard); // Replace with your XML file name
 
         // Initialize TextViews (these IDs must match your XML layout)
         sovereignCollege = findViewById(R.id.sovereign_college);

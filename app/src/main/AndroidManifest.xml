@@ -32,7 +32,7 @@
 
         </activity>
         <activity
-            android:name=".test_admin_ranking_algorithm"
+            android:name=".user_leaderboard"
             android:exported="true">
 
         </activity>
