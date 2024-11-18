@@ -31,6 +31,11 @@
             android:exported="false">
 
         </activity>
+        <activity
+            android:name=".user_leaderboard"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>
