@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
+//import com.google.firebase.firestore.FirebaseFirestore;
+//
+//import java.util.HashMap;
+//import java.util.Map;
 
 public class LoginSignup extends AppCompatActivity {
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
