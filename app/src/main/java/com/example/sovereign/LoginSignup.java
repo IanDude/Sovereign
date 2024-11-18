@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginSignup extends AppCompatActivity {
-    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-    Button login;
-    Map<String, Object> Users  = new HashMap<>();
+//    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+    Button login,signup;
+//    Map<String, Object> Users  = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +33,13 @@ public class LoginSignup extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        signup = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Userinput((HashMap) Users);
-
+                toMain();
+                toMain();
             }
         });
 
@@ -51,11 +51,11 @@ public class LoginSignup extends AppCompatActivity {
             finish();
         },1000);
     }
-    protected void Userinput(HashMap hashMap){
-        hashMap.put("IanDude","0123");
-        firebase.collection("Users").add(hashMap)
-                .addOnSuccessListener(documentReference -> Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show());
-        toMain();
-    }
+//    protected void Userinput(HashMap hashMap){
+//        hashMap.put("IanDude","0123");
+//        firebase.collection("Users").add(hashMap)
+//                .addOnSuccessListener(documentReference -> Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show())
+//                .addOnFailureListener(e -> Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show());
+//        toMain();
+//    }
 }
