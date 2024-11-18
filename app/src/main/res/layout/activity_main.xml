@@ -10,10 +10,21 @@
 
     <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="105dp"
+        android:id="@+id/HomeTopLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Mainhomelayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/Mainhomelayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/HomeTopLayout"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationMenu">
 
     </FrameLayout>
