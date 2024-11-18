@@ -23,45 +23,72 @@
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="79dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="253dp"
             android:text="Login"
-            tools:layout_editor_absoluteX="69dp"
-            tools:layout_editor_absoluteY="350dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/signup_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
         <Button
             android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="63dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="254dp"
             android:text="Sign Up"
-            tools:layout_editor_absoluteX="199dp"
-            tools:layout_editor_absoluteY="349dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/login_button"
+            app:layout_constraintTop_toBottomOf="@+id/password_text"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/username_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="79dp"
+            android:layout_marginTop="196dp"
+            android:layout_marginEnd="61dp"
             android:ems="10"
             android:hint="Username"
             android:inputType="text"
-            tools:layout_editor_absoluteX="79dp"
-            tools:layout_editor_absoluteY="196dp" />
+            app:layout_constraintBottom_toTopOf="@+id/password_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/password_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="79dp"
+            android:layout_marginEnd="61dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            tools:layout_editor_absoluteX="79dp"
-            tools:layout_editor_absoluteY="241dp" />
+            app:layout_constraintBottom_toTopOf="@+id/checkBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_text" />
 
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="79dp"
+            android:layout_marginEnd="175dp"
+            android:layout_marginBottom="16dp"
             android:text="CheckBox"
-            tools:layout_editor_absoluteX="79dp"
-            tools:layout_editor_absoluteY="286dp" />
+            app:layout_constraintBottom_toTopOf="@+id/login_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
