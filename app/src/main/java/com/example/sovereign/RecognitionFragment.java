@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UserRecognitionFragment#newInstance} factory method to
+ * Use the {@link RecognitionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserRecognitionFragment extends Fragment {
+public class RecognitionFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class UserRecognitionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserRecognitionFragment() {
+    public RecognitionFragment() {
         // Required empty public constructor
     }
 
@@ -37,8 +37,8 @@ public class UserRecognitionFragment extends Fragment {
      * @return A new instance of fragment UserRecognitionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserRecognitionFragment newInstance(String param1, String param2) {
-        UserRecognitionFragment fragment = new UserRecognitionFragment();
+    public static RecognitionFragment newInstance(String param1, String param2) {
+        RecognitionFragment fragment = new RecognitionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +59,6 @@ public class UserRecognitionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_recognition, container, false);
+        return inflater.inflate(R.layout.fragment_recognition, container, false);
     }
 }
