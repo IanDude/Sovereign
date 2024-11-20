@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconSize">0dp</item>
+        <item name="itemTextAppearanceActive">@style/CustomBottomNavText</item>
+        <item name="itemTextAppearanceInactive">@style/CustomBottomNavText</item>
+    </style>
+
+    <style name="CustomBottomNavText" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">18sp</item>
+        <item   name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+
+
+</resources>
