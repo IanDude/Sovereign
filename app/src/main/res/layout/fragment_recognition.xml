@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/recognition_top_navigation_menu" />
+        app:menu="@menu/recognition_top_navigation_menu"
+        style="@style/CustomBottomNavigationView"/>
 
     <FrameLayout
         android:id="@+id/recognition_layout"
