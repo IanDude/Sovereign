@@ -6,7 +6,7 @@
 
         />
     <item
-        android:id="@+id/cingdom"
+        android:id="@+id/kingdom"
         android:title="Kingdom"
         />
 </menu>
