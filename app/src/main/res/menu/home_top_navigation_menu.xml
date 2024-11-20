@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/clan"
-        android:title="Clan"
+        android:title="@string/Clan_title"
 
         />
     <item
         android:id="@+id/kingdom"
-        android:title="Kingdom"
+        android:title="@string/Recognition_title"
         />
 </menu>
