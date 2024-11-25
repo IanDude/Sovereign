@@ -1,0 +1,95 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RankingUpdateFragment">
+
+    <!-- Title Section -->
+    <TextView
+        android:id="@+id/leaderboardTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/university_college_ranking"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:padding="16dp" />
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        android:padding="16dp">
+
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_college"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:padding="10dp"
+            android:background="@drawable/rounded_edittext" />
+
+        <!-- RecyclerView for Rankings -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rankingListRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            tools:listitem="@layout/fragment_ranking" />
+
+        <!-- Action Buttons with added spacing -->
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:weightSum="3"> <!-- Total weight for equal distribution -->
+
+            <Button
+                android:id="@+id/btnAddCollege"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_college"
+                android:backgroundTint="@color/btnGreen"
+                android:textColor="#FFFFFF"
+                android:padding="10dp"
+                android:layout_marginEnd="8dp" /> <!-- Margin for spacing -->
+
+            <Button
+                android:id="@+id/btnUpdatePoints"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/update_points"
+                android:backgroundTint="@color/btnBlue"
+                android:textColor="#FFFFFF"
+                android:padding="10dp"
+                android:layout_marginEnd="8dp" /> <!-- Margin for spacing -->
+
+            <Button
+                android:id="@+id/btnDeleteCollege"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delete_college"
+                android:backgroundTint="@color/btnRed"
+                android:textColor="#FFFFFF"
+                android:padding="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

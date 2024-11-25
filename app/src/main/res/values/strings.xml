@@ -7,4 +7,9 @@
     <string name="Ranking_title">Ranking</string>
     <string name="HallOfFame_title">Hall of Fame</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="university_college_ranking">University College Rankings</string>
+    <string name="search_college">Search college…</string>
+    <string name="add_college">Add College</string>
+    <string name="update_points">Update Points</string>
+    <string name="delete_college">Delete College</string>
 </resources>
