@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ranking_update extends AppCompatActivity {
-    private EditText inputDepartmentName, inputDepartmentPoints, inputEditDepartmentName,
+    EditText inputDepartmentName, inputDepartmentPoints, inputEditDepartmentName,
             inputEditDepartmentPoints, inputDeleteDepartmentName;
-    private Button btnAddDepartment, btnEditDepartmentPoints, btnDeleteDepartment;
-    private TextView tvRankings;
+    Button btnAddDepartment, btnEditDepartmentPoints, btnDeleteDepartment;
+    TextView tvRankings;
 
     public static class Department implements Serializable {
         String name;
@@ -38,7 +38,6 @@ public class ranking_update extends AppCompatActivity {
     }
     private ArrayList<ranking_update.Department> departments = new ArrayList<>();
 
-    @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
