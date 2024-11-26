@@ -17,6 +17,7 @@
         <activity
             android:name=".LoginSignup"
             android:exported="false" />
+
         <activity
             android:name=".Splashscreen"
             android:exported="true" >
@@ -30,7 +31,14 @@
             android:name=".MainActivity"
             android:exported="false">
 
+
         </activity>
+        <activity
+            android:name=".RankingFragment"
+            android:exported="true" />
+        <activity
+            android:name="RankingFragment2"
+            android:exported="true" />
     </application>
 
 </manifest>
