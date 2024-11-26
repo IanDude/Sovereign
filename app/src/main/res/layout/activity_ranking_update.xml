@@ -62,7 +62,8 @@
             android:textSize="16sp"
             android:background="#FFFFFF"
             android:elevation="2dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:inputType="text"/>
 
         <!-- Input for Department Points -->
         <EditText
@@ -99,7 +100,8 @@
             android:textSize="16sp"
             android:background="#FFFFFF"
             android:elevation="2dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/inputEditDepartmentPoints"
@@ -135,7 +137,8 @@
             android:textSize="16sp"
             android:background="#FFFFFF"
             android:elevation="2dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:inputType="text"/>
 
         <!-- Button to Delete Department -->
         <Button
