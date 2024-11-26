@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:id="@+id/Ranking">
 
     <!-- ScrollView for the ranking cards -->
     <ScrollView
@@ -331,7 +332,7 @@
 
     <!-- Floating Action Button (FAB) -->
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/fab"
+        android:id="@+id/updt_dptm"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
