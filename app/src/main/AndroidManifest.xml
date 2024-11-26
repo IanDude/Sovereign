@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sovereign">
 
@@ -14,18 +15,12 @@
         android:theme="@style/Theme.Sovereign"
         tools:targetApi="31">
         <activity
-            android:name=".ranking_update"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
-       <activity
-            android:name=".admin_post"
-            android:exported="false" />
-        <activity
             android:name=".LoginSignup"
             android:exported="false" />
+
         <activity
             android:name=".Splashscreen"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,9 +29,16 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
-      <activity
-            android:exported="false"></activity>
+            android:exported="false">
+
+
+        </activity>
+        <activity
+            android:name=".RankingFragment"
+            android:exported="true" />
+        <activity
+            android:name="RankingFragment2"
+            android:exported="true" />
     </application>
 
 </manifest>
