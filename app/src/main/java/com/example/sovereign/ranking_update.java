@@ -14,11 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ranking_update extends AppCompatActivity {
-    private EditText inputDepartmentName, inputDepartmentPoints;
-    private EditText inputEditDepartmentName, inputEditDepartmentPoints;
-    private EditText inputDeleteDepartmentName;
+    private EditText inputDepartmentName, inputDepartmentPoints, inputEditDepartmentName,
+            inputEditDepartmentPoints, inputDeleteDepartmentName;
     private Button btnAddDepartment, btnEditDepartmentPoints, btnDeleteDepartment;
     private TextView tvRankings;
 
@@ -64,9 +64,75 @@ public class ranking_update extends AppCompatActivity {
         tvRankings = findViewById(R.id.tvRankings);
 
         // Set button listeners
-//        btnAddDepartment.setOnClickListener(v -> addDepartment());
-//        btnEditDepartmentPoints.setOnClickListener(v -> editDepartmentPoints());
-//        btnDeleteDepartment.setOnClickListener(v -> deleteDepartment());
+        btnAddDepartment.setOnClickListener(v -> addDepartment());
+        btnEditDepartmentPoints.setOnClickListener(v -> editDepartmentPoints());
+        btnDeleteDepartment.setOnClickListener(v -> deleteDepartment());
+    }
+    private void addDepartment() {
+        String name = inputDepartmentName.getText().toString();
+        String pointsText = inputDepartmentPoints.getText().toString();
+
+        if (name.isEmpty() || pointsText.isEmpty()) {
+            tvRankings.setText("Please enter department name and points.");
+            return;
+        }
+
+        int points = Integer.parseInt(pointsText);
+        departments.add(new Department(name, points));
+        updateRankings();
+    }
+
+    private void editDepartmentPoints() {
+        String name = inputEditDepartmentName.getText().toString();
+        String pointsText = inputEditDepartmentPoints.getText().toString();
+
+        if (name.isEmpty() || pointsText.isEmpty()) {
+            tvRankings.setText("Please enter department name and new points.");
+            return;
+        }
+
+        int points = Integer.parseInt(pointsText);
+
+        for (Department department : departments) {
+            if (department.name.equalsIgnoreCase(name)) {
+                department.points = points;
+                updateRankings();
+                return;
+            }
+        }
+
+        tvRankings.setText("Department not found.");
+    }
+
+    private void deleteDepartment() {
+        String name = inputDeleteDepartmentName.getText().toString();
+
+        if (name.isEmpty()) {
+            tvRankings.setText("Please enter department name to delete.");
+            return;
+        }
+
+        for (int i = 0; i < departments.size(); i++) {
+            if (departments.get(i).name.equalsIgnoreCase(name)) {
+                departments.remove(i);
+                updateRankings();
+                return;
+            }
+        }
+
+        tvRankings.setText("Department not found.");
+    }
+
+    private void updateRankings() {
+        // Sort departments by points (descending)
+        Collections.sort(departments, (d1, d2) -> d2.points - d1.points);
+
+        // Update rankings display
+        StringBuilder rankings = new StringBuilder();
+        for (int i = 0; i < departments.size(); i++) {
+            rankings.append((i + 1)).append(". ").append(departments.get(i).toString()).append("\n");
+        }
+        tvRankings.setText(rankings.toString());
     }
 
 }
