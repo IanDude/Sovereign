@@ -1,180 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#F9F9F9">
+    android:background="@drawable/background_gradient"
+    tools:context=".ranking_update">
 
-    <LinearLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <!-- Table-like structure for Departments and Points -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inputContainer"
         android:padding="16dp">
 
-        <!-- Header Section -->
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <!-- Header Row -->
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Departments"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="#8B0000"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Points"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="#8B0000"
+                    android:padding="8dp" />
+            </TableRow>
+
+            <!-- Example Rows -->
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CICT"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="15,900"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CJJ"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14,000"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+            <!-- Add more rows dynamically -->
+        </TableLayout>
+    </ScrollView>
+
+    <!-- Input Section -->
+    <LinearLayout
+        android:id="@+id/inputContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Input for Department -->
+        <EditText
+            android:id="@+id/editDepartment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Department"
+            android:padding="8dp"
+            android:background="@drawable/input_background" />
+
+        <!-- Input for Points -->
+        <EditText
+            android:id="@+id/editPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Points"
+            android:padding="8dp"
+            android:inputType="number"
+            android:background="@drawable/input_background"
+            android:layout_marginTop="8dp" />
+
+        <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#D32F2F"
-            android:padding="16dp">
+            android:gravity="center"
+            android:layout_marginTop="8dp">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_launcher_foreground"
-                android:contentDescription="Logo" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:layout_marginStart="10dp">
+                android:text="Add"
+                android:backgroundTint="#8B0000"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ranking System"
-                    android:textSize="22sp"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:gravity="center" />
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:backgroundTint="#8B0000"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2024-2025"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
-                    android:gravity="center" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:backgroundTint="#8B0000"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
-
-        <!-- Input for Department Name -->
-        <EditText
-            android:id="@+id/inputDepartmentName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Department Name"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:background="#FFFFFF"
-            android:elevation="2dp"
-            android:layout_marginBottom="12dp"
-            android:inputType="text"/>
-
-        <!-- Input for Department Points -->
-        <EditText
-            android:id="@+id/inputDepartmentPoints"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Points"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:background="#FFFFFF"
-            android:elevation="2dp"
-            android:layout_marginBottom="12dp"
-            android:inputType="number" />
-
-        <!-- Button to Add Department -->
-        <Button
-            android:id="@+id/btnAddDepartment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Department"
-            android:textColor="#FFFFFF"
-            android:background="#1976D2"
-            android:padding="12dp"
-            android:elevation="4dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Input for Editing Department Points -->
-        <EditText
-            android:id="@+id/inputEditDepartmentName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Department Name to Edit Points"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:background="#FFFFFF"
-            android:elevation="2dp"
-            android:layout_marginBottom="12dp"
-            android:inputType="text"/>
-
-        <EditText
-            android:id="@+id/inputEditDepartmentPoints"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter New Points"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:background="#FFFFFF"
-            android:elevation="2dp"
-            android:layout_marginBottom="12dp"
-            android:inputType="number" />
-
-        <!-- Button to Edit Department Points -->
-        <Button
-            android:id="@+id/btnEditDepartmentPoints"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Department Points"
-            android:textColor="#FFFFFF"
-            android:background="#388E3C"
-            android:padding="12dp"
-            android:elevation="4dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Input for Deleting Department -->
-        <EditText
-            android:id="@+id/inputDeleteDepartmentName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Department Name to Delete"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:background="#FFFFFF"
-            android:elevation="2dp"
-            android:layout_marginBottom="12dp"
-            android:inputType="text"/>
-
-        <!-- Button to Delete Department -->
-        <Button
-            android:id="@+id/btnDeleteDepartment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete Department"
-            android:textColor="#FFFFFF"
-            android:background="#D32F2F"
-            android:padding="12dp"
-            android:elevation="4dp" />
-
-        <!-- Button to View Rankings -->
-        <Button
-            android:id="@+id/btnGoToMainActivity2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Rankings in Detail"
-            android:textColor="#FFFFFF"
-            android:background="#FFA000"
-            android:padding="12dp"
-            android:elevation="4dp"
-            android:layout_marginTop="16dp" />
-
-        <!-- Rankings Display -->
-        <TextView
-            android:id="@+id/tvRankings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Rankings will appear here."
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:background="#E0E0E0"
-            android:elevation="2dp"
-            android:layout_marginTop="16dp" />
-
     </LinearLayout>
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
