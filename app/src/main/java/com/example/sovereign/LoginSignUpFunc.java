@@ -64,15 +64,12 @@ public class LoginSignUpFunc {
                                         //password doesnt match with username
                                         callback.onLoginFailure("Incorrect username or password.");
                                     }
-                                }).addOnFailureListener(e -> { callback.onLoginFailure("Error checking password: " + e.getMessage());
-                                });
+                                }).addOnFailureListener(e -> callback.onLoginFailure("Error checking password: " + e.getMessage()));
                     }else{
                         Toast.makeText(context.getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> {
-                    callback.onLoginFailure("Error checking username: " + e.getMessage());
-                });
+                .addOnFailureListener(e -> callback.onLoginFailure("Error checking username: " + e.getMessage()));
     }
     protected interface LoginCallback{
         void onLoginSuccess();
