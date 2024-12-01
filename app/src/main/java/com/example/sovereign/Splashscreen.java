@@ -23,7 +23,6 @@ public class Splashscreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent splashscreen = new Intent(Splashscreen.this, LoginSignup.class);
             startActivity(splashscreen);
