@@ -33,26 +33,16 @@ public class LoginSignUpFunc {
                         hashMap.put("Password", Password);
                         firebase.collection(Collection)
                                 .add(hashMap)
-                                .addOnSuccessListener(documentReference -> {
-                                    Toast.makeText(context.getApplicationContext(),"Sign Up Successfuil",Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(context.getApplicationContext(),"Sign Up Failed" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                });
+                                .addOnSuccessListener(documentReference -> Toast.makeText(context.getApplicationContext(),"Sign Up Successfuil",Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e -> Toast.makeText(context.getApplicationContext(),"Sign Up Failed" + e.getMessage(), Toast.LENGTH_SHORT).show());
                     }
-                }).addOnFailureListener(e -> {
-                        Toast.makeText(context.getApplicationContext(),"Error"+ e.getMessage(),Toast.LENGTH_SHORT).show();
-                });
+                }).addOnFailureListener(e -> Toast.makeText(context.getApplicationContext(),"Error"+ e.getMessage(),Toast.LENGTH_SHORT).show());
 
     }
     protected boolean EmptyFields(EditText UserInput, EditText PassInput){
         String Username = UserInput.getText().toString().trim();
         String Password = PassInput.getText().toString().trim();
-        if (Username.isEmpty() || Password.isEmpty()){
-            return true;
-        }else {
-            return  false;
-        }
+        return Username.isEmpty() || Password.isEmpty();
     }
     protected void UserLogin (EditText UserInput, EditText PassInput, String Collection, LoginCallback callback){
         String Username = UserInput.getText().toString();
@@ -67,6 +57,7 @@ public class LoginSignUpFunc {
                                 .whereEqualTo("Password", Password)
                                 .get().addOnCompleteListener(task2 -> {
                                     if (task2.isSuccessful() && task2.getResult() != null && !task2.getResult().isEmpty()){
+                                        Toast.makeText(context.getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
                                         callback.onLoginSuccess();
                                     }
                                     else {
@@ -75,7 +66,6 @@ public class LoginSignUpFunc {
                                     }
                                 }).addOnFailureListener(e -> { callback.onLoginFailure("Error checking password: " + e.getMessage());
                                 });
-                        Toast.makeText(context.getApplicationContext(),"Login Successful.", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(context.getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
                     }
