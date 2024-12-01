@@ -1,15 +1,12 @@
 package com.example.sovereign;
 
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,103 +17,88 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Login extends AppCompatActivity {
+public class LoginSignup extends AppCompatActivity {
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-    protected LoginManager Manager;
-    CheckBox showPass;
+    private LoginSignUpFunc loginSignUp;
     Button login,signup;
-    TextView ForgotPass;
     EditText username,password;
-//    Map<String, Object> Users  = new HashMap<>();
+    Map<String, Object> Users  = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Manager = new LoginManager(this);
-//        boolean isLoggedIn = getSharedPreferences("AppPrefs",MODE_PRIVATE)
-//                .getBoolean("isLoggedIn",false);
-        Manager.isLoggedIn();
-        if (Manager.isLoggedIn()){
-            Manager.ToActivity(MainActivity.class);
-            return;
-        }
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_signup);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        loginSignUp = new LoginSignUpFunc(this);
         username = findViewById(R.id.username_text);
         password = findViewById(R.id.password_text);
-        ForgotPass = findViewById(R.id.forgotpass);
         signup = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
-        showPass = findViewById(R.id.checkBox);
-
-        showPass.setOnCheckedChangeListener((compoundButton, checked) -> {
-            if (!checked){
-                password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                password.setSelection(password.getText().length());
-            }else{
-                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                password.setSelection(password.getText().length());
-            }
-
-        });
-
+        boolean isLoggedIn = getSharedPreferences("AppRefs",MODE_PRIVATE)
+                .getBoolean("isLoggedIn",true);
+        if (isLoggedIn){
+            toMain();
+        }else{
+            setContentView(R.layout.activity_login_signup);
+        }
         login.setOnClickListener(view -> {
 //            DataCheck(username,password);
-            if(Manager.EmptyFields(username,password)){
-                Manager.MakeToast("Please fill all fields.");
-//                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
+            if(loginSignUp.EmptyFields(username,password)){
+                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
             }else{
-                Manager.UserLogin(username, password, "Users", new LoginManager.LoginCallback() {
+                loginSignUp.UserLogin(username, password, "Users", new LoginSignUpFunc.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
-//                        saveLoginState();
-                        Manager.saveLoginState();
-                        Manager.ToActivity(MainActivity.class);
-                        finish();
+                        Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                        saveLoginState();
+                        toMain();
                     }
 
                     @Override
                     public void onLoginFailure(String errorMessage) {
-                        Manager.MakeToast(errorMessage);
-//                        Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-        });
-        signup.setOnClickListener(view -> {
-            Manager.ToActivity(SignUp.class);
-        });
-        ForgotPass.setOnClickListener(view -> {
-            Manager.ToActivity(PasswordRecovery.class);
-        });
 
+
+        });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//            UserSignup((HashMap) Users);
+                if (loginSignUp.EmptyFields(username,password)){
+                    Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
+                }else{
+                    loginSignUp.UserSignUp(username,password,"Users",Users);
+                }
+            }
+        });
     }
-//    protected void toActivity(Class<?> activity){
-//        Intent gotoActivity = new Intent(this,activity);
-//        startActivity(gotoActivity);
-//        finish();
-//    }
-//    protected void saveLoginState(){
-//        getSharedPreferences("AppPrefs",MODE_PRIVATE)
-//                .edit()
-//                .putBoolean("isLoggedIn",true)
-//                .apply();
-//    }
-//    protected void logout(){
-//        getSharedPreferences("AppPrefs",MODE_PRIVATE)
-//                .edit()
-//                .remove("isLoggedIn")
-//                .apply();
-//        Intent intent = new Intent(this, LoginSignup.class);
-//        startActivity(intent);
-//        finish();
-//    }
-
+    protected void saveLoginState(){
+        getSharedPreferences("AppPrefs",MODE_PRIVATE)
+                .edit()
+                .putBoolean("isLoggedIn",true)
+                .apply();
+    }
+    protected void logout(){
+        getSharedPreferences("AppPrefs",MODE_PRIVATE)
+                .edit()
+                .remove("isLoggedIn")
+                .apply();
+        Intent intent = new Intent(this, LoginSignup.class);
+        startActivity(intent);
+        finish();
+    }
+    protected void toMain(){
+            Intent gotoMain = new Intent(LoginSignup.this,MainActivity.class);
+            startActivity(gotoMain);
+            finish();
+    }
 
 //    protected void UserSignup(HashMap hashMap){
 //        String usernameInput = username.getText().toString();
