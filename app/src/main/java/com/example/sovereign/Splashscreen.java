@@ -24,7 +24,7 @@ public class Splashscreen extends AppCompatActivity {
             return insets;
         });
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent splashscreen = new Intent(Splashscreen.this, LoginSignup.class);
+            Intent splashscreen = new Intent(this, LoginSignup.class);
             startActivity(splashscreen);
             finish();
         },2000);
