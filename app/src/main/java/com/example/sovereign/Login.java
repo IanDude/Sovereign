@@ -2,9 +2,6 @@ package com.example.sovereign;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -67,15 +64,12 @@ public class LoginSignup extends AppCompatActivity {
 
 
         });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        signup.setOnClickListener(view -> {
 //            UserSignup((HashMap) Users);
-                if (loginSignUp.EmptyFields(username,password)){
-                    Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
-                }else{
-                    loginSignUp.UserSignUp(username,password,"Users",Users);
-                }
+            if (loginSignUp.EmptyFields(username,password)){
+                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
+            }else{
+                loginSignUp.UserSignUp(username,password,"Users",Users);
             }
         });
     }
