@@ -4,28 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class LoginSignup extends AppCompatActivity {
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
@@ -48,31 +38,68 @@ public class LoginSignup extends AppCompatActivity {
         password = findViewById(R.id.password_text);
         signup = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        boolean isLoggedIn = getSharedPreferences("AppRefs",MODE_PRIVATE)
+                .getBoolean("isLoggedIn",true);
+        if (isLoggedIn){
+            toMain();
+        }else{
+            setContentView(R.layout.activity_login_signup);
+        }
+        login.setOnClickListener(view -> {
 //            DataCheck(username,password);
-                toMain();
+            if(loginSignUp.EmptyFields(username,password)){
+                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
+            }else{
+                loginSignUp.UserLogin(username, password, "Users", new LoginSignUpFunc.LoginCallback() {
+                    @Override
+                    public void onLoginSuccess() {
+                        Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                        saveLoginState();
+                        toMain();
+                    }
 
+                    @Override
+                    public void onLoginFailure(String errorMessage) {
+                        Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+
+
         });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //            UserSignup((HashMap) Users);
+                if (loginSignUp.EmptyFields(username,password)){
+                    Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
+                }else{
+                    loginSignUp.UserSignUp(username,password,"Users",Users);
+                }
             }
         });
-
-
-
+    }
+    protected void saveLoginState(){
+        getSharedPreferences("AppPrefs",MODE_PRIVATE)
+                .edit()
+                .putBoolean("isLoggedIn",true)
+                .apply();
+    }
+    protected void logout(){
+        getSharedPreferences("AppPrefs",MODE_PRIVATE)
+                .edit()
+                .remove("isLoggedIn")
+                .apply();
+        Intent intent = new Intent(this, LoginSignup.class);
+        startActivity(intent);
+        finish();
     }
     protected void toMain(){
-        new Handler(Looper.getMainLooper()).postDelayed(()->{
             Intent gotoMain = new Intent(LoginSignup.this,MainActivity.class);
             startActivity(gotoMain);
             finish();
-        },1000);
     }
+
 //    protected void UserSignup(HashMap hashMap){
 //        String usernameInput = username.getText().toString();
 //        String passwordInput = password.getText().toString();
