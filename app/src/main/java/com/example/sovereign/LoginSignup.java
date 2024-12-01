@@ -23,6 +23,12 @@ public class LoginSignup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean isLoggedIn = getSharedPreferences("AppPrefs",MODE_PRIVATE)
+                .getBoolean("isLoggedIn",false);
+        if (isLoggedIn){
+            toMain();
+            return;
+        }
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_signup);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -35,13 +41,7 @@ public class LoginSignup extends AppCompatActivity {
         password = findViewById(R.id.password_text);
         signup = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
-        boolean isLoggedIn = getSharedPreferences("AppRefs",MODE_PRIVATE)
-                .getBoolean("isLoggedIn",true);
-        if (isLoggedIn){
-            toMain();
-        }else{
-            setContentView(R.layout.activity_login_signup);
-        }
+
         login.setOnClickListener(view -> {
 //            DataCheck(username,password);
             if(loginSignUp.EmptyFields(username,password)){
@@ -50,7 +50,6 @@ public class LoginSignup extends AppCompatActivity {
                 loginSignUp.UserLogin(username, password, "Users", new LoginSignUpFunc.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
-                        Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
                         saveLoginState();
                         toMain();
                     }
