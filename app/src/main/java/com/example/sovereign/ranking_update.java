@@ -1,11 +1,13 @@
 package com.example.sovereign;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -17,7 +19,6 @@ public class ranking_update extends AppCompatActivity {
     EditText editDepartment, editPoints;
     Button btnAdd, btnEdit, btnDelete;
     TableLayout tableLayout;
-    int selectedRowIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,94 +34,137 @@ public class ranking_update extends AppCompatActivity {
         btnDelete = findViewById(R.id.btnDelete);
         tableLayout = findViewById(R.id.tableLayout);
 
-        // Set onApplyWindowInsetsListener for layout padding adjustment
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+        // Adjust layout for keyboard visibility
+        View mainLayout = findViewById(R.id.main);
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout, (v, insets) -> {
+            Insets keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
+            Insets systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            v.setPadding(
+                    systemBarsInsets.left,
+                    systemBarsInsets.top,
+                    systemBarsInsets.right,
+                    Math.max(systemBarsInsets.bottom, keyboardInsets.bottom)
+            );
+
             return insets;
         });
 
         // Add button click listener to add a new row
         btnAdd.setOnClickListener(v -> addRow());
 
-        // Edit button click listener to update the selected row
+        // Edit button click listener
         btnEdit.setOnClickListener(v -> editRow());
 
-        // Delete button click listener to remove the selected row
+        // Delete button click listener
         btnDelete.setOnClickListener(v -> deleteRow());
     }
 
-    // Add a new row to the TableLayout
     private void addRow() {
         String department = editDepartment.getText().toString().trim();
         String points = editPoints.getText().toString().trim();
 
         if (!department.isEmpty() && !points.isEmpty()) {
+            // Check for duplicate departments
+            for (int i = 0; i < tableLayout.getChildCount(); i++) {
+                View row = tableLayout.getChildAt(i);
+                if (row instanceof TableRow) {
+                    TextView deptTextView = (TextView) ((TableRow) row).getChildAt(0);
+                    if (deptTextView.getText().toString().equalsIgnoreCase(department)) {
+                        Toast.makeText(this, "Department already exists", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }
+
+            // Create new row
             TableRow row = new TableRow(this);
+            row.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.MATCH_PARENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT
+            ));
+            row.setWeightSum(2);
+
+            // Create department TextView
             TextView deptTextView = new TextView(this);
-            TextView pointsTextView = new TextView(this);
-
+            TableRow.LayoutParams deptParams = new TableRow.LayoutParams(
+                    0,
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    1f  // Weight of 1 for equal distribution
+            );
+            deptTextView.setLayoutParams(deptParams);
             deptTextView.setText(department);
-            pointsTextView.setText(points);
-
+            deptTextView.setGravity(android.view.Gravity.CENTER);
             deptTextView.setPadding(8, 8, 8, 8);
-            pointsTextView.setPadding(8, 8, 8, 8);
+            deptTextView.setTextColor(getResources().getColor(android.R.color.black));
 
+            // Create points TextView
+            TextView pointsTextView = new TextView(this);
+            TableRow.LayoutParams pointsParams = new TableRow.LayoutParams(
+                    0,
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    1f  // Weight of 1 for equal distribution
+            );
+            pointsTextView.setLayoutParams(pointsParams);
+            pointsTextView.setText(points);
+            pointsTextView.setGravity(android.view.Gravity.CENTER);
+            pointsTextView.setPadding(8, 8, 8, 8);
+            pointsTextView.setTextColor(getResources().getColor(android.R.color.black));
+
+            // Add views to row
             row.addView(deptTextView);
             row.addView(pointsTextView);
 
-            // Add click listener to allow row selection for editing or deleting
-            row.setOnClickListener(v -> selectRow(row, department, points));
-
+            // Add row to table (skip header row)
             tableLayout.addView(row);
 
-            // Clear input fields after adding
+            // Clear input fields
             editDepartment.setText("");
             editPoints.setText("");
+        } else {
+            Toast.makeText(this, "Please fill both department and points", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Edit the selected row
+    // Edit the points of a department if it exists
     private void editRow() {
-        if (selectedRowIndex != -1) {
-            String department = editDepartment.getText().toString().trim();
-            String points = editPoints.getText().toString().trim();
+        String department = editDepartment.getText().toString().trim();
+        String points = editPoints.getText().toString().trim();
 
-            if (!department.isEmpty() && !points.isEmpty()) {
-                TableRow selectedRow = (TableRow) tableLayout.getChildAt(selectedRowIndex);
-                TextView deptTextView = (TextView) selectedRow.getChildAt(0);
-                TextView pointsTextView = (TextView) selectedRow.getChildAt(1);
-
-                deptTextView.setText(department);
-                pointsTextView.setText(points);
-
-                // Clear input fields after editing
-                editDepartment.setText("");
-                editPoints.setText("");
-
-                selectedRowIndex = -1; // Reset selection after edit
+        if (!department.isEmpty() && !points.isEmpty()) {
+            for (int i = 0; i < tableLayout.getChildCount(); i++) {
+                View row = tableLayout.getChildAt(i);
+                if (row instanceof TableRow) {
+                    TextView deptTextView = (TextView) ((TableRow) row).getChildAt(0);
+                    if (deptTextView.getText().toString().equalsIgnoreCase(department)) {
+                        TextView pointsTextView = (TextView) ((TableRow) row).getChildAt(1);
+                        pointsTextView.setText(points);
+                        Toast.makeText(this, "Points updated for " + department, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
             }
+            Toast.makeText(this, "Department not found", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Delete the selected row
+    // Delete a department if it exists
     private void deleteRow() {
-        if (selectedRowIndex != -1) {
-            tableLayout.removeViewAt(selectedRowIndex);
-            selectedRowIndex = -1; // Reset selection after deletion
+        String department = editDepartment.getText().toString().trim();
+
+        if (!department.isEmpty()) {
+            for (int i = 0; i < tableLayout.getChildCount(); i++) {
+                View row = tableLayout.getChildAt(i);
+                if (row instanceof TableRow) {
+                    TextView deptTextView = (TextView) ((TableRow) row).getChildAt(0);
+                    if (deptTextView.getText().toString().equalsIgnoreCase(department)) {
+                        tableLayout.removeViewAt(i);
+                        Toast.makeText(this, department + " deleted", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }
+            Toast.makeText(this, "Department not found", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    // Select a row for editing or deletion
-    private void selectRow(TableRow row, String department, String points) {
-        // Highlight the selected row (optional)
-        row.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-
-        // Set input fields with the selected row data for editing
-        editDepartment.setText(department);
-        editPoints.setText(points);
-
-        // Store the index of the selected row for editing or deletion
-        selectedRowIndex = tableLayout.indexOfChild(row);
     }
 }
