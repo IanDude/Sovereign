@@ -1,160 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    android:fillViewport="true"
     tools:context=".ranking_update">
 
-    <!-- Table-like structure for Departments and Points -->
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/inputContainer"
-        android:padding="16dp">
-
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1"
-            android:background="@color/white"
-            android:padding="8dp">
-
-            <!-- Header Row -->
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Departments"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:background="#8B0000"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Points"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:background="#8B0000"
-                    android:padding="8dp" />
-            </TableRow>
-
-            <!-- Example Rows -->
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CICT"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="15,900"
-                    android:gravity="center"
-                    android:padding="8dp" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CJJ"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="14,000"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:padding="8dp" />
-            </TableRow>
-            <!-- Add more rows dynamically -->
-        </TableLayout>
-    </ScrollView>
-
-    <!-- Input Section -->
-    <LinearLayout
-        android:id="@+id/inputContainer"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:background="@drawable/background_gradient">
 
-        <!-- Input for Department -->
-        <EditText
-            android:id="@+id/editDepartment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Department"
-            android:padding="8dp"
-            android:background="@drawable/input_background" />
+        <!-- Table-like structure for Departments and Points -->
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/inputContainer"
+            android:padding="16dp">
 
-        <!-- Input for Points -->
-        <EditText
-            android:id="@+id/editPoints"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Points"
-            android:padding="8dp"
-            android:inputType="number"
-            android:background="@drawable/input_background"
-            android:layout_marginTop="8dp" />
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="8dp">
 
-        <!-- Buttons -->
+                <!-- Header Row -->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Departments"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:background="#8B0000"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Points"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:background="#8B0000"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <!-- Example Rows -->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CICT"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="15,900"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CJJ"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="14,000"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:padding="8dp" />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+
+        <!-- Input Section -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/inputContainer"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="8dp">
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/scrollView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="wrap_content"
+            <!-- Input for Department -->
+            <EditText
+                android:id="@+id/editDepartment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add"
-                android:backgroundTint="#8B0000"
-                android:textColor="#FFFFFF"
-                android:layout_marginEnd="8dp" />
+                android:hint="Enter Department"
+                android:padding="8dp"
+                android:background="@drawable/input_background"
+                android:textColor="@android:color/black" />
 
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
+            <!-- Input for Points -->
+            <EditText
+                android:id="@+id/editPoints"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit"
-                android:backgroundTint="#8B0000"
-                android:textColor="#FFFFFF"
-                android:layout_marginEnd="8dp" />
+                android:hint="Enter Points"
+                android:padding="8dp"
+                android:inputType="number"
+                android:background="@drawable/input_background"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black" />
 
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Delete"
-                android:backgroundTint="#8B0000"
-                android:textColor="#FFFFFF" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:backgroundTint="#8B0000"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:backgroundTint="#8B0000"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:backgroundTint="#8B0000"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
