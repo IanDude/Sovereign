@@ -26,7 +26,7 @@ android {
             )
         }
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
     compileOptions {
@@ -36,11 +36,10 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
-    implementation(libs.constraintlayout)
+    implementation(libs.constraintlayout) // Using version defined in version catalog
     implementation(libs.firebase.firestore)
     implementation(platform(libs.firebase.firestore))
     implementation(libs.firebase.database)
