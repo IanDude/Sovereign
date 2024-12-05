@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/trajui"
-        android:text="Sovereign"
+        android:text="@string/Splash"
 
         android:textColor="#D6BF6A"
         android:textSize="62sp"

@@ -1,13 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HOFFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".HOFFragment"
+    android:background="@color/white">
 
+    <!-- Title TextView -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="HOF Fragment" />
+        android:id="@+id/postTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/post"
+        android:textSize="20sp"
+        android:textColor="@color/bg_red"
+        android:fontFamily="@font/trajui"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <!-- EditText for Post Content -->
+    <EditText
+        android:id="@+id/postContent"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:hint="What's on your mind?"
+        android:gravity="top|start"
+        android:background="@drawable/round_lightopacity"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:inputType="textMultiLine"
+        app:layout_constraintTop_toBottomOf="@id/postTitle"
+        />
+
+    <!-- Button to Add an Image -->
+
+    <!-- ImageView to display the selected image -->
+
+    <Button
+        android:id="@+id/addImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/bg_red"
+        android:text="Add Image"
+        app:layout_constraintStart_toEndOf="@id/submitPostButton"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
+        tools:layout_editor_absoluteX="100dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_placeholder_image"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/addImageButton"/>
+
+    <!-- Submit Post Button -->
+
+    <!-- ProgressBar for showing loading -->
+
+    <Button
+        android:id="@+id/submitPostButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bg_red"
+        android:text="Submit"
+    android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postContent"
+        android:layout_marginEnd="0dp"
+
+    android:textColor="@android:color/white" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="22dp"
+        android:layout_height="335dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" /> <!-- Initially hidden -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

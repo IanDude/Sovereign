@@ -7,19 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".LoginSignup"
     android:background="@drawable/background_gradient">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="350dp"
+            android:layout_height="650dp"
+            android:background="@drawable/round_superlightopacity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="350dp"
-        android:layout_height="650dp"
-        android:background="@drawable/round_superlightopacity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.737"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.493">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+           >
 
-        <!-- Logo -->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
@@ -64,21 +62,17 @@
             app:layout_constraintTop_toBottomOf="@id/username_text" />
 
         <!-- Forgot Password TextView -->
-
-        <!-- CheckBox -->
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/trahu"
-            android:text="Forgot Password?"
+            android:text="@string/pass"
             android:textColor="@color/white"
-            android:textSize="10dp"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontalBias="0.8"
-            app:layout_constraintHorizontal_bias="0.896"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_text" />
 
@@ -91,9 +85,6 @@
             app:layout_constraintTop_toBottomOf="@id/password_text" />
 
         <!-- Login Button -->
-
-        <!-- Sign Up Button -->
-
         <Button
             android:id="@+id/login_button"
             android:layout_width="0dp"
@@ -108,8 +99,9 @@
             app:layout_constraintEnd_toStartOf="@id/signup_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView"
-            app:layout_constraintVertical_bias="0.0" />
+           />
 
+        <!-- Sign Up Button -->
         <Button
             android:id="@+id/signup_button"
             android:layout_width="0dp"
@@ -123,6 +115,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/login_button"
             app:layout_constraintTop_toBottomOf="@id/textView"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+             />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
