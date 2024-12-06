@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/darker_gray"/>
+    <item>
+        <rotate
+            android:drawable="@android:drawable/progress_indeterminate_horizontal"
+            android:fromDegrees="0"
+            android:toDegrees="360"/>
+    </item>
+</layer-list>
