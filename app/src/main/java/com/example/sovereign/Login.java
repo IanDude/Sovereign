@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,18 +15,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class LoginSignup extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
     private LoginSignUpFunc loginSignUp;
     Button login,signup;
+    TextView ForgotPass;
     EditText username,password;
     Map<String, Object> Users  = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean isLoggedIn = getSharedPreferences("AppPrefs",MODE_PRIVATE)
-                .getBoolean("isLoggedIn",false);
-        if (isLoggedIn){
+        loginSignUp = new LoginSignUpFunc(this);
+//        boolean isLoggedIn = getSharedPreferences("AppPrefs",MODE_PRIVATE)
+//                .getBoolean("isLoggedIn",false);
+        loginSignUp.isLoggedIn();
+        if (loginSignUp.isLoggedIn()){
             toMain();
             return;
         }
@@ -36,9 +40,10 @@ public class LoginSignup extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        loginSignUp = new LoginSignUpFunc(this);
+
         username = findViewById(R.id.username_text);
         password = findViewById(R.id.password_text);
+        ForgotPass = findViewById(R.id.forgotpass);
         signup = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
 
@@ -50,7 +55,8 @@ public class LoginSignup extends AppCompatActivity {
                 loginSignUp.UserLogin(username, password, "Users", new LoginSignUpFunc.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
-                        saveLoginState();
+//                        saveLoginState();
+                        loginSignUp.saveLoginState();
                         toMain();
                     }
 
@@ -71,24 +77,29 @@ public class LoginSignup extends AppCompatActivity {
                 loginSignUp.UserSignUp(username,password,"Users",Users);
             }
         });
+        ForgotPass.setOnClickListener(view -> {
+            Intent intent = new Intent(this,PasswordRecovery.class);
+            startActivity(intent);
+            finish();
+        });
     }
-    protected void saveLoginState(){
-        getSharedPreferences("AppPrefs",MODE_PRIVATE)
-                .edit()
-                .putBoolean("isLoggedIn",true)
-                .apply();
-    }
-    protected void logout(){
-        getSharedPreferences("AppPrefs",MODE_PRIVATE)
-                .edit()
-                .remove("isLoggedIn")
-                .apply();
-        Intent intent = new Intent(this, LoginSignup.class);
-        startActivity(intent);
-        finish();
-    }
+//    protected void saveLoginState(){
+//        getSharedPreferences("AppPrefs",MODE_PRIVATE)
+//                .edit()
+//                .putBoolean("isLoggedIn",true)
+//                .apply();
+//    }
+//    protected void logout(){
+//        getSharedPreferences("AppPrefs",MODE_PRIVATE)
+//                .edit()
+//                .remove("isLoggedIn")
+//                .apply();
+//        Intent intent = new Intent(this, LoginSignup.class);
+//        startActivity(intent);
+//        finish();
+//    }
     protected void toMain(){
-            Intent gotoMain = new Intent(LoginSignup.this,MainActivity.class);
+            Intent gotoMain = new Intent(Login.this,MainActivity.class);
             startActivity(gotoMain);
             finish();
     }
