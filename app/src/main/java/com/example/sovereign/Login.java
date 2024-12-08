@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-    private LoginSignUpFunc loginSignUp;
+    private LoginManager loginSignUp;
     Button login,signup;
     TextView ForgotPass;
     EditText username,password;
@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginSignUp = new LoginSignUpFunc(this);
+        loginSignUp = new LoginManager(this);
 //        boolean isLoggedIn = getSharedPreferences("AppPrefs",MODE_PRIVATE)
 //                .getBoolean("isLoggedIn",false);
         loginSignUp.isLoggedIn();
@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
             if(loginSignUp.EmptyFields(username,password)){
                 Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
             }else{
-                loginSignUp.UserLogin(username, password, "Users", new LoginSignUpFunc.LoginCallback() {
+                loginSignUp.UserLogin(username, password, "Users", new LoginManager.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
 //                        saveLoginState();
