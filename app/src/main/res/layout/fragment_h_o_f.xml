@@ -66,12 +66,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_placeholder_image"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/addImageButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
 
             <!-- Submit Post Button -->
             <Button
@@ -105,6 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp" />
     </LinearLayout>
 </ScrollView>
