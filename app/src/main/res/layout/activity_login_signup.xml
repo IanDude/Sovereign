@@ -90,15 +90,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_text" />
+
         <TextView
             android:id="@+id/forgotpass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Forgot your passowrd?"
+            app:layout_constraintBottom_toBottomOf="@id/login_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/checkBox"
-            android:text="Forgot your passowrd?"/>
+            app:layout_constraintVertical_bias="0.875" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
