@@ -43,6 +43,7 @@
                     android:gravity="start|center_vertical">
 
                     <TextView
+                        android:id="@+id/sovereign_department"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CICT"
@@ -70,6 +71,7 @@
                             android:layout_marginEnd="4dp" />
 
                         <TextView
+                            android:id="@+id/sovereign_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="15,900"
@@ -105,6 +107,7 @@
                     android:gravity="start|center_vertical">
 
                     <TextView
+                        android:id="@+id/supreme_department"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CJJ"
@@ -132,6 +135,7 @@
                             android:layout_marginEnd="4dp" />
 
                         <TextView
+                            android:id="@+id/supreme_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="14,000"
@@ -167,6 +171,7 @@
                     android:gravity="start|center_vertical">
 
                     <TextView
+                        android:id="@+id/monarch_department"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CBM"
@@ -194,6 +199,7 @@
                             android:layout_marginEnd="4dp" />
 
                         <TextView
+                            android:id="@+id/monarch_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="13,000"
@@ -229,6 +235,7 @@
                     android:gravity="start|center_vertical">
 
                     <TextView
+                        android:id="@+id/high_lord_department"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CAS"
@@ -256,6 +263,7 @@
                             android:layout_marginEnd="4dp" />
 
                         <TextView
+                            android:id="@+id/high_lord_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12,000"
@@ -291,6 +299,7 @@
                     android:gravity="start|center_vertical">
 
                     <TextView
+                        android:id="@+id/imperial_department"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CSJ"
@@ -318,6 +327,7 @@
                             android:layout_marginEnd="4dp" />
 
                         <TextView
+                            android:id="@+id/imperial_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10,000"
