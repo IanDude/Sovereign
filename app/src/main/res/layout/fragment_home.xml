@@ -9,19 +9,21 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    android:id="@+id/Home">
+    android:id="@+id/Home"
+    >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/home_top_menu"
-            android:background="#F4EFF4"
+            style="@style/CustomBottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="#F4EFF4"
+            app:layout_constraintEnd_toEndOf="@id/home_layout"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:menu="@menu/home_top_navigation_menu"
-            style="@style/CustomBottomNavigationView"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/home_top_navigation_menu" />
+
         <FrameLayout
             android:id="@+id/home_layout"
             android:layout_width="0dp"
