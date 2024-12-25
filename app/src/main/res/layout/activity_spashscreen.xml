@@ -9,32 +9,40 @@
     tools:context=".Splashscreen"
     android:background="@drawable/background_gradient">
 
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
+    <!-- TextView for splash text -->
+    <TextView
+        android:id="@+id/splashText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-
         android:fontFamily="@font/trajui"
         android:text="@string/Splash"
+        android:textAlignment="center"
         android:textColor="#D6BF6A"
-        android:textSize="58sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.113" />
+        app:layout_constraintVertical_bias="0.1"
 
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="24sp"
+        android:autoSizeMaxTextSize="58sp"
+        android:autoSizeStepGranularity="2sp"/>
+
+    <!-- Logo Image below TextView -->
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="374dp"
-        android:layout_height="378dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/splashText"
+        app:layout_constraintVertical_bias="0.7"
+        app:srcCompat="@drawable/logo"
+       />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application) // Core Android application plugin
     alias(libs.plugins.google.gms.google.services) // Google Services plugin for Firebase
+
 }
 
 android {
@@ -42,21 +43,23 @@ dependencies {
     implementation(libs.material) // Material design components
     implementation(libs.activity) // Activity support
     implementation(libs.constraintlayout) // ConstraintLayout for advanced layouts
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0")
+
     // Firebase libraries
     implementation(libs.firebase.firestore) // Firestore database support
     implementation(platform(libs.firebase.firestore)) // Firebase platform BOM
     implementation(libs.firebase.database) // Realtime Database support
     implementation(libs.firebase.storage) // Firebase Storage for uploading files
-    implementation("com.github.bumptech.glide:glide:4.15.0")
 
-    // Glide annotation processor
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.0")
-
-    // Or alternatively, use kapt (Kotlin Annotation Processing Tool)
+    // Glide dependencies
+    implementation(libs.glide.v4150)
+     
 
     // Testing libraries
     testImplementation(libs.junit) // Unit testing
     androidTestImplementation(libs.ext.junit) // Android-specific testing
     androidTestImplementation(libs.espresso.core) // UI testing with Espresso
+}
+
+fun kapt(s: String) {
+    TODO("Not yet implemented")
 }
