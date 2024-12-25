@@ -5,19 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sovereign.RecognitionFragment"
-    android:id="@+id/Recognition"
-    >
+    android:id="@+id/Recognition">
 
+    <!-- Flexible BottomNavigationView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/recognition_top_menu"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/recognition_top_navigation_menu"
-        style="@style/CustomBottomNavigationView"/>
+        style="@style/CustomBottomNavigationView"
+        android:background="#F4EFF4"
+        />
 
+    <!-- Content FrameLayout -->
     <FrameLayout
         android:id="@+id/recognition_layout"
         android:layout_width="0dp"

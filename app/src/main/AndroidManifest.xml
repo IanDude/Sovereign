@@ -4,8 +4,9 @@
     package="com.example.sovereign">
     <uses-permission android:name="android.permission.READ_EXTERNAL_IMAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -36,6 +37,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
+        <activity android:name=".ImageFullViewActivity" />
     </application>
 
 </manifest>

@@ -15,12 +15,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -160,8 +162,14 @@ public class HOFFragment extends Fragment {
                         postTextView.setTextSize(16);
                         postTextView.setTextColor(Color.BLACK);
                         postTextView.setPadding(8, 8, 8, 8);
-
                         postLayout.addView(postTextView);
+
+                        // Create a three-dot menu button
+                        ImageView threeDotsButton = new ImageView(getContext());
+                        threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
+                        threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+                        threeDotsButton.setOnClickListener(v -> showPostOptions(postSnapshot.getKey())); // Handle the menu options
+                        postLayout.addView(threeDotsButton);
 
                         // Check if there's an image to display
                         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
@@ -192,5 +200,51 @@ public class HOFFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to load posts.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void showPostOptions(String postId) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), getView());
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_edit:
+                    editPost(postId);
+                    return true;
+                case R.id.menu_delete:
+                    deletePost(postId);
+                    return true;
+                case R.id.menu_save:
+                    savePost(postId);
+                    return true;
+                default:
+                    return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    private void editPost(String postId) {
+        // Open the post edit functionality
+        // You can navigate to another fragment or show a dialog to edit the content
+        Toast.makeText(getContext(), "Edit post: " + postId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void deletePost(String postId) {
+        postsRef.child(postId).removeValue()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "Post deleted.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Error deleting post.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void savePost(String postId) {
+        // Implement saving logic here (e.g., save to favorites, etc.)
+        Toast.makeText(getContext(), "Save post: " + postId, Toast.LENGTH_SHORT).show();
     }
 }
