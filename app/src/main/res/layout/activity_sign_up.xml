@@ -77,12 +77,12 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Email Address"
-        android:textSize="25sp"
+        android:inputType="text|textEmailAddress"
         android:textColorHint="#878787"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_pass"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_pass" />
     <Button
         android:id="@+id/sign_up_button"
         android:layout_width="wrap_content"
