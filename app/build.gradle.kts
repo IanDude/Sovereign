@@ -58,6 +58,7 @@ dependencies {
     testImplementation(libs.junit) // Unit testing
     androidTestImplementation(libs.ext.junit) // Android-specific testing
     androidTestImplementation(libs.espresso.core) // UI testing with Espresso
+
 }
 
 fun kapt(s: String) {
