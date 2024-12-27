@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.sovereign.databinding.ActivityMainBinding;
+import android.content.Intent;
+
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -34,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new RecognitionFragment());
             }
             return true;
+        });
+
+        binding.btnadmin.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, admin_post.class);
+            startActivity(intent);
         });
 
     }
