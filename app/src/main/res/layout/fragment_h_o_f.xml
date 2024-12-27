@@ -12,6 +12,8 @@
         android:padding="16dp">
 
         <!-- Input Section -->
+
+        <!-- Dynamic Post Feed -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -21,43 +23,60 @@
                 android:id="@+id/postTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/post"
-                android:textSize="20sp"
-                android:textColor="@color/bg_red"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/trajui"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/post"
+                android:textColor="@color/bg_red"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- EditText for Post Content -->
             <EditText
                 android:id="@+id/postContent"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:hint="What's on your mind?"
-                android:gravity="top|start"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/round_lightopacity"
+                android:gravity="top|start"
+                android:hint="What's on your mind?"
+                android:inputType="textMultiLine"
                 android:padding="12dp"
                 android:textColor="#000"
-                android:inputType="textMultiLine"
-                app:layout_constraintTop_toBottomOf="@id/postTitle"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.9"
-                android:layout_marginTop="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/postTitle"
+                app:layout_constraintWidth_percent="0.9" />
+
+            <!-- EditText for Post Date -->
+            <EditText
+                android:id="@+id/postDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_lightopacity"
+                android:focusable="false"
+                android:hint="Select a date"
+                android:inputType="none"
+                android:padding="12dp"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/postContent"
+                app:layout_constraintWidth_percent="0.9" />
 
             <!-- Button to Add an Image -->
             <Button
                 android:id="@+id/addImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="@color/bg_red"
                 android:text="Add Image"
                 android:textColor="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@id/postContent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="16dp" />
+                app:layout_constraintTop_toBottomOf="@id/postDate" />
 
             <!-- ImageView to display the selected image -->
             <ImageView
@@ -66,36 +85,37 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/addImageButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addImageButton" />
 
             <!-- Submit Post Button -->
+
+            <!-- ProgressBar for showing loading -->
+
             <Button
                 android:id="@+id/submitPostButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="@color/bg_red"
                 android:text="Submit"
                 android:textColor="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@id/postContent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+                app:layout_constraintTop_toBottomOf="@+id/postDate" />
 
-            <!-- ProgressBar for showing loading -->
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/submitPostButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/submitPostButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Dynamic Post Feed -->
         <LinearLayout
             android:id="@+id/postsContainer"
             android:layout_width="match_parent"
