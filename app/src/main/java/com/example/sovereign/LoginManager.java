@@ -14,6 +14,7 @@ public class LoginManager {
     protected static final String Pref_name = "AppPrefs";
     protected static final String key_is_logged_in = "isLoggedIn";
 
+
     protected LoginManager(Context context){
         this.firebase = FirebaseFirestore.getInstance();
         this.context = context;
@@ -40,33 +41,55 @@ public class LoginManager {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
-    protected void ToMain(Class<?> mainactivity){
-        Intent intent = new Intent(context, mainactivity);
-
+    protected void ToActivity(Class<?> activity){
+        Intent intent = new Intent(context, activity);
+        context.startActivity(intent);
     }
-    protected void UserSignUp(EditText UserInput, EditText PassInput, String Collection, Map<String, Object> hashMap){
+    protected void UserSignUp(EditText Student_No, EditText UserInput, EditText PassInput,EditText Confirm_pass,EditText Email_Add, String Collection, Map<String, Object> hashMap){
+        String StudentNo = Student_No.getText().toString().trim();
         String Username = UserInput.getText().toString().trim();
         String Password = PassInput.getText().toString().trim();
+        String C_Password = Confirm_pass.getText().toString().trim();
+        String EmailAdd = Email_Add.getText().toString().trim();
 
-        firebase.collection(Collection)
-                .whereEqualTo("Username",Username)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()){
-                        //username already in database
-                        Toast.makeText(context.getApplicationContext(),"Invalid Username",Toast.LENGTH_SHORT).show();
-                    }else{
-                        //username not in database, adds the new data
-                        hashMap.put("Username", Username);
-                        hashMap.put("Password", Password);
-                        firebase.collection(Collection)
-                                .add(hashMap)
-                                .addOnSuccessListener(documentReference -> Toast.makeText(context.getApplicationContext(),"Sign Up Successfuil",Toast.LENGTH_SHORT).show())
-                                .addOnFailureListener(e -> Toast.makeText(context.getApplicationContext(),"Sign Up Failed" + e.getMessage(), Toast.LENGTH_SHORT).show());
-                    }
-                }).addOnFailureListener(e -> Toast.makeText(context.getApplicationContext(),"Error"+ e.getMessage(),Toast.LENGTH_SHORT).show());
+        if(Password.length()<8){
+            MakeToast("Password should be 8 characters longs.");
+            return;
+        }
+
+        if (Password.matches(C_Password)){
+            firebase.collection(Collection)
+                    .whereEqualTo("Username",Username)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()){
+                            //username already in database
+                            Toast.makeText(context.getApplicationContext(),"Invalid Username",Toast.LENGTH_SHORT).show();
+                        }else{
+                            //username not in database, adds the new data
+                            hashMap.put("Student Number",StudentNo);
+                            hashMap.put("Username", Username);
+                            hashMap.put("Password", Password);
+                            hashMap.put("Email Address",EmailAdd);
+                            hashMap.put("Admin","False");
+                            firebase.collection(Collection)
+                                    .add(hashMap)
+                                    .addOnSuccessListener(documentReference -> Toast.makeText(context.getApplicationContext(),"Sign Up Successfuil",Toast.LENGTH_SHORT).show())
+                                    .addOnFailureListener(e -> Toast.makeText(context.getApplicationContext(),"Sign Up Failed" + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            ToActivity(Login.class);
+                        }
+                    }).addOnFailureListener(e -> Toast.makeText(context.getApplicationContext(),"Error"+ e.getMessage(),Toast.LENGTH_SHORT).show());
+        }else{
+            Toast.makeText(context.getApplicationContext(),"Passwords don't match",Toast.LENGTH_SHORT).show();
+
+        }
 
     }
+
+    protected void MakeToast(String message){
+        Toast.makeText(context.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
     protected boolean EmptyFields(EditText UserInput, EditText PassInput){
         String Username = UserInput.getText().toString().trim();
         String Password = PassInput.getText().toString().trim();
