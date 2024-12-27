@@ -7,4 +7,91 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
+    <EditText
+        android:id="@+id/student_no"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Student Number"
+        android:inputType="text"
+        android:textColorHint="#878787"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:textSize="25sp"
+        android:textColorHint="#878787"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/student_no"
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="text|textPassword"
+        android:textColorHint="#878787"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <CheckBox
+        android:id="@+id/showpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/password"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/confirm_pass"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:inputType="text|textPassword"
+        android:textColorHint="#878787"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <CheckBox
+        android:id="@+id/showcpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/confirm_pass"
+        app:layout_constraintTop_toBottomOf="@+id/showpass" />
+
+    <EditText
+        android:id="@+id/email_add"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Email Address"
+        android:textSize="25sp"
+        android:textColorHint="#878787"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_pass"
+        />
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_add"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
