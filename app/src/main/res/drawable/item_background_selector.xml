@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Selected state (when the item is clicked or selected) -->
+    <item android:drawable="@color/bg_red"
+        android:state_checked="true"/> <!-- When item is selected -->
+
+    <!-- Pressed state (when the item is pressed) -->
+    <item android:drawable="@color/bg_red"
+        android:state_pressed="true"/> <!-- When item is pressed -->
+
+    <!-- Default state -->
+    <item android:drawable="@color/white"/> <!-- Default background color -->
+</selector>

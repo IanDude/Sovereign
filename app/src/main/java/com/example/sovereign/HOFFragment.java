@@ -96,10 +96,6 @@ public class HOFFragment extends Fragment {
     private void submitPost() {
         String postText = postContent.getText().toString();
 
-        if (postText.isEmpty()) {
-            Toast.makeText(getContext(), "Please enter some content.", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -168,7 +164,7 @@ public class HOFFragment extends Fragment {
                         ImageView threeDotsButton = new ImageView(getContext());
                         threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
                         threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-                        threeDotsButton.setOnClickListener(v -> showPostOptions(postSnapshot.getKey())); // Handle the menu options
+                        threeDotsButton.setOnClickListener(v -> showPostOptions(postSnapshot.getKey(), v)); // Handle the menu options
                         postLayout.addView(threeDotsButton);
 
                         // Check if there's an image to display
@@ -181,9 +177,16 @@ public class HOFFragment extends Fragment {
                                 postImageView.setImageBitmap(decodedImage);
                                 postImageView.setLayoutParams(new LinearLayout.LayoutParams(
                                         LinearLayout.LayoutParams.MATCH_PARENT,
-                                        400 // Fixed height for consistent UI
+                                        800 // Fixed height for consistent UI
                                 ));
                                 postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                                // Set click listener for full-screen view
+                                postImageView.setOnClickListener(v -> {
+                                    Intent intent = new Intent(getContext(), ImageFullViewActivity.class);
+                                    intent.putExtra(ImageFullViewActivity.IMAGE_BYTE_ARRAY_KEY, imageBytes);
+                                    startActivity(intent);
+                                });
 
                                 postLayout.addView(postImageView);
                             }
@@ -202,27 +205,26 @@ public class HOFFragment extends Fragment {
         });
     }
 
-    private void showPostOptions(String postId) {
-        PopupMenu popupMenu = new PopupMenu(getContext(), getView());
+
+    private void showPostOptions(String postId, View anchorView) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), anchorView, 0, 0, R.style.CustomPopupMenu);
+
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
-                case R.id.menu_edit:
-                    editPost(postId);
-                    return true;
+
                 case R.id.menu_delete:
                     deletePost(postId);
                     return true;
-                case R.id.menu_save:
-                    savePost(postId);
-                    return true;
+
                 default:
                     return false;
             }
         });
 
+        // Show the PopupMenu near the three-dot button (anchorView)
         popupMenu.show();
     }
 
