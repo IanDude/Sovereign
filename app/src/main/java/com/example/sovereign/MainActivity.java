@@ -1,6 +1,9 @@
 package com.example.sovereign;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,6 +16,7 @@ import com.example.sovereign.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    ImageView profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        profile = findViewById(R.id.profile);
+
         binding.bottomNavigationMenu.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.Home) {
@@ -34,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new RecognitionFragment());
             }
             return true;
+        });
+
+        profile.setOnClickListener(view -> {
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
         });
 
     }
