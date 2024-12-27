@@ -1,8 +1,13 @@
 package com.example.sovereign;
 
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,24 +22,25 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-    private LoginManager loginSignUp;
+    protected LoginManager Manager;
+    CheckBox showPass;
     Button login,signup;
     TextView ForgotPass;
     EditText username,password;
-    Map<String, Object> Users  = new HashMap<>();
+//    Map<String, Object> Users  = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginSignUp = new LoginManager(this);
+        Manager = new LoginManager(this);
 //        boolean isLoggedIn = getSharedPreferences("AppPrefs",MODE_PRIVATE)
 //                .getBoolean("isLoggedIn",false);
-        loginSignUp.isLoggedIn();
-        if (loginSignUp.isLoggedIn()){
-            toMain();
+        Manager.isLoggedIn();
+        if (Manager.isLoggedIn()){
+            Manager.ToActivity(MainActivity.class);
             return;
         }
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login_signup);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,43 +52,55 @@ public class Login extends AppCompatActivity {
         ForgotPass = findViewById(R.id.forgotpass);
         signup = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
+        showPass = findViewById(R.id.checkBox);
+
+        showPass.setOnCheckedChangeListener((compoundButton, checked) -> {
+            if (!checked){
+                password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                password.setSelection(password.getText().length());
+            }else{
+                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                password.setSelection(password.getText().length());
+            }
+
+        });
 
         login.setOnClickListener(view -> {
 //            DataCheck(username,password);
-            if(loginSignUp.EmptyFields(username,password)){
-                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
+            if(Manager.EmptyFields(username,password)){
+                Manager.MakeToast("Please fill all fields.");
+//                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
             }else{
-                loginSignUp.UserLogin(username, password, "Users", new LoginManager.LoginCallback() {
+                Manager.UserLogin(username, password, "Users", new LoginManager.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
 //                        saveLoginState();
-                        loginSignUp.saveLoginState();
-                        toMain();
+                        Manager.saveLoginState();
+                        Manager.ToActivity(MainActivity.class);
+                        finish();
                     }
 
                     @Override
                     public void onLoginFailure(String errorMessage) {
-                        Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_SHORT).show();
+                        Manager.MakeToast(errorMessage);
+//                        Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-
-
         });
         signup.setOnClickListener(view -> {
-//            UserSignup((HashMap) Users);
-            if (loginSignUp.EmptyFields(username,password)){
-                Toast.makeText(getApplicationContext(),"Please fill all fields.",Toast.LENGTH_SHORT).show();
-            }else{
-                loginSignUp.UserSignUp(username,password,"Users",Users);
-            }
+            Manager.ToActivity(SignUp.class);
         });
         ForgotPass.setOnClickListener(view -> {
-            Intent intent = new Intent(this,PasswordRecovery.class);
-            startActivity(intent);
-            finish();
+            Manager.ToActivity(PasswordRecovery.class);
         });
+
     }
+//    protected void toActivity(Class<?> activity){
+//        Intent gotoActivity = new Intent(this,activity);
+//        startActivity(gotoActivity);
+//        finish();
+//    }
 //    protected void saveLoginState(){
 //        getSharedPreferences("AppPrefs",MODE_PRIVATE)
 //                .edit()
@@ -98,11 +116,7 @@ public class Login extends AppCompatActivity {
 //        startActivity(intent);
 //        finish();
 //    }
-    protected void toMain(){
-            Intent gotoMain = new Intent(Login.this,MainActivity.class);
-            startActivity(gotoMain);
-            finish();
-    }
+
 
 //    protected void UserSignup(HashMap hashMap){
 //        String usernameInput = username.getText().toString();
