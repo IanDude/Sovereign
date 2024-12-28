@@ -1,21 +1,30 @@
 package com.example.sovereign;
-
 public class Post {
+
+    private String id;        // Added field for ID
     private String content;
     private String imageUrl;
-    private String date; // Added date field
+    private String date;
 
-    // Default Constructor
-    public Post() {}
+    public Post() {
+        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    }
 
-    // Constructor with date
     public Post(String content, String imageUrl, String date) {
         this.content = content;
         this.imageUrl = imageUrl;
         this.date = date;
     }
 
-    // Getters and Setters
+    // Getters and setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getContent() {
         return content;
     }

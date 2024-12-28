@@ -2,6 +2,7 @@ package com.example.sovereign;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,17 +11,9 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
 import java.io.ByteArrayOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -44,10 +37,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class HOFFragment extends Fragment {
 
     private EditText postContent, postDate;
-    private Button addImageButton, submitPostButton;
+    private Button addImageButton;
+    private Button submitPostButton;
     private ProgressBar progressBar;
     private ImageView imageView;
     private LinearLayout postsContainer;
@@ -56,6 +52,7 @@ public class HOFFragment extends Fragment {
     private Uri selectedImageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
 
+    @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -66,7 +63,7 @@ public class HOFFragment extends Fragment {
         postsRef = firebaseDatabase.getReference("posts");
 
         postContent = view.findViewById(R.id.postContent);
-        postDate = view.findViewById(R.id.postDate);
+        postDate = view.findViewById(R.id.postDate);  // Add date input field
         addImageButton = view.findViewById(R.id.addImageButton);
         submitPostButton = view.findViewById(R.id.submitPostButton);
         progressBar = view.findViewById(R.id.progressBar);
@@ -74,9 +71,9 @@ public class HOFFragment extends Fragment {
         postsContainer = view.findViewById(R.id.postsContainer);
 
         // Set up listeners
-        postDate.setOnClickListener(v -> showDatePickerDialog(postDate));
         addImageButton.setOnClickListener(v -> openImagePicker());
         submitPostButton.setOnClickListener(v -> submitPost());
+        postDate.setOnClickListener(v -> showDatePickerDialog(postDate));  // Add date picker listener
 
         // Load existing posts from Firebase
         loadPosts();
@@ -119,12 +116,8 @@ public class HOFFragment extends Fragment {
 
     private void submitPost() {
         String postText = postContent.getText().toString();
-        String postDateText = postDate.getText().toString();
+        String postDateText = postDate.getText().toString();  // Get date from the input
 
-        if (postText.isEmpty()) {
-            Toast.makeText(getContext(), "Please enter some content.", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         if (postDateText.isEmpty()) {
             Toast.makeText(getContext(), "Please select a date.", Toast.LENGTH_SHORT).show();
@@ -147,7 +140,7 @@ public class HOFFragment extends Fragment {
             }
         }
 
-        Post newPost = new Post(postText, imageBase64, postDateText);
+        Post newPost = new Post(postText, imageBase64, postDateText); // Pass date to the Post constructor
 
         postsRef.child(postId).setValue(newPost).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
@@ -174,33 +167,69 @@ public class HOFFragment extends Fragment {
         postsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Post> postsList = new ArrayList<>();
                 postsContainer.removeAllViews();
-
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Post post = postSnapshot.getValue(Post.class);
                     if (post != null) {
-                        postsList.add(post);
-                    }
-                }
+                        LinearLayout postLayout = new LinearLayout(getContext());
+                        postLayout.setOrientation(LinearLayout.VERTICAL);
+                        postLayout.setPadding(16, 16, 16, 16);
+                        postLayout.setBackground(getResources().getDrawable(R.drawable.round_lightopacity, null));
+                        postLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ));
 
-                // Sort posts by date in descending order
-                Collections.sort(postsList, (p1, p2) -> {
-                    try {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                        Date date1 = sdf.parse(p1.getDate());
-                        Date date2 = sdf.parse(p2.getDate());
-                        return date2.compareTo(date1); // Descending order
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        return 0;
-                    }
-                });
+                        // Create and style the text view
+                        TextView postTextView = new TextView(getContext());
+                        postTextView.setText(post.getContent());
+                        postTextView.setTextSize(16);
+                        postTextView.setTextColor(Color.BLACK);
+                        postTextView.setPadding(8, 8, 8, 8);
+                        postLayout.addView(postTextView);
 
-                // Display sorted posts
-                for (Post post : postsList) {
-                    LinearLayout postLayout = createPostLayout(post);
-                    postsContainer.addView(postLayout);
+                        // Display the post date
+                        TextView postDateView = new TextView(getContext());
+                        postDateView.setText("Date: " + post.getDate());
+                        postDateView.setTextSize(12);
+                        postDateView.setTextColor(Color.GRAY);
+                        postLayout.addView(postDateView);
+
+                        // Create a three-dot menu button
+                        ImageView threeDotsButton = new ImageView(getContext());
+                        threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
+                        threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+                        threeDotsButton.setOnClickListener(v -> showPostOptions(postSnapshot.getKey(), v)); // Handle the menu options
+                        postLayout.addView(threeDotsButton);
+
+                        // Check if there's an image to display
+                        if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
+                            byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
+                            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
+                            if (decodedImage != null) {
+                                ImageView postImageView = new ImageView(getContext());
+                                postImageView.setImageBitmap(decodedImage);
+                                postImageView.setLayoutParams(new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        800 // Fixed height for consistent UI
+                                ));
+                                postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                                // Set click listener for full-screen view
+                                postImageView.setOnClickListener(v -> {
+                                    Intent intent = new Intent(getContext(), ImageFullViewActivity.class);
+                                    intent.putExtra(ImageFullViewActivity.IMAGE_BYTE_ARRAY_KEY, imageBytes);
+                                    startActivity(intent);
+                                });
+
+                                postLayout.addView(postImageView);
+                            }
+                        }
+
+                        // Add the combined layout to the container
+                        postsContainer.addView(postLayout, 0);
+                    }
                 }
             }
 
@@ -211,42 +240,41 @@ public class HOFFragment extends Fragment {
         });
     }
 
-    private LinearLayout createPostLayout(Post post) {
-        LinearLayout postLayout = new LinearLayout(getContext());
-        postLayout.setOrientation(LinearLayout.VERTICAL);
-        postLayout.setPadding(16, 16, 16, 16);
-        postLayout.setBackground(getResources().getDrawable(R.drawable.round_lightopacity, null));
+    private void showPostOptions(String postId, View anchorView) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), anchorView, 0, 0, R.style.CustomPopupMenu);
 
-        // Display post content
-        TextView postTextView = new TextView(getContext());
-        postTextView.setText(post.getContent());
-        postLayout.addView(postTextView);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
 
-        // Display post date
-        TextView postDateView = new TextView(getContext());
-        postDateView.setText("Date: " + post.getDate());
-        postDateView.setTextSize(12);
-        postDateView.setTextColor(Color.GRAY);
-        postLayout.addView(postDateView);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
 
-        // Check if there's an image to display
-        if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
-            byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
-            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                case R.id.menu_delete:
+                    deletePost(postId);
+                    return true;
 
-            if (decodedImage != null) {
-                ImageView postImageView = new ImageView(getContext());
-                postImageView.setImageBitmap(decodedImage);
-                postImageView.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        800 // Fixed height for consistent UI
-                ));
-                postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                postLayout.addView(postImageView);
+                default:
+                    return false;
             }
-        }
+        });
 
-        return postLayout;
+        // Show the PopupMenu near the three-dot button (anchorView)
+        popupMenu.show();
+    }
+
+    private void deletePost(String postId) {
+        postsRef.child(postId).removeValue()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "Post deleted.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Error deleting post.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void savePost(String postId) {
+        // Implement saving logic here (e.g., save to favorites, etc.)
+        Toast.makeText(getContext(), "Save post: " + postId, Toast.LENGTH_SHORT).show();
     }
 }
