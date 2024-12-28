@@ -212,7 +212,7 @@ public class HOFFragment extends Fragment {
                                 postImageView.setImageBitmap(decodedImage);
                                 postImageView.setLayoutParams(new LinearLayout.LayoutParams(
                                         LinearLayout.LayoutParams.MATCH_PARENT,
-                                        800 // Fixed height for consistent UI
+                                        750 // Fixed height for consistent UI
                                 ));
                                 postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
