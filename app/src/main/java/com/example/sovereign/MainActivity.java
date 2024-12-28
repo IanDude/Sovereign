@@ -1,6 +1,5 @@
 package com.example.sovereign;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -40,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new RecognitionFragment());
             }
             return true;
-        });
-
-        profile.setOnClickListener(view -> {
-            Intent intent = new Intent(this, UserProfile.class);
-            startActivity(intent);
         });
 
     }
