@@ -7,25 +7,60 @@
     tools:context="com.example.sovereign.RecognitionFragment"
     android:id="@+id/Recognition">
 
-    <!-- Flexible BottomNavigationView -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/recognition_top_menu"
+<!--    &lt;!&ndash; Top NavigationView &ndash;&gt;-->
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/recognition_top_menu"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:menu="@menu/recognition_top_navigation_menu"-->
+<!--        style="@style/CustomBottomNavigationView"-->
+<!--        android:background="#F4EFF4"-->
+<!--        />-->
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabrecognition_top_menu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/recognition_top_navigation_menu"
-        style="@style/CustomBottomNavigationView"
-        android:background="#F4EFF4"
-        />
+        app:tabIndicator="@drawable/custom_tab_indicator"
+        app:tabIndicatorColor="@color/theme_color"
+        app:tabIndicatorHeight="4dp"
+
+        app:tabSelectedTextColor="@color/tab_active"
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabTextColor="@color/tab_inactive">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ranking" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/HallOfFame_title" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+
 
     <!-- Content FrameLayout -->
     <FrameLayout
         android:id="@+id/recognition_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/recognition_top_menu"
+        app:layout_constraintTop_toBottomOf="@id/tabrecognition_top_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
