@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="postTitle" type="id" />
+    <item name="postDate" type="id" />
+    <item name="addImageButton" type="id" />
+    <item name="submitPostButton" type="id" />
+    <item name="progressBar" type="id" />
+    <item name="postsContainer" type="id" />
+</resources>
