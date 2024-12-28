@@ -10,4 +10,7 @@
     <string name="Splash">Sovereign</string>
     <string name="pass">Forgot Password?</string>
     <string name="post">Post</string>
+    <string name="clan">Clan</string>
+    <string name="kingdom">Kingdom</string>
+
 </resources>
