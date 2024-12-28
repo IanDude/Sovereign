@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.sovereign.databinding.FragmentRecognitionBinding;
+import com.google.android.material.tabs.TabLayout;
 
 public class RecognitionFragment extends Fragment {
     private FragmentRecognitionBinding binding;
@@ -23,16 +24,31 @@ public class RecognitionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         changeFragment(new RankingFragment());
-        binding.recognitionTopMenu.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.ranking){
-                changeFragment(new RankingFragment());
-            }else if(id == R.id.HOF){
-                changeFragment(new HOFFragment());
+
+        // Use the correct binding reference for your TabLayout
+        binding.tabrecognitionTopMenu.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) { // Assuming the first tab corresponds to Ranking
+                    changeFragment(new RankingFragment());
+                } else if (position == 1) { // Assuming the second tab corresponds to HOF
+                    changeFragment(new HOFFragment());
+                }
             }
-            return true;
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Optional: Handle tab unselected state if needed
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Optional: Handle tab reselected state if needed
+            }
         });
     }
+
 
     private void changeFragment (Fragment fragment){
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
