@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sovereign">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_IMAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
     <application
@@ -19,9 +21,12 @@
         android:theme="@style/Theme.Sovereign"
         tools:targetApi="31">
         <activity
+            android:name=".Clan_Post"
+            android:exported="false" />
+        <activity
             android:name=".ranking_update"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginSignup"
             android:exported="false" />
@@ -36,15 +41,16 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:hardwareAccelerated="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize" />
 
         <meta-data
             android:name="android.support.v7.appcompat"
             android:value="true" />
+
         <activity android:name=".ImageFullViewActivity" />
     </application>
 
