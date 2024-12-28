@@ -2,12 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bg_red">#cc1e1e</color>
     <color name="tab_active">#262626</color> <!-- Active tab title color -->
     <color name="tab_inactive">#888888</color> <!-- Inactive tab title color -->
     <color name="theme_color">#CC1E1E</color>
 
     <color name="profile">#D9D9D9</color>
-
-
-
 </resources>
