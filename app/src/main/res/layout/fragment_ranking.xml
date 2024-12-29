@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -42,7 +43,8 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/logo1"
                         android:contentDescription="Left Image"
-                        android:layout_gravity="start" />
+                        android:layout_gravity="start"
+                        app:tint="@color/black" />
 
                     <!-- Sovereign Label Text (Centered) -->
                     <TextView
@@ -50,10 +52,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:fontFamily="@font/trahu"
+                        android:fontFamily="@font/prince"
                         android:text="SOVEREIGN"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
+                        android:textColor="#4D0303"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <!-- Rightmost Image -->
@@ -64,7 +66,8 @@
                         android:scaleX="-1"
                         android:src="@drawable/logo1"
                         android:contentDescription="Right Image"
-                        android:layout_gravity="end" />
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
 
@@ -85,7 +88,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="CJJ"
-                            android:textColor="#FFFFFF"
+                            android:textColor="#F8F8F8"
                             android:layout_marginLeft="5dp"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -140,7 +143,8 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/logo2"
                         android:contentDescription="Left Image"
-                        android:layout_gravity="start" />
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
 
                     <!-- Supreme Label Text (Centered) -->
                     <TextView
@@ -148,10 +152,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:fontFamily="@font/trahu"
+                        android:fontFamily="@font/prince"
                         android:text="SUPREME"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
+                        android:textColor="#4D1B03"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <!-- Rightmost Image -->
@@ -162,7 +166,8 @@
                         android:scaleX="-1"
                         android:src="@drawable/logo2"
                         android:contentDescription="Right Image"
-                        android:layout_gravity="end" />
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -236,7 +241,8 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/logo3"
                         android:contentDescription="Left Image"
-                        android:layout_gravity="start" />
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
 
                     <!-- Monarch Label Text (Centered) -->
                     <TextView
@@ -244,10 +250,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:fontFamily="@font/trahu"
+                        android:fontFamily="@font/prince"
                         android:text="MONARCH"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
+                        android:textColor="#5D4502"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <!-- Rightmost Image -->
@@ -258,7 +264,8 @@
                         android:scaleX="-1"
                         android:src="@drawable/logo3"
                         android:contentDescription="Right Image"
-                        android:layout_gravity="end" />
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -332,7 +339,8 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/logo4"
                         android:contentDescription="Left Image"
-                        android:layout_gravity="start" />
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
 
                     <!-- High Lord Label Text (Centered) -->
                     <TextView
@@ -340,10 +348,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:fontFamily="@font/trahu"
+                        android:fontFamily="@font/prince"
                         android:text="HIGH LORD"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
+                        android:textColor="#3B3C01"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <!-- Rightmost Image -->
@@ -354,7 +362,8 @@
                         android:scaleX="-1"
                         android:src="@drawable/logo4"
                         android:contentDescription="Right Image"
-                        android:layout_gravity="end" />
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -428,7 +437,8 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/logo5"
                         android:contentDescription="Left Image"
-                        android:layout_gravity="start" />
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
 
                     <!-- Imperial Label Text (Centered) -->
                     <TextView
@@ -436,10 +446,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:fontFamily="@font/trahu"
+                        android:fontFamily="@font/prince"
                         android:text="IMPERIAL"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
+                        android:textColor="#044720"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <!-- Rightmost Image -->
@@ -450,7 +460,8 @@
                         android:scaleX="-1"
                         android:src="@drawable/logo5"
                         android:contentDescription="Right Image"
-                        android:layout_gravity="end" />
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
                 <LinearLayout

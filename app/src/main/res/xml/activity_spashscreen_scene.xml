@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- Transition defining start and end states -->
+    <Transition
+        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@id/end"
+        motion:duration="2000"> <!-- Animation duration set to 2 seconds -->
+    </Transition>
+
+    <!-- Start state -->
+    <ConstraintSet android:id="@+id/start">
+        <!-- Logo (imageView2) starts scaled down -->
+
+        <!-- Splash Text starts invisible -->
+        <Constraint
+            android:id="@+id/imageView2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.7"
+            motion:layout_constraintTop_toBottomOf="@+id/splashText"
+            motion:layout_constraintStart_toStartOf="parent" /> <!-- Invisible (alpha 0) -->
+    </ConstraintSet>
+
+    <!-- End state -->
+    <ConstraintSet android:id="@+id/end">
+        <!-- Logo (imageView2) scaled up to full size -->
+
+        <!-- Splash Text becomes visible -->
+        <Constraint
+            android:id="@+id/splashText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toTopOf="@+id/imageView2"
+            motion:layout_constraintVertical_bias="0.1"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:alpha="1" />
+        <Constraint
+            android:id="@+id/imageView2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.7"
+            motion:layout_constraintTop_toBottomOf="@+id/splashText"
+            motion:layout_constraintStart_toStartOf="parent" /> <!-- Fully visible (alpha 1) -->
+    </ConstraintSet>
+
+</MotionScene>

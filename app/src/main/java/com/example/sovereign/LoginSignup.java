@@ -1,6 +1,7 @@
 package com.example.sovereign;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -27,7 +28,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class LoginSignup extends AppCompatActivity {
+    private MediaPlayer mediaPlayer;
+
 //    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
     private LoginSignUpFunc loginSignUp;
     Button login,signup;
@@ -43,6 +47,11 @@ public class LoginSignup extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.trumpet); // Use the music file in res/raw
+        mediaPlayer.setLooping(true);  // Set the music to loop
+        mediaPlayer.start();  // Start playing the music
+
         loginSignUp = new LoginSignUpFunc(this);
         username = findViewById(R.id.username_text);
         password = findViewById(R.id.password_text);
@@ -65,6 +74,15 @@ public class LoginSignup extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stop the music when the activity is destroyed to release resources
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
     }
     protected void toMain(){
         new Handler(Looper.getMainLooper()).postDelayed(()->{
