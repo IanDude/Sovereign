@@ -1,6 +1,8 @@
 package com.example.sovereign;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -15,6 +17,7 @@ import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    ImageView profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        profile = findViewById(R.id.profile);
 
         binding.bottomNavigationMenu.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
