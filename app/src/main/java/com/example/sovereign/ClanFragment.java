@@ -20,7 +20,6 @@ import com.example.sovereign.R;
 import java.util.ArrayList;
 
 public class ClanFragment extends Fragment {
-
     private RecyclerView recyclerView;
     private EditText editTextItem;
     private Button buttonAdd;

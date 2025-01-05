@@ -16,10 +16,12 @@ import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+//    LoginManager Manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        Manager = new LoginManager(this);
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
         changeFragment(new HomeFragment());
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
+//        boolean isAdmin = Manager.UserState();
+//        String Username = Manager.getUsername();
         binding.bottomNavigationMenu.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.Home) {
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.btnadmin.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, admin_post.class);
+            Intent intent = new Intent(MainActivity.this, UserProfile.class);
             startActivity(intent);
         });
 

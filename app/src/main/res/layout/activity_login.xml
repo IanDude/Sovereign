@@ -56,6 +56,9 @@
             android:layout_marginTop="196dp"
             android:layout_marginEnd="61dp"
             android:ems="10"
+
+            android:minHeight="48dp"
+            android:minWidth="48dp"
             android:hint="Username"
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/password_text"
@@ -70,6 +73,8 @@
             android:layout_marginStart="79dp"
             android:layout_marginEnd="61dp"
             android:ems="10"
+            android:minHeight="48dp"
+            android:minWidth="48dp"
             android:hint="Password"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/checkBox"

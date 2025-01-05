@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    android:paddingStart="10dp"
+    >
+    <EditText
+        android:id="@+id/newInput"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:textSize="20sp"
+        android:inputType="text"
+        android:hint="Hint"
+        android:textColorHint="@color/hint_color"
+        android:background="@drawable/input_background"
+        android:textColor="@color/black"
+        />
+
+    <android.widget.CheckBox
+        android:id="@+id/showpass"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:buttonTint="@color/white"
+        android:visibility="gone"
+        android:layout_gravity="end|center_vertical"
+        />
+<!--    <CheckBox-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:id="@+id/showpass"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_gravity="end"/>-->
+</LinearLayout>
