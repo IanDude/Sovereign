@@ -13,6 +13,7 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -36,7 +37,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class HOFFragment extends Fragment {
 
@@ -117,6 +123,7 @@ public class HOFFragment extends Fragment {
         String postText = postContent.getText().toString();
         String postDateText = postDate.getText().toString();  // Get date from the input
 
+
         if (postDateText.isEmpty()) {
             Toast.makeText(getContext(), "Please select a date.", Toast.LENGTH_SHORT).show();
             return;
@@ -138,7 +145,7 @@ public class HOFFragment extends Fragment {
             }
         }
 
-        Post2 newPost = new Post2(postText, imageBase64, postDateText); // Use Post2
+        Post2 newPost = new Post2(postText, imageBase64, postDateText); // Pass date to the Post constructor
 
         postsRef.child(postId).setValue(newPost).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
@@ -166,54 +173,100 @@ public class HOFFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postsContainer.removeAllViews();
+
+                // Create a list to store posts
+                List<Post> postList = new ArrayList<>();
+
+                // Populate the list with posts from the database
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Post2 post = postSnapshot.getValue(Post2.class); // Use Post2
+                    Post post = postSnapshot.getValue(Post.class);
                     if (post != null) {
-                        LinearLayout postLayout = new LinearLayout(getContext());
-                        postLayout.setOrientation(LinearLayout.VERTICAL);
-                        postLayout.setPadding(16, 16, 16, 16);
-                        postLayout.setBackground(getResources().getDrawable(R.drawable.round_lightopacity, null));
-                        postLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        ));
+                        post.setId(postSnapshot.getKey()); // Save the post ID for sorting and later use
+                        postList.add(post);
+                    }
+                }
 
-                        // Create and style the text view
-                        TextView postTextView = new TextView(getContext());
-                        postTextView.setText(post.getContent());
-                        postTextView.setTextSize(16);
-                        postTextView.setTextColor(Color.BLACK);
-                        postTextView.setPadding(8, 8, 8, 8);
-                        postLayout.addView(postTextView);
+                // Sort the list by date and then by Firebase key (newest first)
+                Collections.sort(postList, (post1, post2) -> {
+                    try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date1 = dateFormat.parse(post1.getDate());
+                        Date date2 = dateFormat.parse(post2.getDate());
 
-                        // Display the post date
-                        TextView postDateView = new TextView(getContext());
-                        postDateView.setText("Date: " + post.getDate());
-                        postDateView.setTextSize(12);
-                        postDateView.setTextColor(Color.GRAY);
-                        postLayout.addView(postDateView);
-
-                        // Check if there's an image to display
-                        if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
-                            byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
-                            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-
-                            if (decodedImage != null) {
-                                ImageView postImageView = new ImageView(getContext());
-                                postImageView.setImageBitmap(decodedImage);
-                                postImageView.setLayoutParams(new LinearLayout.LayoutParams(
-                                        LinearLayout.LayoutParams.MATCH_PARENT,
-                                        750 // Fixed height for consistent UI
-                                ));
-                                postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                                postLayout.addView(postImageView);
-                            }
+                        // First compare by date (newest first)
+                        int dateComparison = date2.compareTo(date1);
+                        if (dateComparison != 0) {
+                            return dateComparison;
                         }
 
-                        // Add the combined layout to the container
-                        postsContainer.addView(postLayout, 0);
+                        // If dates are the same, compare by Firebase key (newest post first)
+                        return post2.getId().compareTo(post1.getId());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return 0;
                     }
+                });
+
+                // Display the sorted posts
+                for (Post post : postList) {
+                    LinearLayout postLayout = new LinearLayout(getContext());
+                    postLayout.setOrientation(LinearLayout.VERTICAL);
+                    postLayout.setPadding(16, 16, 16, 16);
+                    postLayout.setBackground(getResources().getDrawable(R.drawable.round_lightopacity, null));
+                    postLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    ));
+
+                    // Create and style the text view
+                    TextView postTextView = new TextView(getContext());
+                    postTextView.setText(post.getContent());
+                    postTextView.setTextSize(16);
+                    postTextView.setTextColor(Color.BLACK);
+                    postTextView.setPadding(8, 8, 8, 8);
+                    postLayout.addView(postTextView);
+
+                    // Display the post date
+                    TextView postDateView = new TextView(getContext());
+                    postDateView.setText("Date: " + post.getDate());
+                    postDateView.setTextSize(12);
+                    postDateView.setTextColor(Color.GRAY);
+                    postLayout.addView(postDateView);
+
+                    // Create a three-dot menu button
+                    ImageView threeDotsButton = new ImageView(getContext());
+                    threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
+                    threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+                    threeDotsButton.setOnClickListener(v -> showPostOptions(post.getId(), v)); // Handle the menu options
+                    postLayout.addView(threeDotsButton);
+
+                    // Check if there's an image to display
+                    if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
+                        byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
+                        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
+                        if (decodedImage != null) {
+                            ImageView postImageView = new ImageView(getContext());
+                            postImageView.setImageBitmap(decodedImage);
+                            postImageView.setLayoutParams(new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    750 // Fixed height for consistent UI
+                            ));
+                            postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                            // Set click listener for full-screen view
+                            postImageView.setOnClickListener(v -> {
+                                Intent intent = new Intent(getContext(), ImageFullViewActivity.class);
+                                intent.putExtra(ImageFullViewActivity.IMAGE_BYTE_ARRAY_KEY, imageBytes);
+                                startActivity(intent);
+                            });
+
+                            postLayout.addView(postImageView);
+                        }
+                    }
+
+                    // Add the combined layout to the container
+                    postsContainer.addView(postLayout);
                 }
             }
 
@@ -222,5 +275,43 @@ public class HOFFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to load posts.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void showPostOptions(String postId, View anchorView) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), anchorView, 0, 0, R.style.CustomPopupMenu);
+
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+
+                case R.id.menu_delete:
+                    deletePost(postId);
+                    return true;
+
+                default:
+                    return false;
+            }
+        });
+
+        // Show the PopupMenu near the three-dot button (anchorView)
+        popupMenu.show();
+    }
+
+    private void deletePost(String postId) {
+        postsRef.child(postId).removeValue()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "Post deleted.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Error deleting post.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void savePost(String postId) {
+        // Implement saving logic here (e.g., save to favorites, etc.)
+        Toast.makeText(getContext(), "Save post: " + postId, Toast.LENGTH_SHORT).show();
     }
 }
