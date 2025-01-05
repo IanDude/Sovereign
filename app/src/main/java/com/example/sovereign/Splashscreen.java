@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.graphics.Insets;
@@ -22,8 +27,15 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spashscreen);
 
-        // Set up MotionLayout for the splash screen animation
-        motionLayout = findViewById(R.id.main);
+        TextView splashText = findViewById(R.id.splashText);
+        ImageView imageView2 = findViewById(R.id.imageView2);
+
+        // Load the fade-in animation
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+        // Start the animation
+        splashText.startAnimation(fadeIn);
+        imageView2.startAnimation(fadeIn);
 
         // Handle system UI insets (status bar, navigation bar)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -34,33 +46,38 @@ public class Splashscreen extends AppCompatActivity {
 
         try {
             // Initialize MediaPlayer for background music
-            mediaPlayer = MediaPlayer.create(this, R.raw.intro); // Make sure the file is in the res/raw folder
-            mediaPlayer.setLooping(true);  // Set music to loop
-            mediaPlayer.start();  // Start playing the background music
+            mediaPlayer = MediaPlayer.create(this, R.raw.intro); // Ensure the file exists in res/raw
+            if (mediaPlayer != null) {
+                mediaPlayer.setLooping(true);  // Set music to loop
+                mediaPlayer.start();  // Start playing the background music
+            } else {
+                Log.e("Splashscreen", "MediaPlayer failed to initialize");
+            }
 
-            // Duration for splash screen (e.g., 2000ms for 2 seconds)
-            int splashDuration = 10000;  // 2 seconds
+            // Duration for splash screen (e.g., 10 seconds)
+            int splashDuration = 10000;
 
-            // Ensure the music stops after splash duration
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Stop the music after splash screen duration ends
-                    if (mediaPlayer != null) {
-                        mediaPlayer.stop(); // Stop the music
-                        mediaPlayer.release(); // Release resources
+            // Stop music and transition to next activity after splash duration
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                // Stop the music after splash duration ends
+                if (mediaPlayer != null) {
+                    try {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null; // Nullify reference to prevent leaks
+                    } catch (Exception e) {
+                        Log.e("Splashscreen", "Error stopping media player", e);
                     }
-
-                    // Transition to the next activity (LoginSignup in this case)
-                    Intent intent = new Intent(Splashscreen.this, LoginSignup.class);
-                    startActivity(intent);
-                    finish();  // Close the splash screen activity
                 }
-            }, splashDuration);  // 2000ms = 2 seconds
+
+                // Transition to the next activity
+                Intent intent = new Intent(Splashscreen.this, LoginSignup.class);
+                startActivity(intent);
+                finish();  // Close the splash screen activity
+            }, splashDuration);
 
         } catch (Exception e) {
-            // Catch any errors related to MediaPlayer
-            Log.e("Splashscreen", "Error initializing media player", e);
+            Log.e("Splashscreen", "Error initializing MediaPlayer", e);
         }
     }
 
@@ -72,8 +89,9 @@ public class Splashscreen extends AppCompatActivity {
             try {
                 mediaPlayer.stop();
                 mediaPlayer.release();
+                mediaPlayer = null; // Nullify reference
             } catch (Exception e) {
-                Log.e("Splashscreen", "Error stopping media player", e);
+                Log.e("Splashscreen", "Error releasing MediaPlayer", e);
             }
         }
     }
