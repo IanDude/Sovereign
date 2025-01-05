@@ -213,10 +213,13 @@ public class HOFFragment extends Fragment {
                     postLayout.setOrientation(LinearLayout.VERTICAL);
                     postLayout.setPadding(16, 16, 16, 16);
                     postLayout.setBackground(getResources().getDrawable(R.drawable.round_lightopacity, null));
-                    postLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams postLayoutParams = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
-                    ));
+                    );
+
+                    postLayoutParams.bottomMargin = 32; // Adjust this value to set the desired spacing
+                    postLayout.setLayoutParams(postLayoutParams);
 
                     // Create and style the text view
                     TextView postTextView = new TextView(getContext());
