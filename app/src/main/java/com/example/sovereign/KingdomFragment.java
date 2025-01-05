@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -145,6 +146,7 @@ public class KingdomFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postsContainer.removeAllViews();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String postId = postSnapshot.getKey(); // Get the post ID
                     Post2 post = postSnapshot.getValue(Post2.class);
                     if (post != null) {
                         LinearLayout postLayout = new LinearLayout(getContext());
@@ -156,18 +158,18 @@ public class KingdomFragment extends Fragment {
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
 
-                        // Create and style the text view
+                        // Display Post Content
                         TextView postTextView = new TextView(getContext());
                         postTextView.setText(post.getContent());
                         postTextView.setTextSize(16);
                         postLayout.addView(postTextView);
 
-                        // Display the post date
+                        // Display Post Date
                         TextView postDateView = new TextView(getContext());
                         postDateView.setText("Date: " + post.getDate());
                         postLayout.addView(postDateView);
 
-                        // Check if there's an image to display
+                        // Display Image if available
                         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
                             byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
                             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
@@ -177,14 +179,32 @@ public class KingdomFragment extends Fragment {
                                 postImageView.setImageBitmap(decodedImage);
                                 postImageView.setLayoutParams(new LinearLayout.LayoutParams(
                                         LinearLayout.LayoutParams.MATCH_PARENT,
-                                        750 // Fixed height for consistent UI
+                                        750
                                 ));
                                 postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                 postLayout.addView(postImageView);
                             }
                         }
 
-                        // Add the combined layout to the container
+                        // Add Edit and Delete Icons
+                        LinearLayout iconLayout = new LinearLayout(getContext());
+                        iconLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+                        // Edit Icon
+                        ImageButton editIcon = new ImageButton(getContext());
+                        editIcon.setImageResource(R.drawable.ic_edit); // Replace with your edit icon resource
+                        editIcon.setBackground(null);
+                        editIcon.setOnClickListener(v -> editPost(postId, post));
+                        iconLayout.addView(editIcon);
+
+                        // Delete Icon
+                        ImageButton deleteIcon = new ImageButton(getContext());
+                        deleteIcon.setImageResource(R.drawable.ic_delete); // Replace with your delete icon resource
+                        deleteIcon.setBackground(null);
+                        deleteIcon.setOnClickListener(v -> deletePost(postId));
+                        iconLayout.addView(deleteIcon);
+
+                        postLayout.addView(iconLayout);
                         postsContainer.addView(postLayout, 0);
                     }
                 }
@@ -194,6 +214,61 @@ public class KingdomFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(), "Failed to load posts.", Toast.LENGTH_SHORT).show();
             }
+            private void editPost(String postId, Post2 post) {
+                // Show confirmation dialog
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                        .setTitle("Edit Post")
+                        .setMessage("Are you sure you want to edit this post?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            // Prefill the post content for editing
+                            postContent.setText(post.getContent());
+                            selectedImageUri = null;
+
+                            submitPostButton.setText("Update Post");
+                            submitPostButton.setOnClickListener(v -> {
+                                String updatedText = postContent.getText().toString();
+                                if (updatedText.isEmpty()) {
+                                    Toast.makeText(getContext(), "Post content cannot be empty.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                // Update post in Firebase
+                                post.setContent(updatedText);
+                                postsRef.child(postId).setValue(post).addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getContext(), "Post updated successfully.", Toast.LENGTH_SHORT).show();
+                                        postContent.setText("");
+                                        submitPostButton.setText("Submit Post");
+                                        submitPostButton.setOnClickListener(view -> submitPost());
+                                    } else {
+                                        Toast.makeText(getContext(), "Failed to update post.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            });
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+
+
+            private void deletePost(String postId) {
+                // Show confirmation dialog
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                        .setTitle("Delete Post")
+                        .setMessage("Are you sure you want to delete this post?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            postsRef.child(postId).removeValue().addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Post deleted successfully.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Failed to delete post.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+
         });
     }
 }
