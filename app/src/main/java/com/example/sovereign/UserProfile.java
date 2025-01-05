@@ -246,9 +246,7 @@ public class UserProfile extends AppCompatActivity {
                         showpass.setVisibility(View.VISIBLE);
                         newInput.requestFocus();
                     }
-                    showpass.setOnCheckedChangeListener((compoundButton, checked) -> {
-                        Manager.ShowPass(newInput,checked);
-                    });
+                    showpass.setOnCheckedChangeListener((compoundButton, checked) -> Manager.ShowPass(newInput,checked));
                     builder2.setPositiveButton("Confirm",(dialog2,which2) ->{
                         if (newInput.getText().toString().isEmpty()){
                             Manager.MakeToast("Empty Fields");
@@ -280,9 +278,7 @@ public class UserProfile extends AppCompatActivity {
             updateDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
         });
 
-        logout.setOnClickListener(view -> {
-            Manager.logout(Login.class);
-        });
+        logout.setOnClickListener(view -> Manager.logout());
 
     }
 }

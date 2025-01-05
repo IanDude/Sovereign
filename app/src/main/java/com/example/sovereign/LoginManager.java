@@ -92,12 +92,12 @@ public class LoginManager {
                 .getString(SAVED_USER_DEPT,"SAVED DEPARTMENT");
     }
 
-    protected void logout(Class<?> backtologin){
+    protected void logout(){
         context.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE)
                 .edit()
                 .clear()
                 .apply();
-        Intent intent = new Intent(context,backtologin);
+        Intent intent = new Intent(context, Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
@@ -232,9 +232,7 @@ public class LoginManager {
                     }else{
                         MakeToast("User not found.");
                     }
-                }).addOnFailureListener(e -> {
-                    MakeToast("Error" + e.getMessage());
-                });
+                }).addOnFailureListener(e -> MakeToast("Error" + e.getMessage()));
     }
 
     protected void RetrieveUserState(String Username, OnRetrieveUserListener listener){

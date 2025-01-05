@@ -46,7 +46,7 @@ public class Gmail {
     }
 
 
-    protected void createEmailMessage() throws AddressException, MessagingException, UnsupportedEncodingException {
+    protected void createEmailMessage() throws MessagingException, UnsupportedEncodingException {
         mailSession = Session.getDefaultInstance(emailProperties,null);
         emailMessage = new MimeMessage(mailSession);
 

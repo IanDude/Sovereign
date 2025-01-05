@@ -10,6 +10,7 @@
     tools:context=".SignUp">
 
     <ImageView
+        android:contentDescription="Sovereign Logo"
         android:id="@+id/logo"
         android:layout_width="327dp"
         android:layout_height="338dp"
@@ -175,7 +176,7 @@
             android:layout_height="25dp"
             android:hint="Email Address"
             android:background="@drawable/input_background"
-            android:inputType="text"
+            android:inputType="text|textEmailAddress"
             android:textColorHint="#878787"
             android:textSize="13sp"
             android:padding="5dp"/>
