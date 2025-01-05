@@ -13,7 +13,6 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -118,7 +117,6 @@ public class HOFFragment extends Fragment {
         String postText = postContent.getText().toString();
         String postDateText = postDate.getText().toString();  // Get date from the input
 
-
         if (postDateText.isEmpty()) {
             Toast.makeText(getContext(), "Please select a date.", Toast.LENGTH_SHORT).show();
             return;
@@ -140,7 +138,7 @@ public class HOFFragment extends Fragment {
             }
         }
 
-        Post newPost = new Post(postText, imageBase64, postDateText); // Pass date to the Post constructor
+        Post2 newPost = new Post2(postText, imageBase64, postDateText); // Use Post2
 
         postsRef.child(postId).setValue(newPost).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
@@ -169,7 +167,7 @@ public class HOFFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postsContainer.removeAllViews();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Post post = postSnapshot.getValue(Post.class);
+                    Post2 post = postSnapshot.getValue(Post2.class); // Use Post2
                     if (post != null) {
                         LinearLayout postLayout = new LinearLayout(getContext());
                         postLayout.setOrientation(LinearLayout.VERTICAL);
@@ -195,13 +193,6 @@ public class HOFFragment extends Fragment {
                         postDateView.setTextColor(Color.GRAY);
                         postLayout.addView(postDateView);
 
-                        // Create a three-dot menu button
-                        ImageView threeDotsButton = new ImageView(getContext());
-                        threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
-                        threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-                        threeDotsButton.setOnClickListener(v -> showPostOptions(postSnapshot.getKey(), v)); // Handle the menu options
-                        postLayout.addView(threeDotsButton);
-
                         // Check if there's an image to display
                         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
                             byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
@@ -215,13 +206,6 @@ public class HOFFragment extends Fragment {
                                         750 // Fixed height for consistent UI
                                 ));
                                 postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                                // Set click listener for full-screen view
-                                postImageView.setOnClickListener(v -> {
-                                    Intent intent = new Intent(getContext(), ImageFullViewActivity.class);
-                                    intent.putExtra(ImageFullViewActivity.IMAGE_BYTE_ARRAY_KEY, imageBytes);
-                                    startActivity(intent);
-                                });
 
                                 postLayout.addView(postImageView);
                             }
@@ -238,43 +222,5 @@ public class HOFFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to load posts.", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void showPostOptions(String postId, View anchorView) {
-        PopupMenu popupMenu = new PopupMenu(getContext(), anchorView, 0, 0, R.style.CustomPopupMenu);
-
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
-
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-
-                case R.id.menu_delete:
-                    deletePost(postId);
-                    return true;
-
-                default:
-                    return false;
-            }
-        });
-
-        // Show the PopupMenu near the three-dot button (anchorView)
-        popupMenu.show();
-    }
-
-    private void deletePost(String postId) {
-        postsRef.child(postId).removeValue()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Post deleted.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), "Error deleting post.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void savePost(String postId) {
-        // Implement saving logic here (e.g., save to favorites, etc.)
-        Toast.makeText(getContext(), "Save post: " + postId, Toast.LENGTH_SHORT).show();
     }
 }
