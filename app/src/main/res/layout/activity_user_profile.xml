@@ -5,16 +5,324 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfile">
+    tools:context=".UserProfile"
+    android:background="@drawable/background_gradient">
 
 
     <TextView
+        android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Profile"
+        android:fontFamily="@font/montagu_slab_bold"
+        android:text="Account Details"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="25sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sovereign_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="Logo"
+        android:alpha=".3"/>
+    <LinearLayout
+        android:id="@+id/details"
+        android:layout_width="338dp"
+        android:layout_height="312dp"
+        android:background="@drawable/rectangle_59"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montagu_slab_bold"
+                android:text="Username"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Number"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab_bold"
+                 
+                />
+            <TextView
+                android:id="@+id/id_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Number"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Department"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab_bold"
+
+                />
+            <TextView
+                android:id="@+id/department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Department"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="30dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montagu_slab_bold"
+                     
+                    />
+                <TextView
+                    android:id="@+id/firstname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name"
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montagu_slab"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montagu_slab_bold"
+                     
+                    />
+                <TextView
+                    android:id="@+id/lastname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name"
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montagu_slab"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab_bold"
+                 
+                />
+            <TextView
+                android:id="@+id/email_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montagu_slab"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        >
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            >
+            <ImageButton
+                android:id="@+id/update"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:contentDescription="Update"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                android:fontFamily="@font/montagu_slab"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:textColor="#D6BF6A"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_selector">
+            <ImageButton
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Logout"
+                android:background="@drawable/button_selector"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:fontFamily="@font/montagu_slab"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:textColor="#D6BF6A"
+                />
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/buttons2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        >
+        <FrameLayout
+            android:id="@+id/edit_user_layout"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="visible"
+            >
+            <ImageButton
+                android:id="@+id/edit_user_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:contentDescription="Update"
+                />
+            <TextView
+                android:id="@+id/edit_user_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit User"
+                android:fontFamily="@font/montagu_slab"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:textColor="#D6BF6A"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/edit_dept_layout"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="visible"
+            >
+            <ImageButton
+                android:id="@+id/edit_dept_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:contentDescription="Update"
+                />
+            <TextView
+                android:id="@+id/edit_dept_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Department"
+                android:fontFamily="@font/montagu_slab"
+                android:textSize="11sp"
+                android:layout_gravity="center"
+                android:textColor="#D6BF6A"
+                />
+        </FrameLayout>
+    </LinearLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

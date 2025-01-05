@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RadioGroup
+        android:id="@+id/usertype_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.widget.RadioButton
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Admin"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            />
+        <android.widget.RadioButton
+            android:id="@+id/regular"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Regular"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            />
+        <android.widget.RadioButton
+            android:id="@+id/clan_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Clan Poster"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            />
+        <android.widget.RadioButton
+            android:id="@+id/ssg"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="SSG"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            />
+    </RadioGroup>
+</LinearLayout>

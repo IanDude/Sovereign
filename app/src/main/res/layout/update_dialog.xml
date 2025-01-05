@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <android.widget.RadioButton
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Username"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+        <android.widget.RadioButton
+            android:id="@+id/ID_Number"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="ID Number"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+        <android.widget.RadioButton
+            android:id="@+id/Department"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Department"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+        <android.widget.RadioButton
+            android:id="@+id/FirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="FirstName"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+
+        <android.widget.RadioButton
+            android:id="@+id/LastName"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="LastName"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+        <android.widget.RadioButton
+            android:id="@+id/Email_Add"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Email Address"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+        <android.widget.RadioButton
+            android:id="@+id/Password"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Password"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
+
+    </RadioGroup>
+</LinearLayout>

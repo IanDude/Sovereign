@@ -11,13 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.sovereign.databinding.ActivityMainBinding;
+import android.content.Intent;
+
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+//    LoginManager Manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        Manager = new LoginManager(this);
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
         changeFragment(new HomeFragment());
@@ -27,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
+//        boolean isAdmin = Manager.UserState();
+//        String Username = Manager.getUsername();
         binding.bottomNavigationMenu.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.Home) {
@@ -36,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new RecognitionFragment());
             }
             return true;
+        });
+
+        binding.btnadmin.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UserProfile.class);
+            startActivity(intent);
         });
 
     }
