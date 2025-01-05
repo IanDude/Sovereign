@@ -10,10 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
-import java.io.ByteArrayOutputStream;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -37,13 +34,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 
 public class ClanFragment extends Fragment {
 
     private EditText postContent, postDate;
-    private Button addImageButton;
-    private Button submitPostButton;
+    private Button addImageButton, submitPostButton;
     private ProgressBar progressBar;
     private ImageView imageView;
     private LinearLayout postsContainer;
@@ -52,7 +49,7 @@ public class ClanFragment extends Fragment {
     private Uri selectedImageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
+    @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -116,8 +113,8 @@ public class ClanFragment extends Fragment {
 
     private void submitPost() {
         String postText = postContent.getText().toString();
-        String postDateText = postDate.getText().toString();  // Get date from the input
-
+        String postDateText = postDate.getText().toString();
+        String postType = "Clan"; // Ensure the type is included
 
         if (postDateText.isEmpty()) {
             Toast.makeText(getContext(), "Please select a date.", Toast.LENGTH_SHORT).show();
@@ -131,7 +128,6 @@ public class ClanFragment extends Fragment {
 
         if (selectedImageUri != null) {
             try {
-                // Convert selected image to Base64
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
                 imageBase64 = encodeImageToBase64(bitmap);
             } catch (Exception e) {
@@ -140,7 +136,8 @@ public class ClanFragment extends Fragment {
             }
         }
 
-        Post newPost = new Post(postText, imageBase64, postDateText); // Pass date to the Post constructor
+        // Use the constructor with four parameters
+        Post newPost = new Post(postText, imageBase64, postDateText, postType);
 
         postsRef.child(postId).setValue(newPost).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
@@ -155,6 +152,7 @@ public class ClanFragment extends Fragment {
             }
         });
     }
+
 
     private String encodeImageToBase64(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -180,29 +178,15 @@ public class ClanFragment extends Fragment {
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
 
-                        // Create and style the text view
                         TextView postTextView = new TextView(getContext());
                         postTextView.setText(post.getContent());
                         postTextView.setTextSize(16);
-                        postTextView.setTextColor(Color.BLACK);
-                        postTextView.setPadding(8, 8, 8, 8);
                         postLayout.addView(postTextView);
 
-                        // Display the post date
                         TextView postDateView = new TextView(getContext());
                         postDateView.setText("Date: " + post.getDate());
-                        postDateView.setTextSize(12);
-                        postDateView.setTextColor(Color.GRAY);
                         postLayout.addView(postDateView);
 
-                        // Create a three-dot menu button
-                        ImageView threeDotsButton = new ImageView(getContext());
-                        threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
-                        threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-                        threeDotsButton.setOnClickListener(v -> showPostOptions(postSnapshot.getKey(), v)); // Handle the menu options
-                        postLayout.addView(threeDotsButton);
-
-                        // Check if there's an image to display
                         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
                             byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
                             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
@@ -212,22 +196,13 @@ public class ClanFragment extends Fragment {
                                 postImageView.setImageBitmap(decodedImage);
                                 postImageView.setLayoutParams(new LinearLayout.LayoutParams(
                                         LinearLayout.LayoutParams.MATCH_PARENT,
-                                        750 // Fixed height for consistent UI
+                                        750
                                 ));
                                 postImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                                // Set click listener for full-screen view
-                                postImageView.setOnClickListener(v -> {
-                                    Intent intent = new Intent(getContext(), ImageFullViewActivity.class);
-                                    intent.putExtra(ImageFullViewActivity.IMAGE_BYTE_ARRAY_KEY, imageBytes);
-                                    startActivity(intent);
-                                });
-
                                 postLayout.addView(postImageView);
                             }
                         }
 
-                        // Add the combined layout to the container
                         postsContainer.addView(postLayout, 0);
                     }
                 }
@@ -238,43 +213,5 @@ public class ClanFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to load posts.", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void showPostOptions(String postId, View anchorView) {
-        PopupMenu popupMenu = new PopupMenu(getContext(), anchorView, 0, 0, R.style.CustomPopupMenu);
-
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
-
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-
-                case R.id.menu_delete:
-                    deletePost(postId);
-                    return true;
-
-                default:
-                    return false;
-            }
-        });
-
-        // Show the PopupMenu near the three-dot button (anchorView)
-        popupMenu.show();
-    }
-
-    private void deletePost(String postId) {
-        postsRef.child(postId).removeValue()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Post deleted.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), "Error deleting post.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void savePost(String postId) {
-        // Implement saving logic here (e.g., save to favorites, etc.)
-        Toast.makeText(getContext(), "Save post: " + postId, Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,23 +1,20 @@
 package com.example.sovereign;
 
-public class Post {
+public class Post2 {
 
-    private String id;        // Unique ID for the post
-    private String content;   // Content of the post
-    private String imageUrl;  // Base64 encoded image
-    private String date;      // Date of the post
-    private String type;      // Type of the post (e.g., Clan, Kingdom)
+    private String id;        // Added field for ID
+    private String content;
+    private String imageUrl;
+    private String date;
 
-    // Default constructor required for Firebase
-    public Post() {
+    public Post2() {
+        // Default constructor required for calls to DataSnapshot.getValue(Post2.class)
     }
 
-    // Constructor with all fields
-    public Post(String content, String imageUrl, String date, String type) {
+    public Post2(String content, String imageUrl, String date) {
         this.content = content;
         this.imageUrl = imageUrl;
         this.date = date;
-        this.type = type;
     }
 
     // Getters and setters
@@ -51,13 +48,5 @@ public class Post {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
