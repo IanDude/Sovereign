@@ -3,25 +3,20 @@ package com.example.sovereign;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
-import java.io.ByteArrayOutputStream;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,13 +31,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class KingdomFragment extends Fragment {
 
-    private EditText postContent, postDate;
-    private Button addImageButton;
-    private Button submitPostButton;
+    private EditText postContent;
+    private Button addImageButton, submitPostButton;
     private ProgressBar progressBar;
     private ImageView imageView;
     private LinearLayout postsContainer;
@@ -62,7 +59,6 @@ public class KingdomFragment extends Fragment {
         postsRef = firebaseDatabase.getReference("postKingdom");
 
         postContent = view.findViewById(R.id.postContent);
-        postDate = view.findViewById(R.id.postDate);  // Add date input field
         addImageButton = view.findViewById(R.id.addImageButton);
         submitPostButton = view.findViewById(R.id.submitPostButton);
         progressBar = view.findViewById(R.id.progressBar);
@@ -72,29 +68,11 @@ public class KingdomFragment extends Fragment {
         // Set up listeners
         addImageButton.setOnClickListener(v -> openImagePicker());
         submitPostButton.setOnClickListener(v -> submitPost());
-        postDate.setOnClickListener(v -> showDatePickerDialog(postDate));  // Add date picker listener
 
         // Load existing posts from Firebase
         loadPosts();
 
         return view;
-    }
-
-    private void showDatePickerDialog(EditText dateField) {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(),
-                (view, selectedYear, selectedMonth, selectedDay) -> {
-                    String selectedDate = selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay;
-                    dateField.setText(selectedDate);
-                },
-                year, month, day
-        );
-        datePickerDialog.show();
     }
 
     private void openImagePicker() {
@@ -115,10 +93,12 @@ public class KingdomFragment extends Fragment {
 
     private void submitPost() {
         String postText = postContent.getText().toString();
-        String postDateText = postDate.getText().toString();  // Get date from the input
 
-        if (postDateText.isEmpty()) {
-            Toast.makeText(getContext(), "Please select a date.", Toast.LENGTH_SHORT).show();
+        // Get the current date and time in AM/PM format
+        String currentDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault()).format(Calendar.getInstance().getTime());
+
+        if (postText.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter post content.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -129,7 +109,6 @@ public class KingdomFragment extends Fragment {
 
         if (selectedImageUri != null) {
             try {
-                // Convert selected image to Base64
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
                 imageBase64 = encodeImageToBase64(bitmap);
             } catch (Exception e) {
@@ -138,14 +117,13 @@ public class KingdomFragment extends Fragment {
             }
         }
 
-        Post2 newPost = new Post2(postText, imageBase64, postDateText); // Use Post2 here
+        Post2 newPost = new Post2(postText, imageBase64, currentDateTime); // Only 3 parameters
 
         postsRef.child(postId).setValue(newPost).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
             if (task.isSuccessful()) {
                 Toast.makeText(getContext(), "Post submitted successfully!", Toast.LENGTH_SHORT).show();
                 postContent.setText(""); // Clear content
-                postDate.setText(""); // Clear date
                 imageView.setVisibility(View.GONE); // Hide preview
                 selectedImageUri = null; // Reset the selected image
             } else {
@@ -167,7 +145,7 @@ public class KingdomFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postsContainer.removeAllViews();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Post2 post = postSnapshot.getValue(Post2.class); // Use Post2 here
+                    Post2 post = postSnapshot.getValue(Post2.class);
                     if (post != null) {
                         LinearLayout postLayout = new LinearLayout(getContext());
                         postLayout.setOrientation(LinearLayout.VERTICAL);
@@ -182,15 +160,11 @@ public class KingdomFragment extends Fragment {
                         TextView postTextView = new TextView(getContext());
                         postTextView.setText(post.getContent());
                         postTextView.setTextSize(16);
-                        postTextView.setTextColor(Color.BLACK);
-                        postTextView.setPadding(8, 8, 8, 8);
                         postLayout.addView(postTextView);
 
                         // Display the post date
                         TextView postDateView = new TextView(getContext());
                         postDateView.setText("Date: " + post.getDate());
-                        postDateView.setTextSize(12);
-                        postDateView.setTextColor(Color.GRAY);
                         postLayout.addView(postDateView);
 
                         // Check if there's an image to display
