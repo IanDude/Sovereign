@@ -140,6 +140,7 @@ public class KingdomFragment extends Fragment {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+
     private void loadPosts() {
         postsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,21 +154,107 @@ public class KingdomFragment extends Fragment {
                         postLayout.setOrientation(LinearLayout.VERTICAL);
                         postLayout.setPadding(16, 16, 16, 16);
                         postLayout.setBackground(getResources().getDrawable(R.drawable.round_lightopacity, null));
-                        postLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams postLayoutParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+
+                        postLayoutParams.bottomMargin = 32; // Adjust this value to set the desired spacing
+                        postLayout.setLayoutParams(postLayoutParams);
+
+
+
+                        // Create a vertical LinearLayout for the post content, icons, and date
+                        LinearLayout verticalLayout = new LinearLayout(getContext());
+                        verticalLayout.setOrientation(LinearLayout.VERTICAL);
+                        verticalLayout.setLayoutParams(new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
 
-                        // Display Post Content
+                        // Create a horizontal LinearLayout for the post content and icons
+                        LinearLayout contentAndIconsLayout = new LinearLayout(getContext());
+                        contentAndIconsLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        contentAndIconsLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ));
+
+                        // Add Post Content
                         TextView postTextView = new TextView(getContext());
                         postTextView.setText(post.getContent());
                         postTextView.setTextSize(16);
-                        postLayout.addView(postTextView);
 
-                        // Display Post Date
+                        // Set layout parameters with top margin
+                        LinearLayout.LayoutParams postTextParams = new LinearLayout.LayoutParams(
+                                0, // Use weight to distribute space
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                1.0f // Weight for the content to push icons to the right
+                        );
+                        postTextParams.topMargin = 0; // Add top margin (adjust value as needed)
+                        postTextParams.bottomMargin = 80; // Add top margin (adjust value as needed)
+
+                        postTextView.setLayoutParams(postTextParams);
+
+                        contentAndIconsLayout.addView(postTextView);
+                        // Add Edit Icon
+                        ImageButton editIcon = new ImageButton(getContext());
+                        editIcon.setImageResource(R.drawable.ic_edit); // Replace with your edit icon resource
+                        editIcon.setBackground(null); // Remove default background
+
+// Set layout parameters with reduced right margin
+                        LinearLayout.LayoutParams editIconParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        editIconParams.rightMargin = -60; // Reduce right margin (adjust value as needed)
+                        editIconParams.topMargin = -20; // Retain reduced top margin
+                        editIcon.setLayoutParams(editIconParams);
+
+                        editIcon.setOnClickListener(v -> editPost(postId, post));
+                        contentAndIconsLayout.addView(editIcon);
+
+// Add Delete Icon
+                        ImageButton deleteIcon = new ImageButton(getContext());
+                        deleteIcon.setImageResource(R.drawable.ic_delete); // Replace with your delete icon resource
+                        deleteIcon.setBackground(null); // Remove default background
+
+// Set layout parameters with reduced left margin
+                        LinearLayout.LayoutParams deleteIconParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        deleteIconParams.leftMargin = -20; // Reduce left margin (adjust value as needed)
+                        deleteIconParams.rightMargin= -20;
+                        deleteIconParams.topMargin = -20; // Retain reduced top margin
+                        deleteIcon.setLayoutParams(deleteIconParams);
+
+                        deleteIcon.setOnClickListener(v -> deletePost(postId));
+                        contentAndIconsLayout.addView(deleteIcon);
+
+
+// Add the horizontal layout (post content + icons) to the vertical layout
+                        verticalLayout.addView(contentAndIconsLayout);
+// Add Post Date below the horizontal layout
                         TextView postDateView = new TextView(getContext());
                         postDateView.setText("Date: " + post.getDate());
-                        postLayout.addView(postDateView);
+
+// Set layout parameters with proper top margin
+                        LinearLayout.LayoutParams dateParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        dateParams.topMargin = -60; // Add a small positive margin to separate it from the text above
+
+                        postDateView.setLayoutParams(dateParams);
+
+// Add the date view to the vertical layout
+                        verticalLayout.addView(postDateView);
+
+// Add the vertical layout to the post layout
+                        postLayout.addView(verticalLayout);
+
+
 
                         // Display Image if available
                         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
@@ -186,29 +273,12 @@ public class KingdomFragment extends Fragment {
                             }
                         }
 
-                        // Add Edit and Delete Icons
-                        LinearLayout iconLayout = new LinearLayout(getContext());
-                        iconLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-                        // Edit Icon
-                        ImageButton editIcon = new ImageButton(getContext());
-                        editIcon.setImageResource(R.drawable.ic_edit); // Replace with your edit icon resource
-                        editIcon.setBackground(null);
-                        editIcon.setOnClickListener(v -> editPost(postId, post));
-                        iconLayout.addView(editIcon);
-
-                        // Delete Icon
-                        ImageButton deleteIcon = new ImageButton(getContext());
-                        deleteIcon.setImageResource(R.drawable.ic_delete); // Replace with your delete icon resource
-                        deleteIcon.setBackground(null);
-                        deleteIcon.setOnClickListener(v -> deletePost(postId));
-                        iconLayout.addView(deleteIcon);
-
-                        postLayout.addView(iconLayout);
+                        // Add post layout to the container
                         postsContainer.addView(postLayout, 0);
                     }
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
