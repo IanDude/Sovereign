@@ -8,13 +8,12 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.sovereign"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        applicationId = "com.example.sovereign" // Unique application ID
+        minSdk = 24 // Minimum supported SDK
+        targetSdk = 34 // Targeted SDK version
+        versionCode = 1 // Version code for updates
+        versionName = "1.0" // Version name
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" // Test runner
     }
 
     buildTypes {
@@ -40,17 +39,22 @@ android {
 }
 
 dependencies {
+    // Android libraries
+    implementation(libs.appcompat) // AppCompat for backward compatibility
+    implementation(libs.material) // Material design components
+    implementation(libs.activity) // Activity support
+    implementation(libs.constraintlayout) // ConstraintLayout for advanced layouts
 
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    implementation(libs.firebase.firestore)
     implementation(libs.gson)
-    implementation(platform(libs.firebase.firestore))
-    implementation(libs.android.mail)
-    implementation(libs.android.activation)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+
+    // Firebase libraries
+    implementation(libs.firebase.firestore) // Firestore database support
+    implementation(platform(libs.firebase.firestore)) // Firebase platform BOM
+    implementation(libs.firebase.database) // Realtime Database support
+    implementation(libs.firebase.storage) // Firebase Storage for uploading files
+
+    // Glide dependencies
+    implementation(libs.glide.v4150)
+
+
 }

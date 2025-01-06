@@ -2,6 +2,7 @@
 agp = "8.6.1"
 androidMail = "1.6.7"
 gson = "2.11.0"
+glideVersion = "4.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -13,8 +14,12 @@ googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.1.1"
 firebase-bom = "33.7.0"
 firebaseDatabase = "21.0.0"
+firebaseStorage = "21.0.1"
+glide = "4.15.1"  # Add the Glide version here
 
 [libraries]
+compiler-v4150 = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+glide-v4150 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
 android-activation = { module = "com.sun.mail:android-activation", version.ref = "androidMail" }
 android-mail = { module = "com.sun.mail:android-mail", version.ref = "androidMail" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
@@ -26,6 +31,14 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-firestore = {group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore"}
+firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom"}
+firebase-analytics = {group = "com.google.firebase", name = "firebase-analytics"}
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+# Add Glide and its compiler
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

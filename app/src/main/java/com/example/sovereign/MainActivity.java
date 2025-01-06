@@ -2,6 +2,7 @@ package com.example.sovereign;
 
 import android.os.Bundle;
 
+import android.media.MediaPlayer;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -16,14 +17,19 @@ import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-//    LoginManager Manager;
+    private MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        Manager = new LoginManager(this);
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.trumpet); // Replace 'background_music' with your audio file name
+        mediaPlayer.setLooping(true); // Set the music to loop
+        mediaPlayer.start();
+
         changeFragment(new HomeFragment());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -31,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-//        boolean isAdmin = Manager.UserState();
-//        String Username = Manager.getUsername();
         binding.bottomNavigationMenu.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.Home) {
@@ -58,5 +62,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Ensure MediaPlayer is released when the activity is destroyed
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+    }
 }

@@ -1,27 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/white">
 
-    <EditText
-        android:id="@+id/editTextItem"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter item"
-        android:inputType="text"
-        android:minHeight="48dp" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
 
-    <Button
-        android:id="@+id/buttonAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add" />
+        <!-- Input Section -->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="593dp"
-        android:scrollbars="vertical" />
-</LinearLayout>
+        <!-- Dynamic Post Feed -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Title TextView -->
+            <TextView
+                android:id="@+id/postTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/trahu"
+                android:text="@string/post"
+                android:textColor="@color/bg_red"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- EditText for Post Content -->
+            <EditText
+                android:id="@+id/postContent"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_lightopacity"
+                android:gravity="top|start"
+                android:hint="What's on your mind?"
+                android:inputType="textMultiLine"
+                android:padding="12dp"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/postTitle"
+                app:layout_constraintWidth_percent="0.9" />
+
+            <!-- EditText for Post Date -->
+
+            <!-- Button to Add an Image -->
+
+            <!-- ImageView to display the selected image -->
+
+            <Button
+                android:id="@+id/addImageButton"
+                android:layout_width="110dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:backgroundTint="@color/bg_red"
+                android:text="@string/add_image"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/submitPostButton"
+                app:layout_constraintHorizontal_bias="0.122"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postContent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addImageButton" />
+
+            <!-- Submit Post Button -->
+
+            <!-- ProgressBar for showing loading -->
+
+
+            <Button
+                android:id="@+id/submitPostButton"
+                android:layout_width="110dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:backgroundTint="@color/bg_red"
+                android:text="@string/post"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.938"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postContent" />
+
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="110dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/bg_red"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="Clear Image"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postContent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/submitPostButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/postsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp" />
+    </LinearLayout>
+</ScrollView>
