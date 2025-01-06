@@ -19,6 +19,23 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="CustomButtons" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="CustomButtonsText" parent="Widget.AppCompat.TextView">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/montagu_slab_bold</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 
 
 </resources>

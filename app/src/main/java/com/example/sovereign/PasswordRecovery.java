@@ -27,7 +27,6 @@ public class PasswordRecovery extends AppCompatActivity {
     protected String OTP_Code;
     protected long initialTime = 0;
 
-    // Handler and Runnable for periodic time check
     Handler handler = new Handler();
     Runnable otpExpirationCheck = new Runnable() {
         @Override

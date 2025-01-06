@@ -232,19 +232,27 @@ public class UserProfile extends AppCompatActivity {
 
                     CheckBox showpass = customLayout2.findViewById(R.id.showpass);
                     newInput.setHint(selectedOption);
-                    if (selectedOption.equals("Username") || selectedOption.equals("FirstName") || selectedOption.equals("LastName") || selectedOption.equals("Department")){
-                        newInput.setInputType(InputType.TYPE_CLASS_TEXT);
-                        newInput.requestFocus();
-                    }else if(selectedOption.equals("Email Address")){
-                        newInput.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                        newInput.requestFocus();
-                    }else if(selectedOption.equals("ID Number")){
-                        newInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-                        newInput.requestFocus();
-                    } else if (selectedOption.equals("Password")) {
-                        newInput.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        showpass.setVisibility(View.VISIBLE);
-                        newInput.requestFocus();
+                    switch (selectedOption) {
+                        case "Username":
+                        case "FirstName":
+                        case "LastName":
+                        case "Department":
+                            newInput.setInputType(InputType.TYPE_CLASS_TEXT);
+                            newInput.requestFocus();
+                            break;
+                        case "Email Address":
+                            newInput.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                            newInput.requestFocus();
+                            break;
+                        case "ID Number":
+                            newInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            newInput.requestFocus();
+                            break;
+                        case "Password":
+                            newInput.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            showpass.setVisibility(View.VISIBLE);
+                            newInput.requestFocus();
+                            break;
                     }
                     showpass.setOnCheckedChangeListener((compoundButton, checked) -> Manager.ShowPass(newInput,checked));
                     builder2.setPositiveButton("Confirm",(dialog2,which2) ->{
@@ -278,7 +286,10 @@ public class UserProfile extends AppCompatActivity {
             updateDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
         });
 
-        logout.setOnClickListener(view -> Manager.logout());
+        logout.setOnClickListener(view -> {
+            Manager.logout();
+            finish();
+        });
 
     }
 }
