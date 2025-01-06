@@ -14,5 +14,6 @@
     <string name="kingdom">Kingdom</string>
     <string name="ranking">Ranking</string>
     <string name="add_image">Add Image</string>
+    <string name="clear">Clear</string>
 
 </resources>
