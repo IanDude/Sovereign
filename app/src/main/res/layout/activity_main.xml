@@ -36,12 +36,13 @@
                 app:layout_constraintVertical_bias="0.48"
                 app:srcCompat="@drawable/header" />
 
-            <Button
+            <ImageButton
+                android:contentDescription="Admin Button"
                 android:id="@+id/btnadmin"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_gravity="end"
-                android:background="@drawable/circle"
+                android:background="@mipmap/profile_foreground"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +57,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
                 android:text="ANNOUNCEMENTS"
                 android:textSize="16sp"
                 android:textStyle="bold"

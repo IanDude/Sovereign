@@ -2,8 +2,8 @@ package com.example.sovereign;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class ranking_update extends AppCompatActivity {
 
     EditText editDepartment, editPoints;
-    Button btnAdd, btnEdit, btnDelete;
+    ImageButton btnAdd, btnEdit, btnDelete;
     TableLayout tableLayout;
     private FirebaseFirestore db;
 

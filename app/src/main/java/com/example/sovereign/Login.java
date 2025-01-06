@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class Login extends AppCompatActivity {
     protected LoginManager Manager;
     CheckBox showPass;
-    Button login,signup;
+    ImageButton login,signup;
     TextView ForgotPass;
     EditText username,password;
     @Override
@@ -77,11 +78,9 @@ public class Login extends AppCompatActivity {
         });
         signup.setOnClickListener(view -> {
             Manager.ToActivity(SignUp.class);
-            finish();
         });
         ForgotPass.setOnClickListener(view -> {
             Manager.ToActivity(PasswordRecovery.class);
-            finish();
         });
     }
 }
