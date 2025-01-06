@@ -66,9 +66,14 @@ public class ClanFragment extends Fragment {
         imageView = view.findViewById(R.id.imageView);
         postsContainer = view.findViewById(R.id.postsContainer);
 
+        // Initialize the Clear Button
+        Button clearButton = view.findViewById(R.id.clearButton);
+        clearButton.setOnClickListener(v -> clearPostContent()); // Call the clearPostContent method
+
         // Set up listeners
         addImageButton.setOnClickListener(v -> openImagePicker());
         submitPostButton.setOnClickListener(v -> submitPost());
+
 
         // Load existing posts from Firebase
         loadPosts();
@@ -140,6 +145,19 @@ public class ClanFragment extends Fragment {
         byte[] byteArray = outputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
+
+    private boolean clearImage = false; // Flag to track if the image is cleared
+
+    private void clearPostContent() {
+        imageView.setVisibility(View.GONE); // Hide the image preview
+        selectedImageUri = null; // Reset the selected image URI
+        clearImage = true; // Mark the image as cleared
+        Toast.makeText(getContext(), "Image cleared.", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
 
     private void loadPosts() {
         postsRef.addValueEventListener(new ValueEventListener() {
@@ -288,14 +306,28 @@ public class ClanFragment extends Fragment {
             private void editPost(String postId, Post post) {
                 // Show confirmation dialog
                 new androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                        .setTitle("Edit Post")
+                        .setTitle("Confirm Edit")
                         .setMessage("Are you sure you want to edit this post?")
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            // Prefill the post content and optionally image for editing
+                            // Proceed with editing the post
                             postContent.setText(post.getContent());
-                            selectedImageUri = null; // Reset image selection
+                            selectedImageUri = null; // Reset selected image
+                            clearImage = false; // Reset the clear image flag
+
+                            // Show the existing image, if any
+                            if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
+                                byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
+                                Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                                imageView.setImageBitmap(decodedImage);
+                                imageView.setVisibility(View.VISIBLE);
+                            } else {
+                                imageView.setVisibility(View.GONE);
+                            }
 
                             submitPostButton.setText("Update Post");
+
+                            addImageButton.setOnClickListener(v -> openImagePicker());
+
                             submitPostButton.setOnClickListener(v -> {
                                 String updatedText = postContent.getText().toString();
                                 if (updatedText.isEmpty()) {
@@ -303,12 +335,32 @@ public class ClanFragment extends Fragment {
                                     return;
                                 }
 
-                                // Update post in Firebase
+                                progressBar.setVisibility(View.VISIBLE);
+
                                 post.setContent(updatedText);
+
+                                if (clearImage) {
+                                    // Clear the image if the user chose to clear it
+                                    post.setImageUrl("");
+                                } else if (selectedImageUri != null) {
+                                    try {
+                                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
+                                        String newImageBase64 = encodeImageToBase64(bitmap);
+                                        post.setImageUrl(newImageBase64);
+                                    } catch (Exception e) {
+                                        Toast.makeText(getContext(), "Error encoding image.", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
+                                    }
+                                }
+
                                 postsRef.child(postId).setValue(post).addOnCompleteListener(task -> {
+                                    progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), "Post updated successfully.", Toast.LENGTH_SHORT).show();
                                         postContent.setText(""); // Clear content
+                                        imageView.setVisibility(View.GONE); // Hide image preview
+                                        selectedImageUri = null; // Reset selected image URI
+                                        clearImage = false; // Reset the clear image flag
                                         submitPostButton.setText("Submit Post");
                                         submitPostButton.setOnClickListener(view -> submitPost());
                                     } else {
@@ -320,6 +372,8 @@ public class ClanFragment extends Fragment {
                         .setNegativeButton("No", null) // Dismiss dialog if "No" is clicked
                         .show();
             }
+
+
 
             private void deletePost(String postId) {
                 // Show confirmation dialog
@@ -340,6 +394,8 @@ public class ClanFragment extends Fragment {
                         .setNegativeButton("No", null) // Dismiss dialog if "No" is clicked
                         .show();
             }
+
+
 
         });
     }}

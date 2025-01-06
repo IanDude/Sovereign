@@ -47,6 +47,7 @@ public class KingdomFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference postsRef;
     private Uri selectedImageUri;
+    private boolean clearImage = false; // Flag to track if the image is cleared
     private static final int PICK_IMAGE_REQUEST = 1;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -65,6 +66,10 @@ public class KingdomFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         imageView = view.findViewById(R.id.imageView);
         postsContainer = view.findViewById(R.id.postsContainer);
+
+        // Initialize the Clear Button
+        Button clearButton = view.findViewById(R.id.clearButton);
+        clearButton.setOnClickListener(v -> clearPostContent());
 
         // Set up listeners
         addImageButton.setOnClickListener(v -> openImagePicker());
@@ -118,7 +123,7 @@ public class KingdomFragment extends Fragment {
             }
         }
 
-        Post2 newPost = new Post2(postText, imageBase64, currentDateTime); // Only 3 parameters
+        Post2 newPost = new Post2(postText, imageBase64, currentDateTime);
 
         postsRef.child(postId).setValue(newPost).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
@@ -140,6 +145,12 @@ public class KingdomFragment extends Fragment {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+    private void clearPostContent() {
+        imageView.setVisibility(View.GONE); // Hide the image preview
+        selectedImageUri = null; // Reset the selected image URI
+        clearImage = true; // Mark the image as cleared
+        Toast.makeText(getContext(), "Image cleared.", Toast.LENGTH_SHORT).show();
+    }
 
     private void loadPosts() {
         postsRef.addValueEventListener(new ValueEventListener() {
@@ -161,8 +172,6 @@ public class KingdomFragment extends Fragment {
 
                         postLayoutParams.bottomMargin = 32; // Adjust this value to set the desired spacing
                         postLayout.setLayoutParams(postLayoutParams);
-
-
 
                         // Create a vertical LinearLayout for the post content, icons, and date
                         LinearLayout verticalLayout = new LinearLayout(getContext());
@@ -197,64 +206,57 @@ public class KingdomFragment extends Fragment {
                         postTextView.setLayoutParams(postTextParams);
 
                         contentAndIconsLayout.addView(postTextView);
+
                         // Add Edit Icon
                         ImageButton editIcon = new ImageButton(getContext());
                         editIcon.setImageResource(R.drawable.ic_edit); // Replace with your edit icon resource
                         editIcon.setBackground(null); // Remove default background
 
-// Set layout parameters with reduced right margin
                         LinearLayout.LayoutParams editIconParams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        editIconParams.rightMargin = -60; // Reduce right margin (adjust value as needed)
-                        editIconParams.topMargin = -20; // Retain reduced top margin
+                        editIconParams.rightMargin = -60; // Reduce right margin
+                        editIconParams.topMargin = -20; // Reduce top margin
                         editIcon.setLayoutParams(editIconParams);
 
                         editIcon.setOnClickListener(v -> editPost(postId, post));
                         contentAndIconsLayout.addView(editIcon);
 
-// Add Delete Icon
+                        // Add Delete Icon
                         ImageButton deleteIcon = new ImageButton(getContext());
                         deleteIcon.setImageResource(R.drawable.ic_delete); // Replace with your delete icon resource
                         deleteIcon.setBackground(null); // Remove default background
 
-// Set layout parameters with reduced left margin
                         LinearLayout.LayoutParams deleteIconParams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        deleteIconParams.leftMargin = -20; // Reduce left margin (adjust value as needed)
-                        deleteIconParams.rightMargin= -20;
-                        deleteIconParams.topMargin = -20; // Retain reduced top margin
+                        deleteIconParams.leftMargin = -20; // Reduce left margin
+                        deleteIconParams.rightMargin = -20;
+                        deleteIconParams.topMargin = -20; // Reduce top margin
                         deleteIcon.setLayoutParams(deleteIconParams);
 
                         deleteIcon.setOnClickListener(v -> deletePost(postId));
                         contentAndIconsLayout.addView(deleteIcon);
 
-
-// Add the horizontal layout (post content + icons) to the vertical layout
+                        // Add the horizontal layout (post content + icons) to the vertical layout
                         verticalLayout.addView(contentAndIconsLayout);
-// Add Post Date below the horizontal layout
+                        // Add Post Date below the horizontal layout
                         TextView postDateView = new TextView(getContext());
                         postDateView.setText("Date: " + post.getDate());
 
-// Set layout parameters with proper top margin
                         LinearLayout.LayoutParams dateParams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        dateParams.topMargin = -60; // Add a small positive margin to separate it from the text above
+                        dateParams.topMargin = -60; // Add a small margin to separate from text
 
                         postDateView.setLayoutParams(dateParams);
 
-// Add the date view to the vertical layout
                         verticalLayout.addView(postDateView);
 
-// Add the vertical layout to the post layout
                         postLayout.addView(verticalLayout);
-
-
 
                         // Display Image if available
                         if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
@@ -273,28 +275,36 @@ public class KingdomFragment extends Fragment {
                             }
                         }
 
-                        // Add post layout to the container
                         postsContainer.addView(postLayout, 0);
                     }
                 }
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(), "Failed to load posts.", Toast.LENGTH_SHORT).show();
             }
+
             private void editPost(String postId, Post2 post) {
-                // Show confirmation dialog
                 new androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                        .setTitle("Edit Post")
+                        .setTitle("Confirm Edit")
                         .setMessage("Are you sure you want to edit this post?")
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            // Prefill the post content for editing
                             postContent.setText(post.getContent());
                             selectedImageUri = null;
+                            clearImage = false;
+
+                            if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
+                                byte[] imageBytes = Base64.decode(post.getImageUrl(), Base64.DEFAULT);
+                                Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                                imageView.setImageBitmap(decodedImage);
+                                imageView.setVisibility(View.VISIBLE);
+                            } else {
+                                imageView.setVisibility(View.GONE);
+                            }
 
                             submitPostButton.setText("Update Post");
+                            addImageButton.setOnClickListener(v -> openImagePicker());
                             submitPostButton.setOnClickListener(v -> {
                                 String updatedText = postContent.getText().toString();
                                 if (updatedText.isEmpty()) {
@@ -302,12 +312,30 @@ public class KingdomFragment extends Fragment {
                                     return;
                                 }
 
-                                // Update post in Firebase
+                                progressBar.setVisibility(View.VISIBLE);
                                 post.setContent(updatedText);
+
+                                if (clearImage) {
+                                    post.setImageUrl("");
+                                } else if (selectedImageUri != null) {
+                                    try {
+                                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
+                                        String newImageBase64 = encodeImageToBase64(bitmap);
+                                        post.setImageUrl(newImageBase64);
+                                    } catch (Exception e) {
+                                        Toast.makeText(getContext(), "Error encoding image.", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
+                                    }
+                                }
+
                                 postsRef.child(postId).setValue(post).addOnCompleteListener(task -> {
+                                    progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), "Post updated successfully.", Toast.LENGTH_SHORT).show();
                                         postContent.setText("");
+                                        imageView.setVisibility(View.GONE);
+                                        selectedImageUri = null;
+                                        clearImage = false;
                                         submitPostButton.setText("Submit Post");
                                         submitPostButton.setOnClickListener(view -> submitPost());
                                     } else {
@@ -320,9 +348,7 @@ public class KingdomFragment extends Fragment {
                         .show();
             }
 
-
             private void deletePost(String postId) {
-                // Show confirmation dialog
                 new androidx.appcompat.app.AlertDialog.Builder(requireContext())
                         .setTitle("Delete Post")
                         .setMessage("Are you sure you want to delete this post?")
