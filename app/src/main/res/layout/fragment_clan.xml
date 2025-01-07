@@ -18,7 +18,7 @@
         <!-- Dynamic Post Feed -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clanpost"
-            android:visibility="gone"
+android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -67,6 +67,8 @@
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
                 android:backgroundTint="@color/bg_red"
+                android:fontFamily="@font/trahu"
+
                 android:text="@string/add_image"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toStartOf="@+id/submitPostButton"
@@ -98,6 +100,8 @@
                 android:paddingEnd="4dp"
                 android:backgroundTint="@color/bg_red"
                 android:text="@string/post"
+
+                android:fontFamily="@font/trahu"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.938"
@@ -112,7 +116,8 @@
                 android:backgroundTint="@color/bg_red"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
-                android:text="Clear Image"
+                android:text="@string/clear"
+                android:fontFamily="@font/trahu"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"

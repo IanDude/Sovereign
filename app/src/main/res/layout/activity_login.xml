@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="650dp"
-        android:background="@drawable/bg_layer_10opacity"
+        android:background="@drawable/round_superlightopacity"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="40dp"
         android:orientation="vertical"
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
+
             >
 
             <EditText
@@ -40,11 +41,13 @@
                 android:layout_height="50dp"
                 android:hint="Username"
                 android:textColorHint="@color/hint_color"
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
                 android:minHeight="48dp"
                 android:minWidth="48dp"
                 android:padding="5dp"
-                android:background="@drawable/input_background"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_superlightopacity"
                 />
             <EditText
                 android:id="@+id/password_text"
@@ -54,11 +57,13 @@
                 android:minHeight="48dp"
                 android:minWidth="48dp"
                 android:padding="5dp"
+                android:textColor="@color/white"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColorHint="@color/hint_color"
-                android:textSize="20sp"
-                android:background="@drawable/input_background"
+                android:textSize="16sp"
+                android:background="@drawable/round_superlightopacity"
+
                 />
 
         </LinearLayout>
@@ -86,8 +91,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="FORGOT PASSWORD?"
-                android:textSize="15sp"
+                android:fontFamily="@font/trahu"
+                android:text="Forgot Password?"
+                android:textSize="10sp"
                 android:paddingTop="10dp"
                 />
 
@@ -95,7 +101,7 @@
         </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
@@ -107,17 +113,19 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             >
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/login_button"
-                android:contentDescription="login button"
-                style="@style/CustomButtons"/>
+                style="@style/CustomButtons"
+                android:contentDescription="login button" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Login"
-                android:textSize="20sp"
-                android:fontFamily="@font/montagu_slab_bold"
+                android:textSize="15sp"
+                android:fontFamily="@font/trahu"
                 android:textColor="@color/text_color"
                 android:layout_gravity="center"
                 />
@@ -138,7 +146,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/CustomButtonsText"
                 android:text="Sign Up"
-                />
+                android:textSize="15dp"
+                android:fontFamily="@font/trahu"/>
+
         </FrameLayout>
 
     </LinearLayout>

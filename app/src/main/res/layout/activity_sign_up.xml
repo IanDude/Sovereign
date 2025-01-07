@@ -49,23 +49,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montagu_slab_bold"
+                    android:fontFamily="@font/trahu"
                     android:text="ID Number"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="10sp"/>
 
-                    />
 
                 <EditText
                     android:id="@+id/ID_No"
                     android:layout_width="158dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/input_background"
+                    android:textColor="@color/white"
+                    android:background="@drawable/round_superlightopacity"
                     android:hint="ID Number"
                     android:inputType="text"
                     android:padding="5dp"
                     android:textColorHint="#878787"
-                    android:textSize="13sp" />
+                    android:textSize="10sp"
+                    android:layout_marginBottom="8dp"/>
 
             </LinearLayout>
 
@@ -79,10 +80,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montagu_slab_bold"
+                    android:fontFamily="@font/trahu"
                     android:text="Department"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="10sp"
+                   />
 
                 <Spinner
                     android:id="@+id/department"
@@ -91,7 +93,8 @@
                     android:backgroundTint="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lastname" />
+                    app:layout_constraintTop_toBottomOf="@+id/lastname"
+                    android:layout_marginBottom="8dp"/>
 
             </LinearLayout>
 
@@ -113,21 +116,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montagu_slab_bold"
+                    android:fontFamily="@font/trahu"
                     android:text="Firstname"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="10sp"
+                    />
 
                 <EditText
                     android:id="@+id/firstname"
                     android:layout_width="158dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/input_background"
+                    android:background="@drawable/round_superlightopacity"
                     android:hint="First Name"
                     android:inputType="text"
                     android:padding="5dp"
+                    android:textColor="@color/white"
                     android:textColorHint="#878787"
-                    android:textSize="13sp" />
+                    android:textSize="10sp"
+                    android:layout_marginBottom="8dp"/>
 
             </LinearLayout>
 
@@ -141,99 +147,113 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montagu_slab_bold"
+                    android:fontFamily="@font/trahu"
                     android:text="Lastname"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="10sp"
+                    />
 
                 <EditText
                     android:id="@+id/lastname"
                     android:layout_width="158dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/input_background"
+                    android:textColor="@color/white"
+                    android:background="@drawable/round_superlightopacity"
                     android:hint="Last Name"
                     android:inputType="text"
                     android:padding="5dp"
                     android:textColorHint="#878787"
-                    android:textSize="13sp" />
+                    android:textSize="10sp"
+                    android:layout_marginBottom="8dp"/>
             </LinearLayout>
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montagu_slab_bold"
+            android:fontFamily="@font/trahu"
             android:text="Email Address"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="10sp"
+            />
 
         <EditText
             android:id="@+id/email_add"
             android:layout_width="337dp"
             android:layout_height="25dp"
-            android:background="@drawable/input_background"
+            android:textColor="@color/white"
+            android:background="@drawable/round_superlightopacity"
             android:hint="Email Address"
             android:inputType="text|textEmailAddress"
             android:padding="5dp"
             android:textColorHint="#878787"
-            android:textSize="13sp" />
+            android:textSize="10sp"
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montagu_slab_bold"
+            android:fontFamily="@font/trahu"
             android:text="Username"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/username"
             android:layout_width="337dp"
             android:layout_height="25dp"
-            android:background="@drawable/input_background"
+            android:textColor="@color/white"
+            android:background="@drawable/round_superlightopacity"
             android:hint="Username"
             android:inputType="text"
             android:padding="5dp"
             android:textColorHint="#878787"
-            android:textSize="13sp" />
+            android:textSize="10sp"
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montagu_slab_bold"
+            android:fontFamily="@font/trahu"
             android:text="Password"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="10sp"
+            />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="337dp"
             android:layout_height="25dp"
-            android:background="@drawable/input_background"
+            android:textColor="@color/white"
+            android:background="@drawable/round_superlightopacity"
             android:hint="Password"
             android:inputType="text|textPassword"
             android:padding="5dp"
             android:textColorHint="#878787"
-            android:textSize="13sp" />
+            android:textSize="10sp"
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montagu_slab_bold"
+            android:fontFamily="@font/trahu"
             android:text="Confirm Password"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="10sp"
+           />
 
         <EditText
             android:id="@+id/confirm_pass"
             android:layout_width="337dp"
             android:layout_height="25dp"
-            android:background="@drawable/input_background"
+            android:textColor="@color/white"
+            android:background="@drawable/round_superlightopacity"
             android:hint="Confirm Password"
             android:inputType="text|textPassword"
             android:padding="5dp"
             android:textColorHint="#878787"
-            android:textSize="13sp" />
+            android:textSize="10sp"
+            android:layout_marginBottom="8dp"/>
 
         <android.widget.CheckBox
             android:id="@+id/showpass"
@@ -254,7 +274,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/CustomButtonsText"
-                android:text="Sign Up" />
+                android:text="Sign Up"
+                android:fontFamily="@font/trahu"
+                android:textSize="15sp"/>
         </FrameLayout>
 
     </LinearLayout>
