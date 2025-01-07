@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -174,15 +176,52 @@ public class UserProfile extends AppCompatActivity {
             new_input.setInputType(InputType.TYPE_CLASS_TEXT);
 
             builder3.setPositiveButton("Add",(dialog3,which3) ->{
-                DeptItems.add(new_input.getText().toString());
-                Manager.saveDeptList(DeptItems);
-                Manager.MakeToast(new_input.getText().toString() + " Added");
+                if(new_input.getText().toString().isEmpty()){
+                    Manager.MakeToast("Invalid Input");
+                }else {
+                    DeptItems.add(new_input.getText().toString());
+                    Manager.saveDeptList(DeptItems);
+                    Manager.MakeToast(new_input.getText().toString() + " Added");
+                }
+
             });
             builder3.setNeutralButton("Remove",(dialog3,which3) ->{
-               DeptItems.remove(new_input.getText().toString());
-               Manager.saveDeptList(DeptItems);
-               Manager.MakeToast(new_input.getText().toString()+" Remooved");
+                AlertDialog.Builder builder4 = new AlertDialog.Builder(this);
+                TextView title4 = new TextView(this);
+                title4.setText("Select a Department");
+                title4.setTextColor(getColor(R.color.white));
+                title4.setTextSize(20);
+                title4.setPadding(30,30,30,30);
+                title4.setTypeface(null,Typeface.BOLD);
+                builder4.setCustomTitle(title4);
+
+                View customLayout4 = getLayoutInflater().inflate(R.layout.delete_dept_dropdown,null);
+                builder4.setView(customLayout4);
+                ArrayList<String> items = Manager.getDeptList();
+                Spinner Department = customLayout4.findViewById(R.id.spinner_item);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.spinner_item,items);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                Department.setAdapter(adapter);
+                String selectedItem = Department.getSelectedItem().toString();
+
+                builder4.setPositiveButton("Remove",(dialog4,which4) -> {
+                    DeptItems.remove(selectedItem);
+                    Manager.saveDeptList(DeptItems);
+                    Manager.MakeToast(selectedItem + " Removed");
+                });
+                builder4.setNegativeButton("Cancel",(dialog4,which4) -> dialog4.dismiss());
+
+                AlertDialog removeDept = builder4.create();
+                removeDept.getWindow().setBackgroundDrawableResource(R.drawable.background_gradient);
+                removeDept.show();
+
+                removeDept.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
+                removeDept.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.WHITE);
+
             });
+
+
             builder3.setNegativeButton("Cancel",(dialog3,which3) ->dialog3.dismiss());
 
             AlertDialog updateDept = builder3.create();
@@ -191,6 +230,8 @@ public class UserProfile extends AppCompatActivity {
 
             updateDept.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.WHITE);
             updateDept.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
+            updateDept.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.WHITE);
+
         });
 
 

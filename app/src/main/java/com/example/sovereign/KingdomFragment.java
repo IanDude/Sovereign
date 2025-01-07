@@ -57,7 +57,7 @@ public class KingdomFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kingdom, container, false);
-        Manager = new LoginManager(getContext());
+        Manager = new LoginManager(requireContext());
         usertype = Manager.getUserType();
 
         // Initialize Firebase
