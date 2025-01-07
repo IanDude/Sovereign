@@ -15,6 +15,8 @@
 
         <!-- Dynamic Post Feed -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HOFLayout"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -69,11 +71,12 @@
             <!-- Button to Add an Image -->
 
             <!-- ImageView to display the selected image -->
+
             <Button
                 android:id="@+id/addImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
+                android:layout_marginStart="52dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/bg_red"
                 android:text="Add Image"
@@ -104,7 +107,7 @@
                 android:text="Submit"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.73"
+                app:layout_constraintHorizontal_bias="0.772"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/postDate" />
 

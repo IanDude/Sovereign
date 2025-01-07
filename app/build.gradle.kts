@@ -1,12 +1,11 @@
 plugins {
-    alias(libs.plugins.android.application) // Core Android application plugin
-    alias(libs.plugins.google.gms.google.services) // Google Services plugin for Firebase
-
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.example.sovereign" // Unique package namespace
-    compileSdk = 34 // Compile SDK version
+    namespace = "com.example.sovereign"
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.sovereign" // Unique application ID
@@ -19,21 +18,23 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false // Disable code minification for release builds
+            isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), // Default ProGuard rules
-                "proguard-rules.pro" // Custom ProGuard rules
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
-
-    buildFeatures {
-        viewBinding = true // Enable ViewBinding for easier UI management
+    buildFeatures{
+        viewBinding = true
     }
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8 // Java 8 compatibility
+        sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    packagingOptions{
+        exclude("META-INF/NOTICE.md")
+        exclude("META-INF/LICENSE.md")
     }
 }
 
@@ -44,23 +45,28 @@ dependencies {
     implementation(libs.activity) // Activity support
     implementation(libs.constraintlayout) // ConstraintLayout for advanced layouts
 
+    implementation(libs.gson)
+    implementation(libs.android.mail)
+    implementation(libs.android.activation)
+
     // Firebase libraries
     implementation(libs.firebase.firestore) // Firestore database support
     implementation(platform(libs.firebase.firestore)) // Firebase platform BOM
     implementation(libs.firebase.database) // Realtime Database support
     implementation(libs.firebase.storage) // Firebase Storage for uploading files
 
+
     // Glide dependencies
     implementation(libs.glide.v4150)
-     
+    testImplementation(libs.junit)
 
-    // Testing libraries
-    testImplementation(libs.junit) // Unit testing
-    androidTestImplementation(libs.ext.junit) // Android-specific testing
-    androidTestImplementation(libs.espresso.core) // UI testing with Espresso
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.ext.junit)
+
 
 }
 
-fun kapt(s: String) {
-    TODO("Not yet implemented")
+fun kapt(s: String){
+    TODO("Not yet Implemented")
 }

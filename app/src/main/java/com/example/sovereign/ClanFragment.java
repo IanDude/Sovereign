@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +39,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class ClanFragment extends Fragment {
-
+    private ConstraintLayout post_layout;
     private EditText postContent;
     private Button addImageButton, submitPostButton;
     private ProgressBar progressBar;
@@ -48,17 +49,22 @@ public class ClanFragment extends Fragment {
     private DatabaseReference postsRef;
     private Uri selectedImageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
-
+    protected String UserType;
+    protected LoginManager Manager;
     @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clan, container, false);
+        Manager = new LoginManager(getContext());
 
+        UserType = Manager.getUserType();
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         postsRef = firebaseDatabase.getReference("postClan");
 
+
+        post_layout = view.findViewById(R.id.clanpost);
         postContent = view.findViewById(R.id.postContent);
         addImageButton = view.findViewById(R.id.addImageButton);
         submitPostButton = view.findViewById(R.id.submitPostButton);
@@ -74,6 +80,9 @@ public class ClanFragment extends Fragment {
         addImageButton.setOnClickListener(v -> openImagePicker());
         submitPostButton.setOnClickListener(v -> submitPost());
 
+        if (UserType.equals("Clan Poster")){
+            post_layout.setVisibility(View.VISIBLE);
+        }
 
         // Load existing posts from Firebase
         loadPosts();
