@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -21,62 +22,101 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/gradient_sovereign"
-                android:padding="16dp"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SOVEREIGN"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/gradient_sovereign"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Leftmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/logo1"
+                        android:contentDescription="Left Image"
+                        android:layout_gravity="start"
+                        app:tint="@color/black" />
+
+                    <!-- Sovereign Label Text (Centered) -->
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/trahu"
+                        android:text="Sovereign"
+                        android:textColor="#4D0303"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Rightmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/logo1"
+                        android:contentDescription="Right Image"
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="start|center_vertical">
-
-                    <TextView
-                        android:id="@+id/sovereign_department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CICT"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginEnd="8dp" />
+                    android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical">
+
+                        <TextView
+                            android:id="@+id/sovereign_department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text=""
+                            android:textColor="#F8F8F8"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:gravity="end|center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
                             android:text="⭐"
-                            android:textSize="16sp"
                             android:textColor="#FFD700"
-                            android:layout_marginEnd="4dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/sovereign_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="15,900"
-                            android:textSize="16sp"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -85,62 +125,99 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/gradient_supreme"
-                android:padding="16dp"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SUPREME"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/gradient_supreme"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Leftmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/logo2"
+                        android:contentDescription="Left Image"
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
+
+                    <!-- Supreme Label Text (Centered) -->
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/trahu"
+                        android:text="Supreme"
+                        android:textColor="#4D1B03"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Rightmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/logo2"
+                        android:contentDescription="Right Image"
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="start|center_vertical">
-
-                    <TextView
-                        android:id="@+id/supreme_department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CJJ"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginEnd="8dp" />
+                    android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical">
+
+                        <TextView
+                            android:id="@+id/supreme_department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:gravity="end|center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
                             android:text="⭐"
-                            android:textSize="16sp"
                             android:textColor="#FFD700"
-                            android:layout_marginEnd="4dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/supreme_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="14,000"
-                            android:textSize="16sp"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -149,62 +226,99 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/gradient_monarch"
-                android:padding="16dp"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MONARCH"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/gradient_monarch"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Leftmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/logo3"
+                        android:contentDescription="Left Image"
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
+
+                    <!-- Monarch Label Text (Centered) -->
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/trahu"
+                        android:text="Monarch"
+                        android:textColor="#5D4502"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Rightmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/logo3"
+                        android:contentDescription="Right Image"
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="start|center_vertical">
-
-                    <TextView
-                        android:id="@+id/monarch_department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CBM"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginEnd="8dp" />
+                    android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical">
+
+                        <TextView
+                            android:id="@+id/monarch_department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:gravity="end|center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
                             android:text="⭐"
-                            android:textSize="16sp"
                             android:textColor="#FFD700"
-                            android:layout_marginEnd="4dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/monarch_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="13,000"
-                            android:textSize="16sp"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -213,62 +327,98 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/gradient_high_lord"
-                android:padding="16dp"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="HIGH LORD"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/gradient_high_lord"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Leftmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/logo4"
+                        android:contentDescription="Left Image"
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
+
+                    <!-- High Lord Label Text (Centered) -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/trahu"
+                        android:text="High Lord"
+                        android:textColor="#3B3C01"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Rightmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/logo4"
+                        android:contentDescription="Right Image"
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="start|center_vertical">
-
-                    <TextView
-                        android:id="@+id/high_lord_department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CAS"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginEnd="8dp" />
+                    android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical">
+
+                        <TextView
+                            android:id="@+id/high_lord_department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:gravity="end|center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
                             android:text="⭐"
-                            android:textSize="16sp"
                             android:textColor="#FFD700"
-                            android:layout_marginEnd="4dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/high_lord_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12,000"
-                            android:textSize="16sp"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -277,72 +427,108 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/gradient_imperial"
-                android:padding="16dp"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="IMPERIAL"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:layout_gravity="center" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/gradient_imperial"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Leftmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/logo5"
+                        android:contentDescription="Left Image"
+                        android:layout_gravity="start"
+                        app:tint="@color/black"/>
+
+                    <!-- Imperial Label Text (Centered) -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/trahu"
+                        android:text="Imperial"
+                        android:textColor="#044720"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Rightmost Image -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/logo5"
+                        android:contentDescription="Right Image"
+                        android:layout_gravity="end"
+                        app:tint="@color/black"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="start|center_vertical">
-
-                    <TextView
-                        android:id="@+id/imperial_department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CSJ"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginEnd="8dp" />
+                    android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical">
+
+                        <TextView
+                            android:id="@+id/imperial_department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:gravity="end|center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
                             android:text="⭐"
-                            android:textSize="16sp"
                             android:textColor="#FFD700"
-                            android:layout_marginEnd="4dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/imperial_points"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10,000"
-                            android:textSize="16sp"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 
     <!-- Floating Action Button (FAB) -->
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/updt_dptm"
+        android:visibility="gone"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
@@ -353,6 +539,5 @@
         android:src="@drawable/ic_add"
         android:background="@drawable/fab_background"
         android:elevation="6dp"
-        android:layout_gravity="end|bottom"/>
-
+        android:layout_gravity="end|bottom" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.constraintlayout) // ConstraintLayout for advanced layouts
 
     implementation(libs.gson)
+    implementation(libs.android.mail)
+    implementation(libs.android.activation)
 
     // Firebase libraries
     implementation(libs.firebase.firestore) // Firestore database support
@@ -53,8 +55,18 @@ dependencies {
     implementation(libs.firebase.database) // Realtime Database support
     implementation(libs.firebase.storage) // Firebase Storage for uploading files
 
+
     // Glide dependencies
     implementation(libs.glide.v4150)
+    testImplementation(libs.junit)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.ext.junit)
 
 
+}
+
+fun kapt(s: String){
+    TODO("Not yet Implemented")
 }

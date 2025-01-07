@@ -1,4 +1,5 @@
 [versions]
+compiler = "4.15.0"
 agp = "8.6.1"
 androidMail = "1.6.7"
 gson = "2.11.0"

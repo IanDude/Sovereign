@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnadmin.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UserProfile.class);
             startActivity(intent);
-            finish();
         });
 
     }

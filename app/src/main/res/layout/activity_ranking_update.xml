@@ -162,6 +162,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/btnAdd"
+                        android:layout_width="90dp"
                         android:contentDescription="Add Button"
                         style="@style/CustomButtons"/>
                     <androidx.appcompat.widget.AppCompatTextView
@@ -177,6 +178,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/btnEdit"
+                        android:layout_width="90dp"
                         android:contentDescription="Edit"
                         style="@style/CustomButtons"/>
                     <androidx.appcompat.widget.AppCompatTextView
@@ -190,6 +192,7 @@
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/btnDelete"
                         style="@style/CustomButtons"
+                        android:layout_width="90dp"
                         android:contentDescription="Delete"
                         android:text="Delete"/>
                     <androidx.appcompat.widget.AppCompatTextView

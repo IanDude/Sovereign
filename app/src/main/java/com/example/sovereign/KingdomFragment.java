@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +39,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class KingdomFragment extends Fragment {
-
+    protected ConstraintLayout layout_kingdom;
     private EditText postContent;
     private Button addImageButton, submitPostButton;
     private ProgressBar progressBar;
@@ -49,17 +50,22 @@ public class KingdomFragment extends Fragment {
     private Uri selectedImageUri;
     private boolean clearImage = false; // Flag to track if the image is cleared
     private static final int PICK_IMAGE_REQUEST = 1;
-
+    protected String usertype;
+    protected LoginManager Manager;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kingdom, container, false);
+        Manager = new LoginManager(getContext());
+        usertype = Manager.getUserType();
 
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         postsRef = firebaseDatabase.getReference("postKingdom");
 
+
+        layout_kingdom = view.findViewById(R.id.kingdom_layout);
         postContent = view.findViewById(R.id.postContent);
         addImageButton = view.findViewById(R.id.addImageButton);
         submitPostButton = view.findViewById(R.id.submitPostButton);
@@ -74,6 +80,10 @@ public class KingdomFragment extends Fragment {
         // Set up listeners
         addImageButton.setOnClickListener(v -> openImagePicker());
         submitPostButton.setOnClickListener(v -> submitPost());
+
+        if (usertype.equals("SSG")){
+            layout_kingdom.setVisibility(View.VISIBLE);
+        }
 
         // Load existing posts from Firebase
         loadPosts();

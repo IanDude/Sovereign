@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,21 +23,25 @@ import java.util.List;
 import java.util.Map;
 
 public class RankingFragment extends Fragment {
-
     private FirebaseFirestore db;
-
+    private String usertype;
+    private LoginManager Manager;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ranking, container, false);
-
         db = FirebaseFirestore.getInstance();
-
+        Manager = new LoginManager(getContext());
+        usertype = Manager.getUserType();
         // Set up the ImageButton click listener
         ImageButton update_ranking = view.findViewById(R.id.updt_dptm);
         update_ranking.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ranking_update.class);
             startActivity(intent);
         });
+
+        if (usertype.equals("SSG")){
+            update_ranking.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

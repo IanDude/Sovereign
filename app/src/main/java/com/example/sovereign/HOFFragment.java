@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +46,7 @@ import java.util.Date;
 import java.util.List;
 
 public class HOFFragment extends Fragment {
-
+    private ConstraintLayout layout_HOF;
     private EditText postContent, postDate;
     private Button addImageButton;
     private Button submitPostButton;
@@ -56,17 +57,20 @@ public class HOFFragment extends Fragment {
     private DatabaseReference postsRef;
     private Uri selectedImageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
-
+    protected String usertype;
+    protected LoginManager Manager;
     @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_h_o_f, container, false);
+        usertype = Manager.getUserType();
 
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         postsRef = firebaseDatabase.getReference("posts");
 
+        layout_HOF = view.findViewById(R.id.HOFLayout);
         postContent = view.findViewById(R.id.postContent);
         postDate = view.findViewById(R.id.postDate);  // Add date input field
         addImageButton = view.findViewById(R.id.addImageButton);
@@ -74,6 +78,10 @@ public class HOFFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         imageView = view.findViewById(R.id.imageView);
         postsContainer = view.findViewById(R.id.postsContainer);
+
+        if (usertype.equals("SSG")){
+            layout_HOF.setVisibility(View.VISIBLE);
+        }
 
         // Set up listeners
         addImageButton.setOnClickListener(v -> openImagePicker());

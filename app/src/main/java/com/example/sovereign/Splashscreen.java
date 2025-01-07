@@ -71,7 +71,7 @@ public class Splashscreen extends AppCompatActivity {
                 }
 
                 // Transition to the next activity
-                Intent intent = new Intent(Splashscreen.this, LoginSignup.class);
+                Intent intent = new Intent(Splashscreen.this, Login.class);
                 startActivity(intent);
                 finish();  // Close the splash screen activity
             }, splashDuration);
