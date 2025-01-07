@@ -16,7 +16,7 @@
         <!-- Dynamic Post Feed -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/HOFLayout"
-            android:visibility="gone"
+        android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -78,9 +78,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="52dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/trahu"
                 android:backgroundTint="@color/bg_red"
                 android:text="Add Image"
-                android:textColor="@android:color/white"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/postDate" />
 
@@ -105,6 +106,7 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/bg_red"
                 android:text="Submit"
+                android:fontFamily="@font/trahu"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.772"

@@ -13,7 +13,7 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montagu_slab_bold"
+        android:fontFamily="@font/trahu"
         android:text="Account Details"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -33,178 +33,198 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:contentDescription="Logo"
         android:alpha=".3"/>
+
     <LinearLayout
         android:id="@+id/details"
         android:layout_width="338dp"
         android:layout_height="312dp"
-        android:background="@drawable/rectangle_59"
         android:layout_marginTop="50dp"
+        android:background="@drawable/round_superlightopacity"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/buttons"
-        android:padding="10dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label"
+     >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montagu_slab_bold"
+                android:fontFamily="@font/trahu"
                 android:text="Username"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
-                android:textSize="13sp"
-                android:textColor="@color/white"
                 android:fontFamily="@font/montagu_slab"
-                />
+                android:text="Username"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/trahu"
                 android:text="ID Number"
-                android:textSize="15sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/montagu_slab_bold"
-                 
+                android:textSize="15sp"
+
                 />
+
             <TextView
                 android:id="@+id/id_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID Number"
-                android:textSize="13sp"
-                android:textColor="@color/white"
                 android:fontFamily="@font/montagu_slab"
+                android:text="ID Number"
+                android:textColor="@color/white"
+                android:textSize="13sp"
 
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/trahu"
                 android:text="Department"
-                android:textSize="15sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/montagu_slab_bold"
+                android:textSize="15sp"
 
                 />
+
             <TextView
                 android:id="@+id/department"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Department"
-                android:textSize="13sp"
-                android:textColor="@color/white"
                 android:fontFamily="@font/montagu_slab"
+                android:text="Department"
+                android:textColor="@color/white"
+                android:textSize="13sp"
 
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="30dp">
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/trahu"
                     android:text="First Name"
-                    android:textSize="15sp"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/montagu_slab_bold"
-                     
+                    android:textSize="15sp"
+
                     />
+
                 <TextView
                     android:id="@+id/firstname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="First Name"
-                    android:textSize="13sp"
-                    android:textColor="@color/white"
                     android:fontFamily="@font/montagu_slab"
+                    android:text="First Name"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
 
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/trahu"
                     android:text="Last Name"
-                    android:textSize="15sp"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/montagu_slab_bold"
-                     
+                    android:textSize="15sp"
+
                     />
+
                 <TextView
                     android:id="@+id/lastname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last Name"
-                    android:textSize="13sp"
-                    android:textColor="@color/white"
                     android:fontFamily="@font/montagu_slab"
+                    android:text="Last Name"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
 
                     />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginEnd="30dp">
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/trahu"
                 android:text="Email Address"
-                android:textSize="15sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/montagu_slab_bold"
-                 
+                android:textSize="15sp"
+
                 />
+
             <TextView
                 android:id="@+id/email_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email Address"
-                android:textSize="13sp"
-                android:textColor="@color/white"
                 android:fontFamily="@font/montagu_slab"
+                android:text="Email Address"
+                android:textColor="@color/white"
+                android:textSize="13sp"
 
                 />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="wrap_content"
@@ -214,35 +234,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="5dp"
+        android:layout_gravity="center"
         >
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
+            android:layout_marginEnd="10dp"
             >
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/update"
                 style="@style/CustomButtons"
                 android:contentDescription="Update"
+
+
                 />
+
             <androidx.appcompat.widget.AppCompatTextView
+                style="@style/CustomButtonsTextDetails"
+
                 android:text="Update"
-                style="@style/CustomButtonsText"
+
+
                 />
         </FrameLayout>
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/logout"
-                android:contentDescription="Logout"
                 style="@style/CustomButtons"
+                android:contentDescription="Logout"
+
                 />
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:text="Logout"
-                style="@style/CustomButtonsText"
-                />
+                style="@style/CustomButtonsTextDetails"
+                android:text="Logout" />
         </FrameLayout>
     </LinearLayout>
     <LinearLayout
@@ -255,30 +284,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="5dp"
+
         >
         <FrameLayout
             android:id="@+id/edit_user_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
+            android:layout_marginEnd="10dp"
             android:visibility="visible"
+
             >
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/edit_user_button"
                 style="@style/CustomButtons"
                 android:contentDescription="Edit User Details"
+
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/edit_user_label"
                 android:text="Edit User"
-                style="@style/CustomButtonsText"
+                style="@style/CustomButtonsTextDetails"
+
+
                 />
         </FrameLayout>
         <FrameLayout
             android:id="@+id/edit_dept_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
             android:visibility="visible"
             >
             <androidx.appcompat.widget.AppCompatImageButton
@@ -289,8 +322,8 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/edit_dept_label"
                 android:text="Edit Department"
-                android:textSize="13sp"
-                style="@style/CustomButtonsText"
+
+                style="@style/CustomButtonsTextDetails"
                 />
         </FrameLayout>
     </LinearLayout>

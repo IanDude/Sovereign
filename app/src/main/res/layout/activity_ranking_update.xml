@@ -47,6 +47,7 @@
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
                         android:background="#8B0000"
+                        android:fontFamily="@font/trahu"
                         android:padding="8dp" />
 
                     <TextView
@@ -54,6 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Points"
+                        android:fontFamily="@font/trahu"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -129,10 +131,11 @@
                 android:id="@+id/editDepartment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/hint_color"
                 android:hint="Enter Department"
                 android:padding="8dp"
-                android:background="@drawable/input_background"
-                android:textColor="@android:color/black" />
+                android:background="@drawable/round_superlightopacity"
+                android:textColor="@color/white" />
 
             <!-- Input for Points -->
             <EditText
@@ -142,9 +145,10 @@
                 android:hint="Enter Points"
                 android:padding="8dp"
                 android:inputType="number"
-                android:background="@drawable/input_background"
+                android:textColorHint="@color/hint_color"
+                android:background="@drawable/round_superlightopacity"
                 android:layout_marginTop="8dp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/white" />
 
             <!-- Buttons -->
             <LinearLayout
