@@ -46,7 +46,7 @@ import java.util.Date;
 import java.util.List;
 
 public class HOFFragment extends Fragment {
-    private ConstraintLayout layout_HOF;
+    ConstraintLayout layout_HOF;
     private EditText postContent, postDate;
     private Button addImageButton;
     private Button submitPostButton;
