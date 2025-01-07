@@ -12,6 +12,8 @@ import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.lang.reflect.Type;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,7 @@ public class LoginManager {
     protected static final String PREF_NAME = "AppPrefs";
     protected static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     protected static final String SAVED_USER_ID = "SavedUserID";
-    protected static final String SAVED_USERTYPE = "UserState";
+    protected static final String SAVED_USERTYPE = "UserType";
     protected static final String SAVED_USER_DEPT = "SaveUserDepartment";
 
     protected static final String DEPT_ITEMS = "DeptList";
@@ -80,7 +82,7 @@ public class LoginManager {
 
     protected String getUserType(){
         return  context.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE)
-                .getString(SAVED_USERTYPE,"Regular");
+                .getString(SAVED_USERTYPE,"UserType");
     }
     protected String getUserID(){
         return context.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE)
@@ -101,6 +103,7 @@ public class LoginManager {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+
     protected void UserSignUp(String ID_No, String Username, String FirstName, String LastName, String Department, String Password,String C_Password,String EmailAdd){
 
         Map<String,Object> hashMap = new HashMap<>();
@@ -109,6 +112,8 @@ public class LoginManager {
             return;
         }
         if (Password.equals(C_Password)){
+            String hashedPassword = hashPassword(Password);
+
             firebase.collection("Users")
                     .whereEqualTo("Username",Username)
                     .get()
@@ -124,7 +129,7 @@ public class LoginManager {
                             hashMap.put("FirstName", FirstName);
                             hashMap.put("LastName",LastName);
                             hashMap.put("Department",Department);
-                            hashMap.put("Password", Password);
+                            hashMap.put("Password", hashedPassword);
                             hashMap.put("Email Address",EmailAdd);
                             hashMap.put("UserType","Regular");
                             firebase.collection("Users")
@@ -157,6 +162,15 @@ public class LoginManager {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty() ){
+//                            String storedhashPassword = task.getResult().getDocuments().get(0).getString("Password");
+//                            String enteredhashPassword = hashPassword(Password);
+//                            if (storedhashPassword.equals(enteredhashPassword)){
+//                                callback.onLoginSuccess();
+//                            }else {
+//                                callback.onLoginFailure("Incorrect Password");
+//                            }
+
+
                         firebase.collection("Users")
                                 .whereEqualTo("Password", Password)
                                 .get()
@@ -301,24 +315,40 @@ public class LoginManager {
         void onFailure(Exception e);
     }
 
-    protected void UpdateData(String DocumentId, String FieldName, String NewData){
+    protected void UpdateData(String DocumentId, String FieldName, String NewData) {
+        // Hash the password if updating the Password field
+        if (FieldName.equals("Password")) {
+            NewData = hashPassword(NewData);
+        }
+
+        // Update the document directly using the Document ID
+        String finalNewData = NewData; // Required for use in lambda expressions
         firebase.collection("Users")
-                .whereEqualTo(FieldPath.documentId(),DocumentId)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()){
-                        firebase.collection("Users")
-                                .document(DocumentId)
-                                .update(FieldName,NewData)
-                                .addOnSuccessListener(task2 -> MakeToast(FieldName + " Successfully Updated"))
-                                .addOnFailureListener(e -> MakeToast("Update Failed"));
-                    }else{
-                        Log.e("Firestore","Document Id not found");
-                    }
-                }).addOnFailureListener(e -> {
-                    MakeToast("Error: " + e.getMessage());
-                    Log.e("Firestore", "Error: " + e.getMessage());
+                .document(DocumentId)
+                .update(FieldName, finalNewData)
+                .addOnSuccessListener(aVoid -> {
+                    MakeToast(FieldName + " Successfully Updated");
+                    Log.i("Firestore", FieldName + " updated successfully for Document ID: " + DocumentId);
+                })
+                .addOnFailureListener(e -> {
+                    MakeToast("Update Failed: " + e.getMessage());
+                    Log.e("Firestore", "Failed to update " + FieldName + " for Document ID: " + DocumentId + ". Error: " + e.getMessage());
                 });
+    }
+
+
+    protected static String hashPassword(String Password){
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = messageDigest.digest(Password.getBytes());
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte b : hashBytes){
+                stringBuilder.append(String.format("%02x",b));
+            }
+            return stringBuilder.toString();
+        }catch (NoSuchAlgorithmException e){
+            throw new RuntimeException("Error hashing password",e);
+        }
     }
 
     protected void MakeToast(String message){

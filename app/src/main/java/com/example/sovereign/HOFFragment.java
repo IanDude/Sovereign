@@ -64,7 +64,7 @@ public class HOFFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_h_o_f, container, false);
-        Manager = new LoginManager(getContext());
+        Manager = new LoginManager(requireContext());
 
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();

@@ -56,12 +56,13 @@ public class ClanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clan, container, false);
-        Manager = new LoginManager(getContext());
+        Manager = new LoginManager(requireContext());
 
         UserType = Manager.getUserType();
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         postsRef = firebaseDatabase.getReference("postClan");
+
 
 
         post_layout = view.findViewById(R.id.clanpost);
