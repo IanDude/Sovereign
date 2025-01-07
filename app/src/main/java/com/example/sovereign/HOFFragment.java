@@ -64,7 +64,7 @@ public class HOFFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_h_o_f, container, false);
-        usertype = Manager.getUserType();
+        Manager = new LoginManager(getContext());
 
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -79,6 +79,8 @@ public class HOFFragment extends Fragment {
         imageView = view.findViewById(R.id.imageView);
         postsContainer = view.findViewById(R.id.postsContainer);
 
+
+        usertype = Manager.getUserType();
         if (usertype.equals("SSG")){
             layout_HOF.setVisibility(View.VISIBLE);
         }
