@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -295,6 +296,7 @@ public class HOFFragment extends Fragment {
 
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(R.menu.post_options_menu, popupMenu.getMenu());
+
 
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {

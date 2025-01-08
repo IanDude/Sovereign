@@ -76,7 +76,7 @@ public class SignUp extends AppCompatActivity {
 
             String selectedDepartment = Department.getSelectedItem().toString(); // Get selected department directly
 
-            if (selectedDepartment == null || selectedDepartment.isEmpty()) {
+            if (selectedDepartment.isEmpty()) {
                 Manager.MakeToast("Select at least 1 Department");
                 return;
             }
