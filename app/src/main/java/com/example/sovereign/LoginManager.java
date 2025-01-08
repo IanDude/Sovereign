@@ -16,7 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -207,7 +207,7 @@ public class LoginManager {
                             String fromEmail = "sovereignofficial0@gmail.com";
                             String fromPassword = "jgjx vnrh fcvk yaza";
 
-                            List<String> toEmailList = Arrays.asList(Email);
+                            List<String> toEmailList = Collections.singletonList(Email);
                             String emailSubject = "Password Update Authentication";
                             String emailBody = MessageFormat.format("<body style=\"font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;\">\n" +
                                     "    <div style=\"max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #dddddd; border-radius: 8px; overflow: hidden;\">\n" +
