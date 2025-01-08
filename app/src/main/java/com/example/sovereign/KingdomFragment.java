@@ -230,6 +230,12 @@ public class KingdomFragment extends Fragment {
                         editIconParams.topMargin = -20; // Reduce top margin
                         editIcon.setLayoutParams(editIconParams);
 
+                        if(usertype.equals("SSG")){
+                            editIcon.setVisibility(View.VISIBLE);
+                        }else{
+                            editIcon.setVisibility(View.GONE);
+                        }
+
                         editIcon.setOnClickListener(v -> editPost(postId, post));
                         contentAndIconsLayout.addView(editIcon);
 
@@ -246,6 +252,12 @@ public class KingdomFragment extends Fragment {
                         deleteIconParams.rightMargin = -20;
                         deleteIconParams.topMargin = -20; // Reduce top margin
                         deleteIcon.setLayoutParams(deleteIconParams);
+
+                        if(usertype.equals("SSG")){
+                            deleteIcon.setVisibility(View.VISIBLE);
+                        }else{
+                            deleteIcon.setVisibility(View.GONE);
+                        }
 
                         deleteIcon.setOnClickListener(v -> deletePost(postId));
                         contentAndIconsLayout.addView(deleteIcon);

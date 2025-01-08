@@ -109,7 +109,7 @@ public class ClanFragment extends Fragment {
 
     private void submitPost() {
         String postText = postContent.getText().toString();
-        String postType = "Clan";
+        String postType = UserType;
 
         // Get the current date and time in AM/PM format
         String currentDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault()).format(Calendar.getInstance().getTime());
@@ -241,6 +241,14 @@ public class ClanFragment extends Fragment {
                         editIconParams.topMargin = -20; // Retain reduced top margin
                         editIcon.setLayoutParams(editIconParams);
 
+                        //check if user is Clan Poster or not
+                        if (UserType.equals("Clan Poster")){
+                            editIcon.setVisibility(View.VISIBLE);
+                        }else{
+                            editIcon.setVisibility(View.GONE);
+                        }
+
+
                         editIcon.setOnClickListener(v -> editPost(postId, post));
                         contentAndIconsLayout.addView(editIcon);
 
@@ -259,6 +267,12 @@ public class ClanFragment extends Fragment {
                         deleteIconParams.topMargin = -20; // Retain reduced top margin
                         deleteIcon.setLayoutParams(deleteIconParams);
 
+                        //check if user is Clan Poster or not
+                        if (UserType.equals("Clan Poster")){
+                            deleteIcon.setVisibility(View.VISIBLE);
+                        }else{
+                            deleteIcon.setVisibility(View.GONE);
+                        }
                         deleteIcon.setOnClickListener(v -> deletePost(postId));
                         contentAndIconsLayout.addView(deleteIcon);
 

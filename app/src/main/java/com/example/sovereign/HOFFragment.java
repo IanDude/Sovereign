@@ -251,8 +251,18 @@ public class HOFFragment extends Fragment {
                     ImageView threeDotsButton = new ImageView(getContext());
                     threeDotsButton.setImageResource(R.drawable.ic_three_dots); // Make sure you have an icon for the three dots
                     threeDotsButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-                    threeDotsButton.setOnClickListener(v -> showPostOptions(post.getId(), v)); // Handle the menu options
+                    if (usertype.equals("SSG")){
+                        threeDotsButton.setVisibility(View.VISIBLE);
+                        threeDotsButton.setOnClickListener(v -> showPostOptions(post.getId(), v)); // Handle the menu options
+                    }else {
+                        threeDotsButton.setVisibility(View.GONE);
+                    }
+
                     postLayout.addView(threeDotsButton);
+
+
+
+
 
                     // Check if there's an image to display
                     if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
@@ -292,6 +302,7 @@ public class HOFFragment extends Fragment {
     }
 
     private void showPostOptions(String postId, View anchorView) {
+
         PopupMenu popupMenu = new PopupMenu(getContext(), anchorView, 0, 0, R.style.CustomPopupMenu);
 
         MenuInflater inflater = popupMenu.getMenuInflater();
