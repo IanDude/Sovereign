@@ -47,6 +47,16 @@ public class SignUp extends AppCompatActivity {
         showPass = findViewById(R.id.showpass);
         Department = findViewById(R.id.department);
 
+        if(DeptList.isEmpty()){
+            DeptList.add("CICT");
+            DeptList.add("CAS");
+            DeptList.add("CCJ");
+            DeptList.add("CBM");
+            Manager.saveDeptList(DeptList);
+        }
+
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.spinner_item,DeptList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

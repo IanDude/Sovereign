@@ -1,6 +1,7 @@
 package com.example.sovereign;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -27,8 +28,12 @@ public class Login extends AppCompatActivity {
         Manager = new LoginManager(this);
         Manager.isLoggedIn();
         if (Manager.isLoggedIn()){
-            Manager.ToActivity(MainActivity.class);
-            return;
+            Intent intent = new Intent(this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+//            Manager.ToActivity(MainActivity.class);
+//            return;
         }
 
         EdgeToEdge.enable(this);

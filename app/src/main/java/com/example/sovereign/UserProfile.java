@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -279,27 +281,29 @@ public class UserProfile extends AppCompatActivity {
                         case "LastName":
                         case "Department":
                             newInput.setInputType(InputType.TYPE_CLASS_TEXT);
-                            newInput.requestFocus();
                             break;
                         case "Email Address":
                             newInput.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                            newInput.requestFocus();
                             break;
                         case "ID Number":
                             newInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-                            newInput.requestFocus();
                             break;
                         case "Password":
                             newInput.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            newInput.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             showpass.setVisibility(View.VISIBLE);
-                            newInput.requestFocus();
                             break;
                     }
+
                     showpass.setOnCheckedChangeListener((compoundButton, checked) -> Manager.ShowPass(newInput,checked));
                     builder2.setPositiveButton("Confirm",(dialog2,which2) ->{
                         if (newInput.getText().toString().isEmpty()){
                             Manager.MakeToast("Empty Fields");
                         }else{
+                            if (selectedOption.equals("Email Address") && (!Patterns.EMAIL_ADDRESS.matcher(newInput.getText().toString()).matches())){
+                                Manager.MakeToast("Invalid Email");
+                                return;
+                            }
                             Manager.UpdateData(Manager.getUserID(),selectedOption,newInput.getText().toString());
                             Manager.MakeToast("Update Successful");
                         }
