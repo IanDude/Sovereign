@@ -162,27 +162,27 @@ public class LoginManager {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty() ){
-//                            String storedhashPassword = task.getResult().getDocuments().get(0).getString("Password");
-//                            String enteredhashPassword = hashPassword(Password);
-//                            if (storedhashPassword.equals(enteredhashPassword)){
-//                                callback.onLoginSuccess();
-//                            }else {
-//                                callback.onLoginFailure("Incorrect Password");
-//                            }
+                            String storedhashPassword = task.getResult().getDocuments().get(0).getString("Password");
+                            String enteredhashPassword = hashPassword(Password);
+                            if (storedhashPassword.equals(enteredhashPassword)){
+                                callback.onLoginSuccess();
+                            }else {
+                                callback.onLoginFailure("Incorrect Password");
+                            }
 
 
-                        firebase.collection("Users")
-                                .whereEqualTo("Password", Password)
-                                .get()
-                                .addOnCompleteListener(task2 -> {
-                                    if (task2.isSuccessful() && task2.getResult() != null && !task2.getResult().isEmpty()){
-                                        callback.onLoginSuccess();
-                                    }
-                                    else {
-                                        //password doesnt match with username
-                                        callback.onLoginFailure("Incorrect Password");
-                                    }
-                                }).addOnFailureListener(e -> callback.onLoginFailure("Error checking Username or Password: " + e.getMessage()));
+//                        firebase.collection("Users")
+//                                .whereEqualTo("Password", Password)
+//                                .get()
+//                                .addOnCompleteListener(task2 -> {
+//                                    if (task2.isSuccessful() && task2.getResult() != null && !task2.getResult().isEmpty()){
+//                                        callback.onLoginSuccess();
+//                                    }
+//                                    else {
+//                                        //password doesnt match with username
+//                                        callback.onLoginFailure("Incorrect Password");
+//                                    }
+//                                }).addOnFailureListener(e -> callback.onLoginFailure("Error checking Username or Password: " + e.getMessage()));
                     }else{
 //                        Toast.makeText(context.getApplicationContext(),"User not found.",Toast.LENGTH_SHORT).show();
                         MakeToast("Invalid Username.");
