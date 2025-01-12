@@ -25,13 +25,13 @@ public class PasswordRecovery extends AppCompatActivity {
     FrameLayout confirm;
     CheckBox shownewpass;
     protected String OTP_Code;
-    protected long initialTime = 0;
+    protected long initialTime,currentTime = 0;
 
     Handler handler = new Handler();
     Runnable otpExpirationCheck = new Runnable() {
         @Override
         public void run() {
-            long currentTime = System.currentTimeMillis();
+            currentTime = System.currentTimeMillis();
 
             if ((currentTime - initialTime) > 120000) {
                 Manager.MakeToast("One-Time Password expired.");
@@ -115,13 +115,15 @@ public class PasswordRecovery extends AppCompatActivity {
             if (Manager.EmptyFields(newpass) || Manager.EmptyFields(newcpass)) {
                 Manager.MakeToast("Please fill all fields.");
             } else {
-                if (newpass.getText().toString().trim().length() < 8 || newcpass.getText().toString().trim().length() < 8) {
+                if (newpass.getText().toString().trim().length() >= 8 && newcpass.getText().toString().trim().length() >= 8) {
                     if (newpass.getText().toString().trim().equals(newcpass.getText().toString().trim())) {
                         Manager.RetrieveID(username.getText().toString().trim(), new LoginManager.OnIDRetrieved() {
                             @Override
                             public void onSuccess(String ID) {
                                 Manager.UpdateData(ID, "Password", newpass.getText().toString());
+                                Manager.MakeToast("Password updated successfully.");
                             }
+
                             @Override
                             public void onFailure(Exception e) {
                                 Manager.MakeToast("Error: " + e.getMessage());
@@ -131,10 +133,11 @@ public class PasswordRecovery extends AppCompatActivity {
                         Manager.MakeToast("Passwords don't match.");
                     }
                 } else {
-                    Manager.MakeToast("Passwords should be 8 characters long.");
+                    Manager.MakeToast("Passwords should be at least 8 characters long.");
                 }
             }
         });
+
 
         shownewpass.setOnCheckedChangeListener((compoundButton, checked) -> {
             Manager.ShowPass(newpass, checked);

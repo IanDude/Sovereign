@@ -171,12 +171,13 @@ public class ClanFragment extends Fragment {
         postsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postsContainer.removeAllViews(); // Clear the container before loading posts
+                postsContainer.removeAllViews(); // Clear container before loading posts
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String postId = postSnapshot.getKey();
                     Post post = postSnapshot.getValue(Post.class);
 
-                    // Check if the post matches the user's department
-                    if (post != null && post.getType().equals(Department)) {
+                    if (post != null && (post.getType().equals(Department) || UserType.equals("Admin"))) {
+                        // Create post layout
                         LinearLayout postLayout = new LinearLayout(getContext());
                         postLayout.setOrientation(LinearLayout.VERTICAL);
                         postLayout.setPadding(16, 16, 16, 16);
@@ -185,21 +186,75 @@ public class ClanFragment extends Fragment {
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-
-                        postLayoutParams.bottomMargin = 32; // Adjust this value to set the desired spacing
+                        postLayoutParams.bottomMargin = 32; // Add spacing between posts
                         postLayout.setLayoutParams(postLayoutParams);
+
+                        // Horizontal layout for content and icons
+                        LinearLayout contentAndIconsLayout = new LinearLayout(getContext());
+                        contentAndIconsLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        contentAndIconsLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ));
 
                         // Post content
                         TextView postTextView = new TextView(getContext());
                         postTextView.setText(post.getContent());
                         postTextView.setTextSize(16);
-                        postTextView.setPadding(0, 0, 0, 8);
-                        postLayout.addView(postTextView);
+                        postTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                0,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                1.0f // Use weight to push icons to the right
+                        ));
+                        contentAndIconsLayout.addView(postTextView);
+
+                        // Edit Icon
+                        ImageButton editIcon = new ImageButton(getContext());
+                        editIcon.setImageResource(R.drawable.ic_edit); // Replace with your edit icon resource
+                        editIcon.setBackground(null); // Remove default background
+                        editIcon.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ));
+
+                        if (UserType.equals("Clan Poster")) {
+                            editIcon.setVisibility(View.VISIBLE);
+                            editIcon.setOnClickListener(v -> editPost(postId, post));
+                        } else {
+                            editIcon.setVisibility(View.GONE);
+                        }
+                        contentAndIconsLayout.addView(editIcon);
+
+                        // Delete Icon
+                        ImageButton deleteIcon = new ImageButton(getContext());
+                        deleteIcon.setImageResource(R.drawable.ic_delete); // Replace with your delete icon resource
+                        deleteIcon.setBackground(null); // Remove default background
+                        deleteIcon.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ));
+
+                        if (UserType.equals("Clan Poster")) {
+                            deleteIcon.setVisibility(View.VISIBLE);
+                            deleteIcon.setOnClickListener(v -> deletePost(postId));
+                        } else {
+                            deleteIcon.setVisibility(View.GONE);
+                        }
+                        contentAndIconsLayout.addView(deleteIcon);
+
+                        // Add horizontal layout (content + icons) to post layout
+                        postLayout.addView(contentAndIconsLayout);
 
                         // Post date
                         TextView postDateView = new TextView(getContext());
                         postDateView.setText("Date: " + post.getDate());
                         postDateView.setTextSize(14);
+                        LinearLayout.LayoutParams dateParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        dateParams.topMargin = 8;
+                        postDateView.setLayoutParams(dateParams);
                         postLayout.addView(postDateView);
 
                         // Display image if available
