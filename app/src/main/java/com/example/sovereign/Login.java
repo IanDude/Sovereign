@@ -4,7 +4,6 @@ package com.example.sovereign;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,8 +31,6 @@ public class Login extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
-//            Manager.ToActivity(MainActivity.class);
-//            return;
         }
 
         EdgeToEdge.enable(this);
@@ -81,11 +78,7 @@ public class Login extends AppCompatActivity {
                 });
             }
         });
-        signup.setOnClickListener(view -> {
-            Manager.ToActivity(SignUp.class);
-        });
-        ForgotPass.setOnClickListener(view -> {
-            Manager.ToActivity(PasswordRecovery.class);
-        });
+        signup.setOnClickListener(view -> Manager.ToActivity(SignUp.class));
+        ForgotPass.setOnClickListener(view -> Manager.ToActivity(PasswordRecovery.class));
     }
 }

@@ -119,11 +119,8 @@ public class LoginManager {
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()){
-                            //username already in database
-//                            Toast.makeText(context.getApplicationContext(),"Invalid Username",Toast.LENGTH_SHORT).show();
                             MakeToast("Username already exists");
                         }else{
-                            //username not in database, adds the new data
                             hashMap.put("ID Number",ID_No);
                             hashMap.put("Username", Username);
                             hashMap.put("FirstName", FirstName);
@@ -134,23 +131,15 @@ public class LoginManager {
                             hashMap.put("UserType","Regular");
                             firebase.collection("Users")
                                     .add(hashMap)
-                                    .addOnSuccessListener(documentReference -> {
-//                                        Toast.makeText(context.getApplicationContext(),"Sign Up Successful",Toast.LENGTH_SHORT).show();
-                                        MakeToast("Sign Up Successful");
-                                    })
+                                    .addOnSuccessListener(documentReference -> MakeToast("Sign Up Successful"))
                                     .addOnFailureListener(e -> {
-//                                        Toast.makeText(context.getApplicationContext(),"Sign Up Failed" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                         MakeToast("Sign Up Failed" + e.getMessage());
                                         Log.e("Firestore","Sign Up Failed: " + e.getMessage());
                                     });
                             ToActivity(Login.class);
                         }
-                    }).addOnFailureListener(e -> {
-//                        Toast.makeText(context.getApplicationContext(),"Error"+ e.getMessage(),Toast.LENGTH_SHORT).show();
-                        MakeToast("Error" + e.getMessage());
-                    });
+                    }).addOnFailureListener(e -> MakeToast("Error" + e.getMessage()));
         }else{
-//            Toast.makeText(context.getApplicationContext(),"Passwords don't match",Toast.LENGTH_SHORT).show();
             MakeToast("Passwords don't match.");
         }
 
@@ -169,22 +158,7 @@ public class LoginManager {
                             }else {
                                 callback.onLoginFailure("Incorrect Password");
                             }
-
-
-//                        firebase.collection("Users")
-//                                .whereEqualTo("Password", Password)
-//                                .get()
-//                                .addOnCompleteListener(task2 -> {
-//                                    if (task2.isSuccessful() && task2.getResult() != null && !task2.getResult().isEmpty()){
-//                                        callback.onLoginSuccess();
-//                                    }
-//                                    else {
-//                                        //password doesnt match with username
-//                                        callback.onLoginFailure("Incorrect Password");
-//                                    }
-//                                }).addOnFailureListener(e -> callback.onLoginFailure("Error checking Username or Password: " + e.getMessage()));
                     }else{
-//                        Toast.makeText(context.getApplicationContext(),"User not found.",Toast.LENGTH_SHORT).show();
                         MakeToast("Invalid Username.");
                     }
                 })
@@ -316,13 +290,11 @@ public class LoginManager {
     }
 
     protected void UpdateData(String DocumentId, String FieldName, String NewData) {
-        // Hash the password if updating the Password field
         if (FieldName.equals("Password")) {
             NewData = hashPassword(NewData);
         }
 
-        // Update the document directly using the Document ID
-        String finalNewData = NewData; // Required for use in lambda expressions
+        String finalNewData = NewData;
         firebase.collection("Users")
                 .document(DocumentId)
                 .update(FieldName, finalNewData)
@@ -363,7 +335,6 @@ public class LoginManager {
         context.startActivity(intent);
     }
     protected String OTP_Generate(){
-//        return String.format("%06d", new java.util.Random().nextInt(1000000));
         return String.format(Locale.ENGLISH,"%06d",new java.util.Random().nextInt(1000000));
     }
 
