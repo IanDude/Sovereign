@@ -10,10 +10,19 @@
     <string name="Splash">Sovereign</string>
     <string name="pass">Forgot Password?</string>
     <string name="post">Post</string>
-    <string name="clan">Clan</string>
-    <string name="kingdom">Kingdom</string>
     <string name="ranking">Ranking</string>
     <string name="add_image">Add</string>
     <string name="clear">Clear</string>
+
+    <string name="clan">Clan</string>
+    <string name="kingdom">Kingdom</string>
+    <string name="viewpager_description">Swipe left or right to navigate between tabs</string>
+    <string name="welcome_to_clan_feed">Welcome to Clan Feed</string>
+    <string name="welcome_to_kingdom_feed">Welcome to Kingdom Feed</string>
+
+
+    <string name="post_caption1">𝐄𝐦𝐞𝐥𝐞𝐫𝐬 𝐂𝐫𝐨𝐰𝐧𝐞𝐝 𝐂𝐈𝐂𝐓 𝐌𝐨𝐛𝐢𝐥𝐞 𝐋𝐞𝐠𝐞𝐧𝐝𝐬 𝐂𝐡𝐚𝐦𝐩𝐢𝐨𝐧𝐬!
+After a great tournament, a champion has been crowned! Emelers dominated Group A in our round-robin tournament, facing off against Goy and Friends from Group B in an intense best-of-five showdown. </string>
+
 
 </resources>
