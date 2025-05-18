@@ -38,7 +38,7 @@ public class Clan_Post extends AppCompatActivity {
 
             // Set the result and finish the activity
             setResult(Activity.RESULT_OK, resultIntent);
-            finish();  // Close the activity and return to ClanFragment
+
         });
     }
 }
