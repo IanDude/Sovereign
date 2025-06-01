@@ -173,7 +173,6 @@ public class ClanFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postsContainer.removeAllViews(); // Clear container before loading posts
-
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String postId = postSnapshot.getKey();
                     Post post = postSnapshot.getValue(Post.class);
