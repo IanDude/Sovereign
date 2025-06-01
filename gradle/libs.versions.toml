@@ -1,5 +1,9 @@
 [versions]
+compiler = "4.15.0"
 agp = "8.6.1"
+androidMail = "1.6.7"
+gson = "2.11.0"
+glideVersion = "4.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -9,10 +13,20 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.1.1"
-firebase-bom = "33.6.0"
+firebase-bom = "33.7.0"
 firebaseDatabase = "21.0.0"
+firebaseStorage = "21.0.1"
+glide = "4.15.1"  # Add the Glide version here
+
+#Hasing
+jbcrypt = "0.4"
 
 [libraries]
+compiler-v4150 = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+glide-v4150 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
+android-activation = { module = "com.sun.mail:android-activation", version.ref = "androidMail" }
+android-mail = { module = "com.sun.mail:android-mail", version.ref = "androidMail" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -24,6 +38,14 @@ firebase-firestore = {group = "com.google.firebase", name = "firebase-firestore"
 firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom"}
 firebase-analytics = {group = "com.google.firebase", name = "firebase-analytics"}
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+# Add Glide and its compiler
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide"}
+
+#Hashing
+jbcrypt = { group = "org.mindrot", name = "jbcrypt", version.ref = "jbcrypt"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

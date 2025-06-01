@@ -6,21 +6,26 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
+    <!-- Top layout (Header) -->
     <FrameLayout
+        android:id="@+id/HomeTopLayout"
         android:layout_width="0dp"
         android:layout_height="105dp"
-        android:id="@+id/HomeTopLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/Mainlayout"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/theme_color">
+        android:background="@drawable/background_gradient">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+
+            >
 
 
             <ImageView
@@ -31,25 +36,27 @@
                 android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.48"
-                app:srcCompat="@drawable/header" />
+                app:srcCompat="@drawable/header"
+                tools:ignore="ContentDescription" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnadmin"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_gravity="right"
-                android:background="@drawable/circle"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:background="@drawable/menu"
+                android:contentDescription="Admin button"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.955"
+                app:layout_constraintHorizontal_bias="0.956"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.719"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintVertical_bias="0.733"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck,RedundantDescriptionCheck" />
 
             <TextView
                 android:id="@+id/textpost"
@@ -64,50 +71,57 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.794" />
+                app:layout_constraintVertical_bias="0.794"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="61dp"
-                android:layout_height="58dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.047"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.675"
-                app:srcCompat="@drawable/sovereign_logo" />
+                app:layout_constraintVertical_bias="0.648"
+                app:srcCompat="@drawable/sovereign_logo"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello"/>
-
     </FrameLayout>
+
+    <!-- Main content layout -->
+
     <FrameLayout
+        android:id="@+id/Mainlayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/Mainlayout"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/HomeTopLayout"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationMenu"
-        >
-
+        app:layout_constraintTop_toBottomOf="@id/HomeTopLayout">
 
 
     </FrameLayout>
+    <!-- Bottom Navigation Bar -->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:itemTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:itemRippleColor="@color/bg_red"
+       android:backgroundTintMode="add"
+        android:background="@drawable/background_gradient"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Mainlayout"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@color/white"
+        tools:ignore="VisualLintBottomNav" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sovereign">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_IMAGES" />
+    <uses-permission android:name="android.permission.WRITE_MEDIA_IMAGES" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -9,10 +16,24 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sovereign"
         tools:targetApi="31">
+        <activity
+            android:name=".Clan_Post"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfile"
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            />
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".PasswordRecovery"
+            android:exported="false" />
         <activity
             android:name=".ranking_update"
             android:exported="false"
@@ -21,7 +42,7 @@
             android:name=".admin_post"
             android:exported="false" />
         <activity
-            android:name=".LoginSignup"
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".Splashscreen"
@@ -34,7 +55,22 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize" />
+
+        <meta-data
+            android:name="android.support.v7.appcompat"
+            android:value="true" />
+
+        <activity android:name=".ImageFullViewActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,13 @@
     <string name="Ranking_title">Ranking</string>
     <string name="HallOfFame_title">Hall of Fame</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Splash">Sovereign</string>
+    <string name="pass">Forgot Password?</string>
+    <string name="post">Post</string>
+    <string name="ranking">Ranking</string>
+    <string name="add_image">Add</string>
+    <string name="clear">Clear</string>
+
     <string name="clan">Clan</string>
     <string name="kingdom">Kingdom</string>
     <string name="viewpager_description">Swipe left or right to navigate between tabs</string>
