@@ -169,9 +169,11 @@ public class ClanFragment extends Fragment {
 
     private void loadPosts() {
         postsRef.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postsContainer.removeAllViews(); // Clear container before loading posts
+
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String postId = postSnapshot.getKey();
                     Post post = postSnapshot.getValue(Post.class);
