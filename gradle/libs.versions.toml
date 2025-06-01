@@ -18,6 +18,9 @@ firebaseDatabase = "21.0.0"
 firebaseStorage = "21.0.1"
 glide = "4.15.1"  # Add the Glide version here
 
+#Hasing
+jbcrypt = "0.4"
+
 [libraries]
 compiler-v4150 = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 glide-v4150 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
@@ -38,7 +41,10 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 # Add Glide and its compiler
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide"}
+
+#Hashing
+jbcrypt = { group = "org.mindrot", name = "jbcrypt", version.ref = "jbcrypt"}
 
 
 [plugins]
